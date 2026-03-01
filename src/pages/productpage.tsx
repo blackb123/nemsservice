@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import ProductSection from '../section/productpage/productsection';
 import { product } from '../data/sitedata'; 
 import { useCategory } from '../provider/categoryprovider'; 
+import { FiChevronRight, FiLayers, FiInfo } from 'react-icons/fi';
 
 const ProductPage: React.FC = () => {
   const { activeCategory } = useCategory();
 
-  // Smooth scroll to top when category changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeCategory]);
@@ -16,57 +16,91 @@ const ProductPage: React.FC = () => {
     : product.filter(p => p.category === activeCategory);
 
   return (
-    <main className="mt-[80px] min-h-screen bg-slate-50">
+    <main className="mt-[80px] min-h-screen bg-[#F8FAFC]">
       
-      {/* --- HERO SECTION --- */}
-      <div className="relative overflow-hidden bg-slate-900 py-24 md:py-32">
-        {/* Animated Background Gradients */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-          <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-blue-600/20 blur-[120px] animate-pulse" />
-          <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] rounded-full bg-indigo-600/20 blur-[120px]" />
-        </div>
-
+      {/* --- HERO SECTION: Human & Editorial --- */}
+      <section className="relative bg-[#020617] pt-32 pb-40 overflow-hidden">
+        {/* Subtile Texture Overlay */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+        
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col items-center text-center">
-            <span className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-[0.2em] text-blue-400 uppercase bg-blue-400/10 border border-blue-400/20 rounded-full">
-              Solutions Premium
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight">
-              {activeCategory}
-            </h1>
-            <div className="h-1.5 w-24 bg-blue-600 rounded-full mb-8" />
-            <p className="max-w-2xl text-slate-400 text-lg md:text-xl leading-relaxed">
-              Explorez notre séléction de supports {activeCategory.toLowerCase()} conçus pour maximiser votre impact visuel et booster votre présence commerciale.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+            <div>
+              <div className="flex items-center gap-3 mb-8">
+                <div className="h-[1px] w-12 bg-blue-500" />
+                <span className="text-blue-400 text-xs font-black uppercase tracking-[0.4em]">
+                  Division Corporate
+                </span>
+              </div>
+              
+              <h1 className="text-6xl md:text-8xl font-black text-white mb-8 tracking-[ -0.04em] leading-none">
+                {activeCategory}
+              </h1>
+              
+              <p className="max-w-xl text-slate-400 text-lg md:text-xl font-light leading-relaxed">
+                L'ingénierie au service de l'image. Découvrez des solutions de communication rigoureusement sélectionnées pour leur <span className="text-white font-medium">impact institutionnel</span> et leur durabilité.
+              </p>
+            </div>
+
+            {/* Info Box - Adding the "Human/Expert" touch */}
+            <div className="hidden lg:block border-l border-white/10 pl-12 pb-4">
+              <div className="flex items-start gap-4 mb-6">
+                <FiInfo className="text-blue-500 mt-1" size={20} />
+                <p className="text-sm text-slate-400 italic">
+                  "Chaque support est testé pour répondre aux standards de qualité Nem's Service avant d'intégrer notre catalogue premium."
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100" alt="Directeur Qualité" className="grayscale hover:grayscale-0 transition-all cursor-crosshair" />
+                </div>
+                <div>
+                    <p className="text-xs font-bold text-white">Responsable Production</p>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-tighter">Nem's Service Cameroon</p>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* --- NAVIGATION / BREADCRUMB: Serious & Professional --- */}
+      <div className="sticky top-[80px] z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          
+          {/* Breadcrumb Path */}
+          <nav className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest">
+            <a href="/" className="text-slate-400 hover:text-blue-600 transition">Accueil</a>
+            <FiChevronRight className="text-slate-300" />
+            <span className="text-slate-400">Catalogue</span>
+            <FiChevronRight className="text-slate-300" />
+            <span className="text-blue-600">{activeCategory}</span>
+          </nav>
+
+          {/* Catalog Counter */}
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 px-4 py-1.5 bg-slate-100 rounded-full">
+              <FiLayers className="text-slate-500" size={14} />
+              <span className="text-xs font-bold text-slate-700">
+                {filteredProducts.length} <span className="text-slate-400 font-medium">Références</span>
+              </span>
+            </div>
+          </div>
+
         </div>
       </div>
 
       {/* --- CONTENT AREA --- */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 -mt-12 pb-24">
-        
-        {/* Stats / Breadcrumb Bar */}
-        <div className="bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl p-4 mb-12 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <span className="hover:text-blue-600 cursor-pointer transition">Accueil</span>
-            <span>/</span>
-            <span className="font-semibold text-slate-900">Produits</span>
-            <span>/</span>
-            <span className="text-blue-600 font-medium">{activeCategory}</span>
-          </div>
-          <div className="text-sm font-medium text-slate-700">
-            Affichage de <span className="text-blue-600">{filteredProducts.length}</span> solutions professionnelles
-          </div>
-        </div>
-
-        {/* --- PRODUCTS LOOP --- */}
+      <div className="max-w-7xl mx-auto px-6 ">
         {filteredProducts.length > 0 ? (
-          <div className="space-y-12 md:space-y-24">
+          <div className="space-y-32">
             {filteredProducts.map((item, index) => (
-              <div 
-                key={index} 
-                className="group reveal-on-scroll"
-              >
+              <div key={index} className="relative">
+                {/* Visual indicator for catalog flow */}
+                <div className="absolute -left-12 top-0 h-full w-[1px] bg-slate-200 hidden xl:block">
+                    <div className="sticky top-[200px] w-3 h-3 -left-[6px] bg-blue-600 rounded-full shadow-lg shadow-blue-200" />
+                </div>
+                
                 <ProductSection 
                   index={index} 
                   {...item} 
@@ -75,27 +109,39 @@ const ProductPage: React.FC = () => {
             ))}
           </div>
         ) : (
-          /* Empty State */
-          <div className="py-32 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-100 mb-6">
-              <span className="text-3xl">📦</span>
+          <div className="py-40 text-center bg-white rounded-3xl border border-slate-100 shadow-sm">
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-slate-50 border border-slate-100 mb-8">
+              <FiLayers className="text-slate-300" size={40} />
             </div>
-            <h3 className="text-xl font-bold text-slate-900">Aucun produit trouvé</h3>
-            <p className="text-slate-500 mt-2">Nous mettons à jour cette catégorie très bientôt.</p>
+            <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Inventaire en cours</h3>
+            <p className="text-slate-500 mt-4 max-w-sm mx-auto font-light">
+              Nos équipes finalisent la sélection des meilleures références pour cette catégorie.
+            </p>
           </div>
         )}
       </div>
 
-      {/* CTA Bottom Section */}
-      <section className="bg-white border-t border-slate-200 py-20">
+      {/* CTA Bottom Section: Corporate & Trust */}
+      <section className="bg-white border-t border-slate-100 py-32">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Besoin d'un devis sur mesure ?</h2>
-          <p className="text-slate-600 mb-10 text-lg">
-            Nos experts sont disponibles pour vous accompagner dans le choix de vos supports de communication.
+          <div className="inline-block px-4 py-1 mb-6 border border-slate-200 rounded-full text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+            Assistance Professionnelle
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-8 tracking-tighter">
+            Prêt à transformer votre communication ?
+          </h2>
+          <p className="text-slate-500 mb-12 text-xl font-light leading-relaxed">
+            Profitez d'un accompagnement personnalisé pour vos projets institutionnels. 
+            Nos experts vous répondent sous 24h.
           </p>
-          <button className="bg-slate-900 text-white px-10 py-4 rounded-xl font-bold hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-1 shadow-xl shadow-slate-200">
-            Contactez un Conseiller
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-[#020617] text-white px-12 py-5 rounded-lg font-bold hover:bg-blue-600 transition-all duration-300 shadow-2xl shadow-slate-200">
+              Demander un devis expert
+            </button>
+            <button className="bg-white text-slate-900 border border-slate-200 px-12 py-5 rounded-lg font-bold hover:bg-slate-50 transition-all">
+              Parler à un conseiller
+            </button>
+          </div>
         </div>
       </section>
 

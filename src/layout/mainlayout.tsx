@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../component/nav';
 import Footer from '../component/footer';
-import zapp from "../assets/zapp.png"
+import zapp from "../assets/zapp.webp"
 interface MainLayoutProps {
   children: React.ReactNode;
 }

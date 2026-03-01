@@ -1,16 +1,16 @@
 // src/data/siteData.ts
-import backdrop from "../assets/backdrop.png"
-import banner from "../assets/banner.png"
-import banner2 from "../assets/banner2.png"
-import businesscard from "../assets/businesscard.png"
-import podcast from "../assets/podscast.png"
-import key from "../assets/keys.PNG"
-import gonflable from "../assets/gonflable.png"
-import roadstand from "../assets/roadstand.png"
-import card from  "../assets/card.png"
-import signification from "../assets/signalisation.png"
-import tshirt from "../assets/tshirts.png"
-import chapitaux from "../assets/chapitaux.png"
+import backdrop from "../assets/backdrop.webp"
+import banner from "../assets/banner.webp"
+import banner2 from "../assets/banner2.webp"
+import businesscard from "../assets/businesscard.webp"
+import podcast from "../assets/podscast.webp"
+import key from "../assets/keys.webp"
+import gonflable from "../assets/gonflable.webp"
+import roadstand from "../assets/roadstand.webp"
+import card from  "../assets/card.webp"
+import signification from "../assets/signalisation.webp"
+import tshirt from "../assets/tshirts.webp"
+import chapitaux from "../assets/chapitaux.webp"
 import * as img from '../assets/COFFRET/coffret_img';
 export const siteData = {
   hero: {

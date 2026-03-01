@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiSearch, FiUser, FiMenu, FiX } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from "../assets/logo_nems.png";
+import logo from "../assets/logo_nems.webp";
 import { useCoffrets } from '../provider/coffreprovider'; 
 import { useCategory } from '../provider/categoryprovider'; // Ton provider de catégories produits
 
