@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiFacebook, FiInstagram, FiTwitter, FiMail, FiPhone } from 'react-icons/fi';
-import logo from "../assets/logo_nems.png";
+import logo from "../assets/logo_nems.webp";
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
