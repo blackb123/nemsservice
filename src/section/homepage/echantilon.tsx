@@ -1,5 +1,5 @@
 // src/components/SocialShowcase.tsx
-import React, { useRef } from 'react';
+import  { useRef } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { siteData } from '../../data/sitedata';
 

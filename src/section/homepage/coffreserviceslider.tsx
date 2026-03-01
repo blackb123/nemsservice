@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import  { useRef, useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight, FiArrowRight } from 'react-icons/fi';
 import { siteData } from '../../data/sitedata';
 import { useCoffrets } from '../../provider/coffreprovider'; // Importe ton context
