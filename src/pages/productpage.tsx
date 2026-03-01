@@ -64,7 +64,7 @@ const ProductPage: React.FC = () => {
           <div className="space-y-12 md:space-y-24">
             {filteredProducts.map((item, index) => (
               <div 
-                key={item.id || index} 
+                key={index} 
                 className="group reveal-on-scroll"
               >
                 <ProductSection 

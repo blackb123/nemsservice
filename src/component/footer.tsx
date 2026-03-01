@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiFacebook, FiInstagram, FiTwitter, FiMail, FiPhone, FiArrowRight } from 'react-icons/fi';
+import { FiFacebook, FiInstagram, FiTwitter, FiMail, FiPhone } from 'react-icons/fi';
 import logo from "../assets/logo_nems.png";
 
 const Footer: React.FC = () => {
