@@ -56,9 +56,9 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
         <div className="w-full md:w-[55%]">
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-slate-50 group">
             <img 
-              src={`/assets/${image}`} 
+              src={image}
               alt={header} 
-              className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+              className="w-full h-full object-contain transition-transform duration-[1.5s] ease-out group-hover:scale-105"
             />
             {/* Subtle Inner Shadow for Depth */}
             <div className="absolute inset-0 ring-1 ring-inset ring-slate-900/5 rounded-3xl" />

@@ -4,7 +4,7 @@ import ambassador from "./2piece/ambassador.webp";
 import brief from "./2piece/brief.webp";
 import creative from "./2piece/creative.webp";
 import notebooks from "./2piece/notebooka5.webp";
-import premier from "./2piece/premier.webp";
+import premier from "./2piece/PREMIER.webp";
 import twoside from "./2piece/twoslide.webp";
 
 // 3piece

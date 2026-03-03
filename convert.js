@@ -3,13 +3,16 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// Fix __dirname for ES Modules
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const directory = path.join(__dirname, 'src', 'assets');
+
+// 🔥 Target ONLY product folder
+const directory = path.join(__dirname, 'src', 'assets', 'product');
 
 const extensionsToConvert = ['.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG'];
 
 /**
- * Fonction récursive pour parcourir les dossiers
+ * Recursive directory processor
  */
 async function processDirectory(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -18,34 +21,36 @@ async function processDirectory(dir) {
     const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      // Si c'est un dossier, on rentre dedans
+      // Go inside subfolder
       await processDirectory(fullPath);
     } else {
       const ext = path.extname(entry.name);
-      
+
       if (extensionsToConvert.includes(ext)) {
         const fileName = path.parse(entry.name).name;
         const outputPath = path.join(dir, `${fileName}.webp`);
 
         try {
           await sharp(fullPath)
-            .webp({ quality: 80 })
+            .webp({ quality: 100 })
             .toFile(outputPath);
-          
-          console.log(`✅ Converti : ${entry.name} -> ${fileName}.webp`);
 
-          // ⚠️ SUPPRESSION DE L'ORIGINAL
+          console.log(`✅ Converted: ${entry.name} → ${fileName}.webp`);
+
+          // 🗑️ Delete original file
           fs.unlinkSync(fullPath);
-          console.log(`   🗑️ Original supprimé : ${entry.name}`);
+          console.log(`🗑️ Deleted original: ${entry.name}`);
+
         } catch (err) {
-          console.error(`❌ Erreur sur ${entry.name}:`, err);
+          console.error(`❌ Error processing ${entry.name}:`, err);
         }
       }
     }
   }
 }
 
-console.log(`🚀 Début de la conversion récursive dans : ${directory}`);
+console.log(`🚀 Starting conversion in: ${directory}`);
+
 processDirectory(directory)
-  .then(() => console.log('✨ Conversion et nettoyage terminés !'))
-  .catch(err => console.error('💥 Erreur fatale :', err));
+  .then(() => console.log('✨ Conversion and cleanup finished!'))
+  .catch(err => console.error('💥 Fatal error:', err));
