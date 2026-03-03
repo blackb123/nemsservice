@@ -1,22 +1,19 @@
-import  { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight, FiArrowRight } from 'react-icons/fi';
 import { siteData } from '../../data/sitedata';
-import { useCoffrets } from '../../provider/coffreprovider'; // Importe ton context
-import { useNavigate } from 'react-router-dom'; // Importe le hook de navigation
+import { useCoffrets } from '../../provider/coffreprovider';
+import { useNavigate } from 'react-router-dom';
 
 const ProductSlider = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = siteData.serviceSlider.length;
 
-  // Accès au setter du context et à la navigation
   const { setSelectedPack } = useCoffrets();
   const navigate = useNavigate();
 
   const handleDetailClick = (item: any) => {
-    // 1. On définit le pack sélectionné dans l'état global
     setSelectedPack(item);
-    // 2. On redirige vers la page /coffrets
     navigate('/coffrets');
   };
 
@@ -81,7 +78,8 @@ const ProductSlider = () => {
               >
                 <div className="flex flex-col bg-[#f4f2f0] rounded-xl overflow-hidden h-full border border-gray-100 hover:shadow-md transition-shadow">
                   
-                  <div className="relative w-full h-44 lg:h-52 overflow-hidden cursor-pointer" onClick={() => handleDetailClick(item)}>
+                  {/* SECTION IMAGE AGRANDIE */}
+                  <div className="relative w-full h-64 lg:h-72 overflow-hidden cursor-pointer" onClick={() => handleDetailClick(item)}>
                     <img 
                       src={item.image} 
                       alt={item.name} 
@@ -92,24 +90,24 @@ const ProductSlider = () => {
                     </div>
                   </div>
 
-                  <div className="p-5 flex flex-col flex-grow">
+                  {/* CONTENU TEXTE (Padding réduit pour garder la taille du cart identique) */}
+                  <div className="p-4 flex flex-col flex-grow">
                     <div className="flex-grow">
                       <p className="text-[10px] font-semibold text-gray-500 mb-1 uppercase tracking-tighter">{item.ref}</p>
                       <h3 className="text-lg font-bold text-gray-900 mb-1 leading-tight">{item.name}</h3>
-                      <p className="text-xs text-gray-600 mb-4 line-clamp-2 italic">{item.tagline}</p>
+                      <p className="text-xs text-gray-600 mb-3 line-clamp-2 italic">{item.tagline}</p>
 
-                      <div className="flex items-center gap-2 mb-4">
+                      <div className="flex items-center gap-2 mb-3">
                         <span className="text-xl font-black text-gray-900">{item.price}</span>
                       </div>
                       
-                      <div className="mb-6 pt-4 border-t border-gray-200">
+                      <div className="mb-4 pt-3 border-t border-gray-200">
                         <span className="text-[10px] font-bold text-gray-400 block uppercase mb-1">Options Couleurs</span>
                         <span className="text-xs text-gray-700 font-medium">{item.colors}</span>
                       </div>
                     </div>
 
                     <div className="space-y-2 mt-auto">
-                      {/* BOUTON MODIFIÉ ICI */}
                       <button 
                         onClick={() => handleDetailClick(item)}
                         className="w-full bg-white text-black text-xs font-bold py-2.5 rounded-lg border border-gray-300 hover:border-black transition-all"

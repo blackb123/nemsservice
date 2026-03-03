@@ -16,7 +16,7 @@ const Hero = () => {
   return (
     <section className="relative w-full h-fit py-10 overflow-hidden font-sans">
       
-      {/* 1. BACKGROUND LAYERS (Cross-fade effect) */}
+      {/* 1. COUCHES D'ARRIÈRE-PLAN (Effet de fondu enchaîné) */}
       {heroImages.map((img, i) => (
         <div
           key={i}
@@ -31,16 +31,16 @@ const Hero = () => {
         />
       ))}
 
-      {/* 2. OVERLAY (Ensures text contrast) */}
+      {/* 2. OVERLAY (Assure le contraste du texte) */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/60" />
 
-      {/* 3. TOP PROMO BANNER (Now more responsive) */}
+      {/* 3. BANNIÈRE PROMO (Responsive) */}
       <div className="absolute top-0 left-0 w-full bg-black/80 backdrop-blur-sm text-white py-4 px-4 text-center text-xs md:text-sm font-semibold z-30">
-        Up to 25% off customer favorites | Ends Feb. 27 
-        <span className="underline ml-2 cursor-pointer hover:text-gray-300">Shop now</span>
+        Jusqu'à -25% sur vos articles favoris | Jusqu'au 27 fév. 
+        <span className="underline ml-2 cursor-pointer hover:text-gray-300">En profiter</span>
       </div>
 
-      {/* 4. MAIN CONTENT */}
+      {/* 4. CONTENU PRINCIPAL */}
       <div className="relative h-full flex items-center justify-center z-20 px-6">
         <div className="max-w-4xl w-full text-center flex flex-col items-center mt-12">
           
@@ -51,7 +51,6 @@ const Hero = () => {
           <p className="text-base md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed">
             {hero.description}
           </p>
-
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             {hero.buttons.map((btn, i) => (
@@ -70,7 +69,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* 5. CAROUSEL INDICATORS (Intuitive UX) */}
+      {/* 5. INDICATEURS DE CAROUSEL */}
       <div className="absolute bottom-3 left-1/2 max-xl:bottom-2 -translate-x-1/2 flex gap-3 z-30">
         {heroImages.map((_, i) => (
           <button
