@@ -78,12 +78,12 @@ const Hero = () => {
       </motion.div>
 
       {/* 2. MAIN CONTENT */}
-      <div className="relative h-full flex items-center justify-center z-20 px-6">
+      <div className="relative h-full flex items-center justify-center z-20 px-6 ">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl w-full text-center flex flex-col items-center"
+          className="max-w-4xl max-sm:pt-12 w-full text-center flex flex-col items-center"
         >
           <motion.h1 
             variants={textVariants}
