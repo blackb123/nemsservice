@@ -45,7 +45,7 @@ const CategorySlider = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto text-black my-16 bg-white px-4 relative group overflow-hidden" id='#products'>
+    <section className="max-w-7xl mx-auto text-black  bg-white px-4 relative group overflow-hidden" id='#products'>
       <motion.h2 
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}

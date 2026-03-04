@@ -78,7 +78,7 @@ const Hero = () => {
       </motion.div>
 
       {/* 2. MAIN CONTENT */}
-      <div className="relative h-full flex items-center justify-center z-20 px-6 ">
+      <div className="relative h-full flex items-center justify-center z-20 px-6 py-15">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
