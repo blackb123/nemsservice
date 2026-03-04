@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
     <header className="w-full bg-white border-b border-gray-100 font-sans sticky top-0 z-[100] shadow-sm">
       
       {/* --- Top Bar --- */}
-      <div className="max-w-7xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between gap-8">
+      <div className="max-w-7xl mx-auto px-4 h-14 md:h-20 flex items-center justify-between gap-8">
         <button onClick={() => setIsOpen(true)} className="md:hidden text-gray-800 p-1">
           <FiMenu size={24} />
         </button>

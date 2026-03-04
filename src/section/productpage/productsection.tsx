@@ -12,8 +12,19 @@ interface SectionProps {
 const ProductSection: React.FC<SectionProps> = ({ header, description, features, image, category, index }) => {
   const isEven = index % 2 === 0;
 
+  // Configuration du lien WhatsApp dynamique
+  const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "237671810319";
+  const whatsappNumber = rawNumber.replace('+', '');
+  
+  // Message personnalisé incluant le nom du produit
+  const orderMessage = encodeURIComponent(`Bonjour Nem's Service, je souhaite commander : ${header}`);
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
+
   return (
-    <section className="w-full py-24 md:py-40 bg-white">
+    <section 
+      className="w-full py-24 max-lg:py-10 lg:py-40 bg-white" 
+      id={index === 0 ? "products" : undefined} // ID pour le scroll fluide du Hero
+    >
       <div className={`max-w-7xl mx-auto px-6 flex flex-col items-center gap-12 md:gap-24 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
         
         {/* TEXT CONTENT */}
@@ -43,9 +54,14 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
 
           {/* Clean Action Buttons */}
           <div className="pt-8 flex items-center gap-8">
-            <button className="text-sm font-semibold text-slate-900 pb-1 border-b-2 border-slate-900 hover:text-blue-600 hover:border-blue-600 transition-all">
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-slate-900 pb-1 border-b-2 border-slate-900 hover:text-blue-600 hover:border-blue-600 transition-all"
+            >
               Commander
-            </button>
+            </a>
             <button className="text-sm font-semibold text-slate-400 hover:text-slate-900 transition-colors">
               Fiche technique
             </button>

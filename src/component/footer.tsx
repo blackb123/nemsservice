@@ -5,11 +5,16 @@ import logo from "../assets/logo_nems.webp";
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
+  // Import des variables d'environnement
+  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "+237 671 810 319";
+  const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || "nemssservice@gmail.com";
+    const telLink = whatsappNumber.replace(/\s/g, '');
+
   return (
-    <footer className="w-full bg-[#020617] border-t border-slate-800 pt-20 pb-10 px-6 font-sans text-slate-400">
+    <footer className="w-full bg-[#020617] border-t border-slate-800 pt-20 pb-10 px-6 font-sans text-slate-400" id='footer'>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
         
-        {/* Brand Section - Takes more space */}
+        {/* Brand Section */}
         <div className="col-span-1 md:col-span-4 space-y-6">
           <div className="flex-shrink-0">
             <img 
@@ -38,7 +43,7 @@ const Footer: React.FC = () => {
             </a></li>
             <li><a href="#" className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
               <span className="w-1 h-1 bg-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-              Tout Nos Produit
+              Tous Nos Produits
             </a></li>
           </ul>
         </div>
@@ -53,27 +58,27 @@ const Footer: React.FC = () => {
           </ul>
         </div>
 
-        {/* Contact & Newsletter - Modern CTA */}
+        {/* Contact Column - Dynamisée avec ENV */}
         <div className="col-span-1 md:col-span-4 space-y-6">
           <h3 className="text-xs font-black text-white uppercase tracking-[0.3em] mb-6">Contact</h3>
           <div className="space-y-4">
-            <a href="tel:+237600000000" className="flex items-center gap-4 text-sm hover:text-white transition-colors group">
+            <a href={`tel:${telLink}`} className="flex items-center gap-4 text-sm hover:text-white transition-colors group">
               <div className="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-all">
                 <FiPhone size={18} />
               </div>
-              <span>+237 6XX XXX XXX</span>
+              <span>{whatsappNumber}</span>
             </a>
-            <a href="mailto:nemssservice@gmail.com" className="flex items-center gap-4 text-sm hover:text-white transition-colors group">
+            <a href={`mailto:${contactEmail}`} className="flex items-center gap-4 text-sm hover:text-white transition-colors group">
               <div className="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-all">
                 <FiMail size={18} />
               </div>
-              <span>nemssservice@gmail.com</span>
+              <span>{contactEmail}</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar: Clean & Minimal */}
+      {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-slate-500">
           <span>© {year} Nem's Service</span>
