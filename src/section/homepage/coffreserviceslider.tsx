@@ -123,9 +123,9 @@ const ProductSlider = () => {
                     </span>
                   </div>
 
-                  {/* Image - Hauteur réduite */}
+                  {/* Image - Hauteur augmentée */}
                   <div 
-                    className="relative w-full h-28 md:h-32 overflow-hidden cursor-pointer bg-gray-50"
+                    className="relative w-full h-36 md:h-40 overflow-hidden cursor-pointer bg-gray-50"
                     onClick={() => handleDetailClick(item)}
                   >
                     <motion.img 
@@ -138,32 +138,32 @@ const ProductSlider = () => {
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
                   </div>
 
-                  {/* Contenu plus compact */}
-                  <div className="p-2.5">
+                  {/* Contenu */}
+                  <div className="p-3">
                     {/* Référence et note */}
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-[6px] font-mono text-gray-400">{item.ref}</span>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[7px] font-mono text-gray-400">{item.ref}</span>
                       <div className="flex items-center gap-0.5">
-                        <FiStar size={6} className="text-yellow-400 fill-yellow-400" />
-                        <span className="text-[6px] text-gray-500">4.9</span>
+                        <FiStar size={7} className="text-yellow-400 fill-yellow-400" />
+                        <span className="text-[7px] text-gray-500">4.9</span>
                       </div>
                     </div>
 
-                    <h3 className="text-[11px] md:text-xs font-medium text-gray-900 mb-0.5 leading-tight line-clamp-1">
+                    <h3 className="text-xs md:text-sm font-medium text-gray-900 mb-1 leading-tight line-clamp-1">
                       {item.name}
                     </h3>
                     
-                    <p className="text-[7px] md:text-[9px] text-gray-500 mb-1.5 line-clamp-1">
+                    <p className="text-[8px] md:text-[10px] text-gray-500 mb-2 line-clamp-1">
                       {item.tagline}
                     </p>
 
                     {/* Prix et action */}
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-[8px] md:text-[10px] font-light text-gray-400 line-through mr-0.5">
+                        <span className="text-[9px] md:text-[11px] font-light text-gray-400 line-through mr-1">
                           {parseInt(item.price.replace('€', '')) * 1.2}€
                         </span>
-                        <span className="text-xs md:text-sm font-semibold text-gray-900">
+                        <span className="text-sm md:text-base font-semibold text-gray-900">
                           {item.price}
                         </span>
                       </div>
@@ -171,15 +171,15 @@ const ProductSlider = () => {
                       <motion.button
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleDetailClick(item)}
-                        className="w-6 h-6 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
+                        className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
                       >
-                        <FiArrowRight size={10} />
+                        <FiArrowRight size={11} />
                       </motion.button>
                     </div>
 
                     {/* Caractéristique */}
-                    <div className="mt-1.5 pt-1.5 border-t border-gray-100">
-                      <span className="text-[6px] text-gray-400 font-mono">
+                    <div className="mt-2 pt-2 border-t border-gray-100">
+                      <span className="text-[7px] text-gray-400 font-mono">
                         ✦ {item.colors}
                       </span>
                     </div>
@@ -193,10 +193,10 @@ const ProductSlider = () => {
           <div className="flex lg:hidden items-center justify-center gap-3 mt-4">
             <button
               onClick={() => scroll('left')}
-              className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-20"
+              className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-20"
               disabled={currentIndex === 0}
             >
-              <FiChevronLeft size={12} />
+              <FiChevronLeft size={14} />
             </button>
             
             <div className="flex gap-1">
@@ -213,8 +213,8 @@ const ProductSlider = () => {
                   }}
                   className={`h-1 rounded-full transition-all duration-300 ${
                     i === currentIndex 
-                      ? 'w-4 bg-black' 
-                      : 'w-1 bg-gray-300 hover:bg-gray-400'
+                      ? 'w-5 bg-black' 
+                      : 'w-1.5 bg-gray-300 hover:bg-gray-400'
                   }`}
                 />
               ))}
@@ -222,10 +222,10 @@ const ProductSlider = () => {
             
             <button
               onClick={() => scroll('right')}
-              className="w-6 h-6 rounded-full bg-black text-white flex items-center justify-center disabled:opacity-20"
+              className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center disabled:opacity-20"
               disabled={currentIndex === totalSlides - 1}
             >
-              <FiChevronRight size={12} />
+              <FiChevronRight size={14} />
             </button>
           </div>
         </div>
