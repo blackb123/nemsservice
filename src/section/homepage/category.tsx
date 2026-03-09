@@ -113,7 +113,7 @@ const CategorySlider = () => {
 
               {/* Texte */}
               <motion.p 
-                className={`text-center font-light text-[9px] md:text-[10px] lg:text-xs tracking-wide capitalize transition-colors ${
+                className={`text-center font-light text-[11px] md:text-[14px] lg:text-xs tracking-wide capitalize transition-colors ${
                   isActive ? 'text-blue-600 font-medium' : 'text-gray-500 group-hover:text-gray-900'
                 }`}
               >
@@ -136,7 +136,7 @@ const CategorySlider = () => {
       <div className="flex lg:hidden items-center justify-center gap-3 mt-4">
         <button
           onClick={() => scroll('left')}
-          className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center"
+          className="w-10 h-10 rounded-full bg-black flex items-center justify-center disabled:opacity-20"
         >
           <ChevronLeft size={14} />
         </button>
@@ -168,7 +168,7 @@ const CategorySlider = () => {
         
         <button
           onClick={() => scroll('right')}
-          className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center"
+          className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center"
         >
           <ChevronRight size={14} />
         </button>
