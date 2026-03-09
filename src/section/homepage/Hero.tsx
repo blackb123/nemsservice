@@ -41,7 +41,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden font-sans bg-[#020617]">
+    <section className="relative w-full h-fit max-sm:h-fit py-10 md:py-20 overflow-hidden font-sans bg-[#020617]">
       
       {/* 1. BACKGROUND AVEC IMAGE RÉDUITE */}
       <div className="absolute inset-0 flex items-center justify-center  z-0">
@@ -122,7 +122,7 @@ const Hero = () => {
       </div>
 
       {/* 3. INDICATORS */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-3 z-30">
         {heroImages.map((_, i) => (
           <button key={i} onClick={() => setIndex(i)} className="group py-2 px-1">
             <motion.div
