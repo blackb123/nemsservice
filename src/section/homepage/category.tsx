@@ -44,7 +44,7 @@ const CategorySlider = () => {
   };
 
   return (
-    <section className="max-w-6xl mx-auto py-8 md:py-10 bg-white px-4 relative group overflow-hidden">
+    <section className="max-w-7xl mx-auto py-8  bg-white px-4 relative group overflow-hidden">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -10 }}
@@ -82,7 +82,7 @@ const CategorySlider = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-30px" }}
-        className="flex overflow-x-auto gap-4 md:gap-6 lg:gap-8 scroll-smooth no-scrollbar snap-x snap-mandatory pb-6 pt-2"
+        className="flex overflow-x-auto gap-4 md:gap-6 lg:gap-8 scroll-smooth no-scrollbar snap-x snap-mandatory pt-2"
       >
         {siteData.categories.map((cat) => {
           const isActive = activeCategory === cat.name;
@@ -93,7 +93,7 @@ const CategorySlider = () => {
               variants={itemVariants}
               whileHover={{ y: -3 }}
               onClick={() => handleCategoryClick(cat.name)} 
-              className="flex-none w-[85px] md:w-[110px] lg:w-[130px] flex flex-col items-center group cursor-pointer snap-center"
+              className="flex-none w-[95px] md:w-[110px] lg:w-[130px] flex flex-col items-center group cursor-pointer snap-center"
             >
               {/* Image container - tailles ajustées */}
               <div className={`

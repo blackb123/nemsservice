@@ -62,7 +62,7 @@ const ProductSlider = () => {
   }, []);
 
   return (
-    <section className="py-8 md:py-12 bg-white overflow-hidden">
+    <section className="pb-4 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div 
