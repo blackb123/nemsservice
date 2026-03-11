@@ -34,7 +34,7 @@ const SocialShowcase = () => {
   };
 
   return (
-    <section className="py-20 bg-white border-t max-sm:py-10 border-gray-50 overflow-hidden">
+    <section className="py-5 bg-white border-t  border-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         
         {/* HEADER ANIMÉ */}
