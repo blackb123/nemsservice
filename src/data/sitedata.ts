@@ -9,6 +9,8 @@ import card from  "../assets/card.webp"
 import signification from "../assets/signalisation.webp"
 import tshirt from "../assets/tshirts.webp"
 import chapitaux from "../assets/chapitaux.webp"
+import portebrochure from "../assets/portebrochure.webp"
+import roomindicator from "../assets/roomindicator.webp"
 import * as img from '../assets/COFFRET/coffret_img';
 
 /////// PRODUCT IMAGE
@@ -52,13 +54,13 @@ import {
   { id: 8, name: "STOP RAYON", image: panneaux },
   
   // Section 9: PLV (from page 35-41, mixed with Stop Rayon)
-  { id: 9, name: "PLV", image: signalition },
+  { id: 9, name: "PLV", image: stoptrottoir1 },
   
   // Section 10: CHEVALETS (from page 42-43)
-  { id: 10, name: "CHEVALETS", image: signalition },
+  { id: 10, name: "CHEVALETS", image: roomindicator },
   
   // Section 11: PORTES BROCHURES (from page 44-46)
-  { id: 11, name: "PORTES BROCHURES", image: offset },
+  { id: 11, name: "PORTES BROCHURES", image: portebrochure },
   
   // Section 12: GONFLABLES (from page 47-54)
   { id: 12, name: "GONFLABLE", image: gonflable },
@@ -73,7 +75,7 @@ import {
   { id: 15, name: "POTENCES", image: panneaux },
   
   // Section 16: IMPRESSION NUMÉRIQUE (from page 68-72)
-  { id: 16, name: "IMPRESSION NUMERIQUE", image: businesscard },
+  { id: 16, name: "IMPRESSION NUMERIQUE", image: card },
   
   // Section 17: OFFSET (from page 68)
   { id: 17, name: "OFFSET", image: offset },
@@ -486,14 +488,14 @@ socialShowcase: {
     "header": "Homme Sandwich",
     "description": "Support publicitaire porté par une personne.",
     "features": ["Double face", "Dimension visuel: 60x60cm", "PVC expansé 6mm", "Bretelles réglables", "Street marketing", "Découpe à la forme"],
-    "image": offset
+    "image": stoptrottoir1
   },
   {
     "category": "STOP TROTTOIRS",
     "header": "PLV Silhouette Découpée sur Pied",
     "description": "Personnage ou produit grandeur nature sur pied.",
     "features": ["Découpe forme", "Pliable", "Impact fort", "Visibilité maximale"],
-    "image": offset2
+    "image": stoptrottoir2
   },
 
   // ==================== SECTION 6: PANNEAUX DE SIGNALISATIONS ====================
@@ -503,14 +505,14 @@ socialShowcase: {
     "header": "Plaque de Porte Permanente",
     "description": "Identification des bureaux et salles à information fixe.",
     "features": ["Aluminium", "Insert papier possible", "Fixation adhésive", "Sur mesure", "Large choix de matières"],
-    "image": signalition
+    "image": roomindicator
   },
   {
     "category": "SIGNALETIQUE",
     "header": "Plaque de Porte Personnalisable",
     "description": "Plaque modulable permettant de changer facilement les informations.",
     "features": ["Modulable", "Changement rapide", "Insert papier sous plaque transparente", "Plexiglas ou inox"],
-    "image": signalition
+    "image": roomindicator
   },
   {
     "category": "SIGNALETIQUE",
@@ -524,21 +526,21 @@ socialShowcase: {
     "header": "Panneau Directionnel Modèle Potence",
     "description": "Signalétique perpendiculaire au mur pour visibilité dans les couloirs.",
     "features": ["Double face", "Alu anodisé", "Visibilité couloir", "Fléchage directionnel"],
-    "image": panneaux
+    "image": roomindicator
   },
   {
     "category": "SIGNALETIQUE",
     "header": "Panneau Directionnel Modèle Mural",
     "description": "Panneaux d'information muraux fixes.",
     "features": ["PVC ou Alu", "Format sur mesure", "Impression directe", "Fléchage inclus"],
-    "image": panneaux2
+    "image": signalition
   },
   {
     "category": "SIGNALETIQUE",
     "header": "Panneau de Plafond Suspendu",
     "description": "Signalétique suspendue pour orientation dans grands espaces.",
     "features": ["Suspension câbles", "Double face", "Léger", "Guidage vertical"],
-    "image": signalition
+    "image": roomindicator
   },
   {
     "category": "SIGNALETIQUE",
@@ -552,14 +554,14 @@ socialShowcase: {
     "header": "Oriflamme Classique",
     "description": "Porte affiche pour stand et point de vente.",
     "features": ["Impression quadri sublimation", "Deux profiles fixés haut et bas", "Crochets de suspension", "Facile à mettre en place"],
-    "image": signalition
+    "image": banner2
   },
   {
     "category": "SIGNALETIQUE",
     "header": "Oriflamme Standard",
     "description": "Kakémono sur-mesure avec qualité d'impression irréprochable.",
     "features": ["Format sur-mesure", "Bâche, tissu polyester ou PVC souple", "Finition œillets ou baguettes", "Option recto/verso"],
-    "image": signalition
+    "image": banner2
   },
 
   // ==================== SECTION 7: CADRES MURAUX ====================
@@ -635,35 +637,35 @@ socialShowcase: {
     "header": "PLV de Comptoir Multiples Formes",
     "description": "Petit présentoir de caisse découpé à la forme.",
     "features": ["Découpe laser", "Carton ou PVC", "Personnalisé", "Pour comptoir/caisse", "Attire l'attention"],
-    "image": signalition
+    "image": stoptrottoir1
   },
   {
     "category": "PLV",
     "header": "Dangler Modèle Classique",
     "description": "PLV suspendue pour communication sans occuper d'espace au sol.",
     "features": ["Suspension plafond", "PVC ou Carton", "Recto/verso", "Formes: carré, rectangulaire, circulaire", "Idéal promotions"],
-    "image": horizontal
+    "image": banner2
   },
   {
     "category": "PLV",
     "header": "Dangler Modèle 3D",
     "description": "Publicité suspendue avec volume.",
     "features": ["Effet 3D", "Montage facile", "Mobile", "Visibilité 360°", "PVC ou Carton"],
-    "image": horizontal
+    "image": banner2
   },
   {
     "category": "PLV",
     "header": "Dangler Modèle 3D Façonnable",
     "description": "Dangler 3D personnalisable selon vos besoins.",
     "features": ["Forme personnalisée", "Effet 3D", "PVC ou Carton", "Recto/verso"],
-    "image": horizontal
+    "image": banner2
   },
   {
     "category": "PLV",
     "header": "Porte Chapelet",
     "description": "Présentoir pour produits en sachets (snacks, bonbons).",
     "features": ["Crochets multiples", "En-tête publicitaire", "Gain de place", "Pour rayons"],
-    "image": signalition
+    "image": portebrochure
   },
   {
     "category": "PLV",
@@ -677,28 +679,28 @@ socialShowcase: {
     "header": "Oeillet Call-Box",
     "description": "PLV pour marchands sur trottoirs à accrocher sur parasols.",
     "features": ["Résistant extérieur", "Fixation rapide", "Visible", "Formats: A5, A4, A3, 40x40cm", "PVC ABS 6-8mm"],
-    "image": panneaux
+    "image": stoptrottoir2
   },
   {
     "category": "PLV",
     "header": "Eventail Personnalisé PVC",
     "description": "Objet publicitaire utile lors d'événements extérieurs.",
     "features": ["PVC souple 0,80mm ou 6mm", "Impression quadri UV recto/verso", "Dimensions: 20x14cm", "Découpe à forme", "Vernis UV selectif"],
-    "image": offset
+    "image": offset2
   },
   {
     "category": "PLV",
     "header": "Tapis de Sol Publicitaire",
     "description": "Logo et message à l'entrée de vos locaux.",
     "features": ["Antidérapant", "Lavable", "Haute définition", "Résistant"],
-    "image": offset2
+    "image": serigraphie1
   },
   {
     "category": "PLV",
     "header": "Mobil Suspendu",
     "description": "Animation aérienne pour points de vente.",
     "features": ["Léger", "Mouvement naturel", "Fixation plafond", "Attire le regard"],
-    "image": horizontal
+    "image": banner2
   },
 
   // ==================== SECTION 9: CHEVALETS DE TABLE ====================
@@ -708,14 +710,14 @@ socialShowcase: {
     "header": "Chevalet de Table Classique Incliné",
     "description": "Support incliné en acrylique/plexiglas pour affiches.",
     "features": ["Acrylique/PMMA", "Bords polis", "Design incliné", "Insertion facile", "Option impression directe sur PVC"],
-    "image": signalition
+    "image": roomindicator
   },
   {
     "category": "CHEVALETS",
     "header": "Chevalet de Table Classique Droit",
     "description": "Support droit en acrylique/plexiglas pour présentation verticale.",
     "features": ["Acrylique/PMMA", "Bords polis", "Présentation verticale", "Double face possible", "Option impression directe"],
-    "image": signalition
+    "image": roomindicator
   },
   {
     "category": "CHEVALETS",
@@ -736,7 +738,7 @@ socialShowcase: {
     "header": "Chevalet Economique PVC Expansé",
     "description": "Solution économique en PVC expansé.",
     "features": ["PVC expansé", "Economique", "Léger", "Bon rapport qualité/prix"],
-    "image": signalition
+    "image": roomindicator
   },
 
   // ==================== SECTION 10: PORTES BROCHURES ====================
@@ -746,56 +748,56 @@ socialShowcase: {
     "header": "Porte Brochures de Table Modèle Contemporain",
     "description": "Présentoir de catalogues design pour table.",
     "features": ["Design contemporain", "Alu/Verre", "Multi-niveaux", "Pliable", "Finition soignée"],
-    "image": offset
+    "image": portebrochure
   },
   {
     "category": "PORTES BROCHURES",
     "header": "Porte Brochures de Table Modèle Futuris",
     "description": "Look futuriste pour vos halls d'accueil.",
     "features": ["Forme courbe", "Grande capacité", "Métal", "Design futuriste"],
-    "image": offset2
+    "image": portebrochure
   },
   {
     "category": "PORTES BROCHURES",
     "header": "Porte Brochures Bio-plastique",
     "description": "Option écologique pour votre PLV.",
     "features": ["Recyclable", "Léger", "Transparent", "Matériau écologique"],
-    "image": offset
+    "image": portebrochure
   },
   {
     "category": "PORTES BROCHURES",
     "header": "Porte Brochures sur Pied avec Table",
     "description": "Présentoir combiné avec une surface d'écriture.",
     "features": ["Hybride", "Pratique salons", "Stable", "Avec tablette"],
-    "image": offset2
+    "image": portebrochure
   },
   {
     "category": "PORTES BROCHURES",
     "header": "Porte Brochures sur Pied Modèle Simple",
     "description": "Structure rétractable qui se déplie en accordéon.",
     "features": ["Structure polycarbonate", "Hauteur: 126cm", "Format brochures A4", "Pliable", "Valise souple incluse", "Poids: 7 kgs"],
-    "image": offset
+    "image": portebrochure
   },
   {
     "category": "PORTES BROCHURES",
     "header": "Porte Brochures sur Pied Modèle Roulette",
     "description": "Présentoir sur roulettes pour grande capacité.",
     "features": ["Hauteur: 156cm", "Format brochures A4", "Très stable", "Polycarbonate résistant", "Valise renforcée", "Poids: 9 kgs"],
-    "image": offset2
+    "image": portebrochure
   },
   {
     "category": "PORTES BROCHURES",
     "header": "Ramasse Monnaie",
     "description": "Publicité au point de paiement.",
     "features": ["Verre ou Plastique", "Visuel interchangeable", "Antidérapant", "Pour caisse"],
-    "image": offset
+    "image": signalition
   },
   {
     "category": "PORTES BROCHURES",
     "header": "Porte Affiches sur Pied",
     "description": "Présentoir pour affiches sur pied.",
     "features": ["Structure stable", "Pour affiches", "Mobile", "Professionnel"],
-    "image": offset
+    "image": portebrochure
   },
 
   // ==================== SECTION 11: GONFLABLES ====================
@@ -1027,42 +1029,42 @@ socialShowcase: {
     "header": "Photocopies / Impressions",
     "description": "Photocopies et impressions haute qualité.",
     "features": ["Noir et couleur", "Formats A3/A4/...", "Différents papiers", "Coupe, pliage, plastification"],
-    "image": businesscard
+    "image": card
   },
   {
     "category": "IMPRESSION NUMERIQUE",
     "header": "Tracés de Plans",
     "description": "Impression professionnelle de plans jusqu'à 2 pouces.",
     "features": ["Noir et couleur", "Coupe et pliage", "Assemblage", "Scannérisation"],
-    "image": businesscard
+    "image": offset
   },
   {
     "category": "IMPRESSION NUMERIQUE",
     "header": "Brochures / Catalogues",
     "description": "Brochures reliées (spirale, thermocollée, piquée).",
     "features": ["Formats A3/A4/A5", "Noir et couleur", "Recto ou recto/verso", "Différentes reliures"],
-    "image": businesscard
+    "image": podcast
   },
   {
     "category": "IMPRESSION NUMERIQUE",
     "header": "Affiches et Posters",
     "description": "Impression grand format pour vos affiches.",
     "features": ["Papier jusqu'à 160g", "Tous formats", "Toutes quantités", "Impression express"],
-    "image": businesscard
+    "image": card
   },
   {
     "category": "IMPRESSION NUMERIQUE",
     "header": "Plaquettes",
     "description": "Plaquettes professionnelles pour entreprise.",
     "features": ["Noir et couleur", "Recto ou recto/verso", "Différents grammages", "Finitions: pliage, rainage"],
-    "image": businesscard
+    "image": podcast
   },
   {
     "category": "IMPRESSION NUMERIQUE",
     "header": "Flyers",
     "description": "Flyers publicitaires pour tous vos événements.",
     "features": ["Dès 115g", "Couché mat ou brillant", "Avec ou sans pelliculage", "Recto ou recto/verso"],
-    "image": businesscard
+    "image": card
   },
   {
     "category": "IMPRESSION NUMERIQUE",
@@ -1076,21 +1078,21 @@ socialShowcase: {
     "header": "Dépliants",
     "description": "Dépliants pour présenter vos produits.",
     "features": ["Plusieurs volets", "Différents formats", "Qualité professionnelle"],
-    "image": businesscard
+    "image": podcast
   },
   {
     "category": "IMPRESSION NUMERIQUE",
     "header": "Papiers à Entête",
     "description": "Papier à entête personnalisé pour votre courrier.",
     "features": ["Noir et couleur", "Recto ou recto/verso", "Différents papiers", "Finitions variées"],
-    "image": businesscard
+    "image": card
   },
   {
     "category": "IMPRESSION NUMERIQUE",
     "header": "Cartes Postales / Correspondance",
     "description": "Cartes postales personnalisées.",
     "features": ["Noir et couleur", "Recto ou recto/verso", "Différents grammages", "Finitions variées"],
-    "image": businesscard
+    "image": podcast
   },
 
   // ==================== SECTION 16: OFFSET / SÉRIGRAPHIE ====================
@@ -1154,7 +1156,7 @@ socialShowcase: {
     "header": "Porte-clés Personnalisés",
     "description": "Porte-clés avec votre logo.",
     "features": ["Différents modèles", "Métal ou plastique", "Gravure ou impression", "Petit prix"],
-    "image": offset2
+    "image": key
   },
   {
     "category": "GADGETS",
