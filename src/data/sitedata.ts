@@ -1,11 +1,9 @@
 // src/data/siteData.ts
 import backdrop from "../assets/product/backdrop1.webp"
 import banner from "../assets/banner.webp"
-import banner2 from "../assets/banner2.webp"
 import businesscard from "../assets/businesscard.webp"
 import podcast from "../assets/podscast.webp"
 import key from "../assets/keys.webp"
-import gonflable from "../assets/gonflable.webp"
 import roadstand from "../assets/roadstand.webp"
 import card from  "../assets/card.webp"
 import signification from "../assets/signalisation.webp"
@@ -15,7 +13,7 @@ import * as img from '../assets/COFFRET/coffret_img';
 
 /////// PRODUCT IMAGE
 import { 
-  backdrop1, backdrop2, banner1, carbanner, gonflable2, horizontal, 
+  backdrop1, backdrop2, banner1, banner2, carbanner, gonflable, gonflable2, horizontal, 
   offset, offset2, panneaux, panneaux2, rollup1, rollup2, 
   serigraphie1, serigraphie2, signalition, stoptrottoir1, stoptrottoir2 
 } from "../assets/product/productimg.ts";
@@ -81,16 +79,16 @@ import {
   { id: 17, name: "OFFSET", image: offset },
   
   // Section 18: SÉRIGRAPHIE (from page 64-65)
-  { id: 18, name: "SERIGRAPHIE", image: offset2 },
+  { id: 18, name: "SERIGRAPHIE", image: serigraphie1 },
   
   // Section 19: BRODERIE INDUSTRIELLE (from page 66)
-  { id: 19, name: "BRODERIE", image: tshirt },
+  { id: 19, name: "BRODERIE", image: serigraphie2 },
   
   // Section 20: TEXTILE & BAGAGERIE (from page 73)
   { id: 20, name: "TEXTILE", image: tshirt },
   
   // Section 21: GADGETS PUBLICITAIRES (from page 73)
-  { id: 21, name: "GADGETS", image: businesscard }
+  { id: 21, name: "GADGETS", image: offset2 }
 ],
   navLinks: [
     "Offres", 
@@ -1108,7 +1106,7 @@ socialShowcase: {
     "header": "Sérigraphie Industrielle",
     "description": "Impression sérigraphique pour textile et objets.",
     "features": ["Impressions au trait", "Impressions à plat", "Grandes séries", "Sur textile et objets"],
-    "image": offset2
+    "image": serigraphie1
   },
 
   // ==================== SECTION 17: BRODERIE ====================
@@ -1117,7 +1115,7 @@ socialShowcase: {
     "header": "Broderie Industrielle",
     "description": "Broderie personnalisée sur textile.",
     "features": ["Sur vêtements", "Logo personnalisé", "Haute qualité", "Durable"],
-    "image": tshirt
+    "image": serigraphie2
   },
 
   // ==================== SECTION 18: TEXTILE & BAGAGERIE ====================
@@ -1142,28 +1140,28 @@ socialShowcase: {
     "header": "Tasses Personnalisées",
     "description": "Mugs et tasses avec votre logo.",
     "features": ["Céramique", "Impression personnalisée", "Idéal cadeau", "Utilisation quotidienne"],
-    "image": businesscard
+    "image": offset2
   },
   {
     "category": "GADGETS",
     "header": "Parapluies Personnalisés",
     "description": "Parapluies avec votre logo.",
     "features": ["Différents modèles", "Résistants", "Impression logo", "Utile au quotidien"],
-    "image": businesscard
+    "image": offset2
   },
   {
     "category": "GADGETS",
     "header": "Porte-clés Personnalisés",
     "description": "Porte-clés avec votre logo.",
     "features": ["Différents modèles", "Métal ou plastique", "Gravure ou impression", "Petit prix"],
-    "image": businesscard
+    "image": offset2
   },
   {
     "category": "GADGETS",
     "header": "Stylos Personnalisés",
     "description": "Stylos publicitaires avec votre logo.",
     "features": ["Différents modèles", "Impression logo", "Goodies classique", "Tous budgets"],
-    "image": businesscard
+    "image": offset2
   }
 ];
 export const coffretProduct = [
