@@ -3,9 +3,14 @@ import { useCoffrets } from '../provider/coffreprovider';
 import { FiArrowRight, FiPackage, FiDroplet } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
+import bg from "../assets/notebook.webp"
 
 const CoffretDisplayPage: React.FC = () => {
   const { allCoffrets, selectedPack } = useCoffrets();
+
+  // WhatsApp configuration
+  const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "237671810319";
+  const whatsappNumber = rawNumber.replace('+', '');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,31 +31,121 @@ const CoffretDisplayPage: React.FC = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
   };
 
+  // Function to handle WhatsApp click with custom message
+  const handleWhatsAppClick = (message: string) => {
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+  };
+
   return (
     <div className="bg-white min-h-screen overflow-x-hidden">
       {/* HEADER SECTION */}
-      <header className="relative py-20 bg-[#f9f9f9] border-b border-gray-100 overflow-hidden">
+      <header className="relative py-32 md:py-40 border-b border-gray-100 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+        {/* Subtle texture background */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, #020617 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }} />
+        
+        {/* Background image with soft overlay */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-20"
+          style={{
+            backgroundImage: `url(${bg})`,
+          }}
+        />
+        
+        {/* Minimal geometric accents */}
+        <div className="absolute top-20 right-20 w-40 h-px bg-gradient-to-l from-blue-500/10 to-transparent rotate-45" />
+        <div className="absolute bottom-20 left-20 w-40 h-px bg-gradient-to-r from-blue-500/10 to-transparent -rotate-45" />
+        
+        {/* Soft overlay for text readability */}
+        <div className="absolute inset-0 z-0 bg-white/40" />
+        
         <motion.div 
           initial="hidden"
           animate="visible"
           variants={{
             hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
           }}
-          className="max-w-7xl mx-auto px-4 text-center relative z-10"
+          className="max-w-4xl mx-auto px-6 text-center relative z-10"
         >
-          <motion.span variants={fadeInUp} className="text-blue-600 font-bold tracking-[0.2em] text-xs uppercase mb-4 block">
-            NEM'S Services - Collection 2024
-          </motion.span>
-          <motion.h1 variants={fadeInUp} className="text-5xl md:text-6xl font-extrabold text-[#1a1a1a] mb-6 tracking-tight">
-            {selectedPack ? selectedPack.name : "Le Catalogue Prestige"}
-          </motion.h1> 
-          <motion.p variants={fadeInUp} className="max-w-2xl mx-auto text-gray-500 text-lg font-light leading-relaxed">
-            {selectedPack?.tagline || "Découvrez notre sélection exclusive d'objets publicitaires et coffrets cadeaux."}
-          </motion.p>
+          {/* Category with refined line */}
+          <motion.div 
+            variants={fadeInUp}
+            className="flex items-center justify-center gap-4 mb-6 group"
+          >
+            <span className="h-[1px] w-8 bg-blue-500/30 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-500" />
+            <span className="text-blue-500/70 text-[10px] font-light uppercase tracking-[0.3em] group-hover:text-blue-500 transition-colors duration-500">
+              NEM'S Services - Collection 2024
+            </span>
+            <span className="h-[1px] w-8 bg-blue-500/30 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-500" />
+          </motion.div>
+          
+          {/* Main title with refined typography */}
+          <motion.h1 
+            variants={fadeInUp} 
+            className="text-5xl md:text-7xl font-light text-gray-900 mb-6 tracking-[-0.02em] leading-[1.1]"
+          >
+            {selectedPack ? (
+              selectedPack.name.split(' ').map((word:any, i:any) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="inline-block mr-3 hover:text-blue-500 transition-colors duration-300"
+                >
+                  {word}
+                </motion.span>
+              ))
+            ) : (
+              <>
+                <span className="block">Le Catalogue</span>
+                <span className="text-blue-500 relative inline-block group">
+                  Prestige
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-px bg-blue-500/30 group-hover:w-20 transition-all duration-500" />
+                </span>
+              </>
+            )}
+          </motion.h1>
+          
+          {/* Description with subtle line accent */}
+          <motion.div 
+            variants={fadeInUp}
+            className="relative max-w-2xl mx-auto"
+          >
+            <span className="absolute left-1/2 -translate-x-1/2 -top-4 w-px h-8 bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" />
+            <p className="text-gray-400 text-lg font-light leading-relaxed">
+              {selectedPack?.tagline || "Découvrez notre sélection exclusive d'objets publicitaires et coffrets cadeaux."}
+            </p>
+          </motion.div>
+
+          {/* Minimal decorative element */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.8 }}
+            className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"
+          />
         </motion.div>
+
+        {/* Subtle floating dots */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-1">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
+              className="w-1 h-1 rounded-full bg-blue-500/30"
+            />
+          ))}
+        </div>
       </header>
 
+      {/* PRODUCTS SECTION */}
       <div className="max-w-6xl mx-auto px-4 py-20">
         {displayGroups.map((group) => (
           <div key={group.id} className="mb-32 last:mb-0">
@@ -155,14 +250,21 @@ const CoffretDisplayPage: React.FC = () => {
                     </div>
 
                     <motion.div variants={fadeInUp} className="pt-6">
-                      <button className="group/btn relative px-10 py-4 bg-black overflow-hidden rounded-full transition-all hover:pr-14">
+                      <motion.button 
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => handleWhatsAppClick(
+                          `Bonjour, je suis intéressé par le coffret ${pack.name} (Ref: ${pack.ref}). Pouvez-vous me donner plus d'informations et un devis ?`
+                        )}
+                        className="group/btn relative px-10 py-4 bg-black overflow-hidden rounded-full transition-all hover:pr-14"
+                      >
                         <span className="relative z-10 text-white text-sm font-bold uppercase tracking-widest">
                           Demander un Devis
                         </span>
                         <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover/btn:opacity-100 transition-all text-white">
                           <FiArrowRight size={20} />
                         </div>
-                      </button>
+                      </motion.button>
                     </motion.div>
                   </div>
                 </motion.section>
@@ -173,19 +275,88 @@ const CoffretDisplayPage: React.FC = () => {
       </div>
 
       {/* FOOTER CALL TO ACTION */}
-      <section className="bg-black py-20 overflow-hidden">
+      <section className="bg-gradient-to-br from-slate-950 to-slate-900 py-32 overflow-hidden relative">
+        {/* Subtle texture */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }} />
+        
+        {/* Geometric accents */}
+        <div className="absolute top-40 left-20 w-40 h-px bg-gradient-to-r from-blue-500/20 to-transparent rotate-45" />
+        <div className="absolute bottom-40 right-20 w-40 h-px bg-gradient-to-l from-blue-500/20 to-transparent -rotate-45" />
+        
         <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto px-4 text-center text-white"
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto px-6 text-center relative z-10"
         >
-          <h2 className="text-3xl font-bold mb-6">Besoin d'un accompagnement sur mesure ?</h2>
-          <p className="text-gray-400 mb-10 font-light">Nos experts vous conseillent sur la personnalisation.</p>
-          <button className="px-12 py-4 border border-white/20 hover:bg-white hover:text-black transition-all rounded-full font-bold uppercase text-xs tracking-[0.2em]">
-            Contactez un conseiller
-          </button>
+          {/* Category line */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center justify-center gap-4 mb-8 group"
+          >
+            <span className="h-[1px] w-8 bg-blue-500/30 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-500" />
+            <span className="text-blue-500/50 text-[10px] font-light uppercase tracking-[0.3em] group-hover:text-blue-400 transition-colors duration-500">
+              Accompagnement
+            </span>
+            <span className="h-[1px] w-8 bg-blue-500/30 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-500" />
+          </motion.div>
+          
+          <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-[-0.02em]">
+            Besoin d'un accompagnement<br />sur mesure ?
+          </h2>
+          
+          <p className="text-gray-400 text-lg font-light mb-12 max-w-2xl mx-auto">
+            Nos experts vous conseillent sur la personnalisation de vos coffrets et objets publicitaires.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* Quote Request Button */}
+            <motion.button 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => handleWhatsAppClick(
+                "Bonjour, je souhaite obtenir un devis pour des coffrets personnalisés. Pouvez-vous me conseiller ?"
+              )}
+              className="group relative px-10 py-4 bg-blue-600 text-white overflow-hidden rounded-full transition-all hover:pr-14"
+            >
+              <span className="relative z-10 flex items-center gap-3 text-sm font-light tracking-wider">
+                Demander un devis
+                <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            </motion.button>
+            
+            {/* Contact Button */}
+            <motion.button 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => handleWhatsAppClick(
+                "Bonjour, je souhaite entrer en contact avec un conseiller pour discuter de mon projet."
+              )}
+              className="px-10 py-4 border border-white/20 text-white rounded-full text-sm font-light tracking-wider hover:bg-white/5 transition-all"
+            >
+              Contacter un conseiller
+            </motion.button>
+          </div>
+
+          {/* Subtle floating dots */}
+          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-1">
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                animate={{ opacity: [0.1, 0.3, 0.1] }}
+                transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
+                className="w-1 h-1 rounded-full bg-blue-500/30"
+              />
+            ))}
+          </div>
         </motion.div>
       </section>
     </div>

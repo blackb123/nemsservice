@@ -6,8 +6,8 @@ import { fileURLToPath } from 'url';
 // Fix __dirname for ES Modules
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// 🔥 Target ONLY product folder
-const directory = path.join(__dirname, 'src', 'assets', 'product');
+//  Target ONLY product folder
+const directory = path.join(__dirname, 'src', 'assets');
 
 const extensionsToConvert = ['.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG'];
 
