@@ -23,7 +23,7 @@ const ProductPage: React.FC = () => {
   const filteredProducts = useMemo(() => 
     activeCategory === 'All' 
       ? product 
-      : product.filter(p => p.category === activeCategory),
+      : product.filter((p: { category: string; }) => p.category === activeCategory),
     [activeCategory]
   );
 
@@ -132,7 +132,7 @@ const ProductPage: React.FC = () => {
       scale: 0.8
     },
     visible: { 
-      opacity: [0, 0.3, 0],
+      opacity: [0, 0.15, 0],
       scale: [0.8, 1.2, 0.8],
       transition: {
         duration: 2,
@@ -176,94 +176,150 @@ const ProductPage: React.FC = () => {
     willChange: 'transform, opacity',
     transform: 'translateZ(0)'
   };
+  const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "237671810319";
+const whatsappNumber = rawNumber.replace('+', '');
 
   return (
     <main className="mt-[80px] min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
       
       {/* --- HERO SECTION --- */}
-      <section className="relative bg-[#020617] pt-40 pb-52 overflow-hidden w-full">
-        {/* Optimized floating circle with transform-gpu */}
+      <section className="relative bg-gradient-to-br from-[#020617] to-[#0b1120] pt-40 pb-52 overflow-hidden w-full">
+  {/* Subtle texture instead of glowing orbs */}
+  <div className="absolute inset-0 opacity-[0.02]" style={{
+    backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+    backgroundSize: '40px 40px'
+  }} />
+  
+  {/* Minimal geometric accents */}
+  <div className="absolute top-20 right-20 w-40 h-px bg-gradient-to-l from-blue-500/20 to-transparent rotate-45" />
+  <div className="absolute bottom-20 left-20 w-40 h-px bg-gradient-to-r from-blue-500/20 to-transparent -rotate-45" />
+  
+  <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      
+      {/* Left Column - Title Area */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="space-y-8"
+      >
+        {/* Category with refined line */}
         <motion.div 
-          animate={{ 
-            scale: shouldReduceMotion ? 1 : [1, 1.05, 1], 
-            opacity: shouldReduceMotion ? 0.1 : [0.1, 0.12, 0.1] 
-          }}
-          transition={{ 
-            duration: shouldReduceMotion ? 0 : 8, 
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute -top-12 -left-12 w-64 h-64 md:w-96 md:h-96 bg-blue-600 rounded-full blur-[100px] pointer-events-none z-0 transform-gpu"
-          style={floatingCircleStyle}
-        />
+          className="flex items-center gap-4 mb-8 group cursor-default"
+          whileHover={{ x: 8 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        >
+          <span className="h-[1px] w-12 bg-blue-500/50 group-hover:w-16 transition-all duration-500" />
+          <span className="text-blue-400/50 text-[10px] font-light uppercase tracking-[0.3em] group-hover:text-blue-400 transition-colors duration-500">
+            Excellence Artisanale
+          </span>
+        </motion.div>
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div style={{ y: shouldReduceMotion ? 0 : y1, opacity: opacityHero }}>
-              <motion.div 
-                initial="hidden"
-                animate="visible"
-                variants={heroTextVariants}
-                className="flex items-center gap-3 mb-8"
-              >
-                <span className="h-[2px] w-8 bg-blue-500" />
-                <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.5em]">
-                  Excellence Opérationnelle
-                </span>
-              </motion.div>
-              
-              <motion.h1 
-                initial="hidden"
-                animate="visible"
-                variants={heroTextVariants}
-                className="text-6xl md:text-[10rem] font-black text-white mb-8 tracking-tighter leading-[0.85] break-words"
-              >
-                {activeCategory}
-              </motion.h1>
-              
-              <motion.p 
-                initial="hidden"
-                animate="visible"
-                variants={heroTextVariants}
-                transition={{ delay: 0.3 }}
-                className="max-w-md text-slate-400 text-xl font-light leading-relaxed border-l-2 border-blue-500/30 pl-6"
-              >
-                Une approche <span className="text-white">architecturale</span> de la communication visuelle. 
-              </motion.p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="hidden lg:block relative"
+        {/* Main title with refined animation */}
+        <h1 className="text-6xl md:text-[7rem] font-light text-white leading-[0.9] tracking-[-0.02em]">
+          {activeCategory.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.02 }}
+              className="inline-block hover:opacity-70 transition-opacity duration-300"
             >
-               <div className="absolute inset-0 bg-blue-500/10 blur-[80px] -z-10" />
-               <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl">
-                  <FiInfo className="text-blue-500 mb-4" size={24} />
-                  <p className="text-slate-300 text-lg italic font-light mb-8">
-                    "Nous forgeons des identités qui durent."
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <img 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100" 
-                      className="w-12 h-12 rounded-full object-cover grayscale border-2 border-blue-500" 
-                      alt="Expert"
-                      loading="lazy"
-                    />
-                    <div>
-                      <p className="text-white font-bold text-sm">Cellule Qualité</p>
-                      <p className="text-blue-500 text-[10px] uppercase font-black tracking-widest">Nem's Service</p>
-                    </div>
-                  </div>
-               </div>
-            </motion.div>
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+        </h1>
+
+        {/* Clean divider */}
+        <div className="w-20 h-px bg-white/10 mt-8" />
+      </motion.div>
+
+      {/* Right Column - Authentic Message */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="space-y-8"
+      >
+        {/* Main message - Elegant and human */}
+        <div className="space-y-6">
+          <p className="text-white text-2xl font-light leading-relaxed">
+            Une collaboration <span className="text-blue-400">sur mesure</span>, 
+            où chaque projet est unique.
+          </p>
+          
+          <div className="space-y-4 text-slate-400 text-base font-light leading-relaxed">
+            <p>
+              Nous travaillons en étroite collaboration avec chaque client pour 
+              garantir une réalisation qui correspond parfaitement à vos attentes. 
+              De la conception à la livraison, notre équipe vous accompagne avec 
+              la même exigence de qualité qui fait notre réputation depuis 15 ans.
+            </p>
+            <p className="text-slate-500 text-sm">
+              — Votre satisfaction est notre seule signature.
+            </p>
           </div>
         </div>
-      </section>
+
+        {/* Minimal contact hint */}
+        <motion.div 
+          className="flex items-center gap-4 pt-6 border-t border-white/5"
+          whileHover={{ x: 5 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
+          <span className="text-xs text-slate-600 font-light tracking-wider uppercase">
+            Discutons de votre projet
+          </span>
+          <span className="text-slate-600 text-lg font-light">→</span>
+        </motion.div>
+
+        {/* Right side - Simple testimonial card without glow */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="relative mt-12 pt-8"
+        >
+          <div className="relative bg-white/[0.02] p-6 rounded-2xl border border-white/5">
+            <div className="absolute top-0 left-8 w-10 h-px bg-blue-500/30" />
+            
+            <p className="text-slate-400 text-sm font-light italic mb-4">
+              "Une équipe qui comprend vraiment nos besoins et qui sait 
+              traduire notre vision en réalité."
+            </p>
+            
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                <span className="text-white/30 text-xs">NS</span>
+              </div>
+              <div>
+                <p className="text-white text-xs font-medium">Direction Créative</p>
+                <p className="text-slate-600 text-[9px] uppercase tracking-wider">Nem's Service</p>
+              </div>
+            </div>
+
+            {/* Minimal decorative element */}
+            <div className="absolute bottom-4 right-4 w-12 h-12 border border-white/5 rounded-full" />
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+
+    {/* Simple baseline */}
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.8 }}
+      className="absolute bottom-12 left-1/2 -translate-x-1/2 text-[8px] text-slate-800 font-light uppercase tracking-[0.5em]"
+    >
+      • Qualité • Exigence • Durabilité •
+    </motion.div>
+  </div>
+</section>
 
       {/* --- NAVIGATION STICKY --- */}
-      <div ref={productListRef} className="sticky top-[80px] z-30 bg-white/80 backdrop-blur-md border-b border-slate-200/60 w-full">
+      <div ref={productListRef} className="sticky top-[80px] z-30 bg-white/80 backdrop-blur-md w-full">
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
           <nav className="flex items-center gap-2 md:gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400">
             <a href="/" className="hover:text-blue-600 transition">Nem's</a>
@@ -285,7 +341,7 @@ const ProductPage: React.FC = () => {
       </div>
 
       {/* --- LISTE DES PRODUITS --- */}
-      <div className="max-w-7xl mx-auto px-6 max-sm:px-0 py-10 max-sm:py-0 relative">
+      <div className="max-w-7xl mx-auto py-10 max-sm:py-0 relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory + currentPage}
@@ -295,7 +351,7 @@ const ProductPage: React.FC = () => {
             exit="hidden"
             className="flex flex-col space-y-4"
           >
-            {currentProducts.map((item, index) => (
+            {currentProducts.map((item:any, index: number) => (
               <motion.div
                 key={`${index}-${activeCategory}`}
                 variants={productItemVariants}
@@ -305,54 +361,9 @@ const ProductPage: React.FC = () => {
                   margin: "-50px",
                   amount: 0.3
                 }}
-                className="group relative bg-white rounded-[2rem] p-6 md:p-10 transition-all duration-500 overflow-hidden will-change-transform cursor-pointer"
+                className="group relative bg-white  p-6 md:p-10 transition-all duration-500 overflow-hidden will-change-transform cursor-pointer "
               >
-                {/* Modern glow effect on hover */}
-                <motion.div
-                  variants={cardGlowVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                />
-                
-                {/* Animated border gradient */}
-                <div className="absolute inset-0 rounded-[2rem] p-[2px] bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/30 transition-all duration-700">
-                  <div className="absolute inset-0 bg-white rounded-[2rem]" />
-                </div>
-
-                {/* Decorative elements */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 0.5, x: 0 }}
-                  transition={{ delay: 0.2 + index * 0.1 }}
-                  className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 via-purple-600 to-blue-600 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-700 origin-top"
-                />
-
-                {/* Sparkle icons */}
-                <motion.div
-                  initial={{ opacity: 0, rotate: -20 }}
-                  animate={{ opacity: 0.1, rotate: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                  className="absolute top-4 right-4"
-                >
-                </motion.div>
-
-                {/* Ligne de flux décorative - désactivée si réduction de mouvement */}
-                {!shouldReduceMotion && (
-                  <div className="absolute left-3 top-10 h-1/2 w-[3px] bg-gradient-to-b from-blue-600 to-transparent hidden xl:block overflow-hidden">
-                    <motion.div
-                      initial={{ y: "-100%" }}
-                      animate={{ y: "100%" }}
-                      transition={{ 
-                        duration: 3, 
-                        repeat: Infinity, 
-                        ease: "linear",
-                        repeatType: "loop"
-                      }}
-                      className="w-full h-20 bg-blue-400 blur-sm"
-                    />
-                  </div>
-                )}
+               
 
                 {/* Card content with staggered animation */}
                 <motion.div
@@ -363,13 +374,7 @@ const ProductPage: React.FC = () => {
                 </motion.div>
 
                 {/* View details badge */}
-                <motion.div
-                  variants={cardBadgeVariants}
-                  className="absolute bottom-6 right-6 flex items-center gap-2 text-xs font-medium text-slate-400 group-hover:text-blue-600 transition-colors"
-                >
-                  <span>View details</span>
-                  <FiEye className="group-hover:translate-x-1 transition-transform" />
-                </motion.div>
+                
               </motion.div>
             ))}
           </motion.div>
@@ -493,91 +498,117 @@ const ProductPage: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#020617]/80 to-[#020617]" />
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+       <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { 
+              opacity: 1,
+              transition: { staggerChildren: 0.1 }
+            }
+          }}
+        >
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
             variants={{
-              hidden: { opacity: 0 },
-              visible: { 
-                opacity: 1,
-                transition: { staggerChildren: 0.1 }
-              }
+              hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
+              visible: { opacity: 1, y: 0 }
             }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 mb-8"
           >
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
-                visible: { opacity: 1, y: 0 }
-              }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 mb-8"
-            >
-              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-              <span className="text-blue-400 text-[10px] font-black uppercase tracking-widest">
-                Disponible pour nouveaux projets
-              </span>
-            </motion.div>
-
-            <h2 className="text-5xl md:text-8xl font-black text-white mb-12 tracking-tighter leading-[0.9]">
-              <div className="overflow-hidden">
-                <motion.span
-                  className="block"
-                  variants={{
-                    hidden: { y: shouldReduceMotion ? 0 : "100%" },
-                    visible: { 
-                      y: 0, 
-                      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
-                    }
-                  }}
-                >
-                  Prêt à définir le
-                </motion.span>
-              </div>
-              
-              <div className="overflow-hidden">
-                <motion.span
-                  className="block text-blue-600 italic"
-                  variants={{
-                    hidden: { y: shouldReduceMotion ? 0 : "100%" },
-                    visible: { 
-                      y: 0, 
-                      transition: { duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] } 
-                    }
-                  }}
-                >
-                  prochain standard ?
-                </motion.span>
-              </div>
-            </h2>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <motion.button 
-                whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-                whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-                className="relative group/btn overflow-hidden bg-orange-500 text-white px-12 py-7 font-black uppercase text-[12px] tracking-[0.2em] shadow-2xl shadow-blue-500/20 transition-all"
-              >
-                <span className="relative z-10 flex items-center gap-4">
-                  Démarrer la collaboration 
-                  <FiArrowRight size={18} className="group-hover/btn:translate-x-2 transition-transform" />
-                </span>
-                {!shouldReduceMotion && (
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
-                )}
-              </motion.button>
-
-              <motion.button 
-                whileHover={shouldReduceMotion ? {} : { backgroundColor: "rgba(255,255,255,0.05)" }}
-                className="px-12 py-7 font-black uppercase text-[11px] tracking-[0.2em] text-white border border-white/10 backdrop-blur-sm transition-all"
-              >
-                Catalogue PDF v2.0
-              </motion.button>
-            </div>
-
-            <p className="mt-16 text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em]">
-              Expertise Technique • Design Architectural • Nem's Service 2026
-            </p>
+            <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+            <span className="text-blue-400 text-[10px] font-black uppercase tracking-widest">
+              Disponible pour nouveaux projets
+            </span>
           </motion.div>
+
+          <h2 className="text-5xl md:text-8xl font-black text-white mb-12 tracking-tighter leading-[0.9]">
+            <div className="overflow-hidden">
+              <motion.span
+                className="block"
+                variants={{
+                  hidden: { y: shouldReduceMotion ? 0 : "100%" },
+                  visible: { 
+                    y: 0, 
+                    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
+                  }
+                }}
+              >
+                Prêt à définir le
+              </motion.span>
+            </div>
+            
+            <div className="overflow-hidden">
+              <motion.span
+                className="block text-blue-600 italic"
+                variants={{
+                  hidden: { y: shouldReduceMotion ? 0 : "100%" },
+                  visible: { 
+                    y: 0, 
+                    transition: { duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] } 
+                  }
+                }}
+              >
+                prochain standard ?
+              </motion.span>
+            </div>
+          </h2>
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          {/* Collaboration Button - WhatsApp Link */}
+          <motion.a 
+            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+              "Salut! Je voudrais discuter d'une collaboration avec votre équipe. Pouvez-vous m'en dire plus sur vos services ?"
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+            className="relative group/btn overflow-hidden bg-orange-500 text-white px-12 py-7 font-black uppercase text-[12px] tracking-[0.2em] shadow-2xl shadow-blue-500/20 transition-all"
+          >
+            <span className="relative z-10 flex items-center gap-4">
+              Démarrer la collaboration 
+              <FiArrowRight size={18} className="group-hover/btn:translate-x-2 transition-transform" />
+            </span>
+            {!shouldReduceMotion && (
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+            )}
+          </motion.a>
+
+          {/* PDF Download Button with File Size Indicator */}
+          <motion.a 
+            href="/catalogue.pdf"
+            download
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+            className="relative group/btn overflow-hidden px-12 py-7 font-black uppercase text-[11px] tracking-[0.2em] text-white border border-white/10 backdrop-blur-sm transition-all hover:bg-white/5"
+          >
+            <span className="relative z-10 flex flex-col items-center">
+              <span className="flex items-center gap-2">
+                Catalogue PDF v2.0
+                <FiArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+              </span>
+              <span className="text-[8px] font-normal text-slate-400 mt-1">
+                Poids: 33 MB • Téléchargement
+              </span>
+            </span>
+            {!shouldReduceMotion && (
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+            )}
+          </motion.a>
+        </div>
+
+          {/* Optional: Add a note about download size */}
+          <p className="mt-4 text-xs text-slate-500">
+            ⚡ Catalogue complet • 33 MB • Format PDF
+          </p>
+
+          <p className="mt-16 text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em]">
+            Expertise Technique • Design Architectural • Nem's Service 2026
+          </p>
+        </motion.div>
         </div>
 
         <div className="absolute bottom-0 right-0 w-1/3 h-[1px] bg-gradient-to-l from-blue-600/50 to-transparent" />

@@ -11,7 +11,7 @@ interface CoffretContextType {
 const CoffretContext = createContext<CoffretContextType | undefined>(undefined);
 
 export const CoffretProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // 1. Initialisation avec récupération depuis le localStorage
+  //  Initialisation avec récupération depuis le localStorage
   const [selectedPack, setSelectedPack] = useState<any | null>(() => {
     const savedPack = localStorage.getItem('nem_selected_pack');
     return savedPack ? JSON.parse(savedPack) : null;

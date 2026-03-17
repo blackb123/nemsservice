@@ -7,14 +7,15 @@ import { CategoryProvider } from './provider/categoryprovider'
 import { CoffretProvider } from './provider/coffreprovider'
 import AboutPage from './pages/apropos'
 import CoffretDisplayPage from './pages/coffretpage'
-import ScrollToTopOnRoute from './component/ScrollToTop'
+import ScrollToTop from './component/ScrollToTop'
+
 function App() {
   
   return (
     <CoffretProvider>
     <CategoryProvider>
     <MainLayout>
-      <ScrollToTopOnRoute />
+      <ScrollToTop />
       <Routes>
         {/* Home Page */}
         <Route path="/" element={<Home />} />  
