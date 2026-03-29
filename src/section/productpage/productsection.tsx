@@ -5,12 +5,13 @@ interface SectionProps {
   header: string;
   description: string;
   features: string[];
-  image: string;
+  image?: string;
+  image_url?: string;
   category: string;
   index: number;
 }
 
-const ProductSection: React.FC<SectionProps> = ({ header, description, features, image, category, index }) => {
+const ProductSection: React.FC<SectionProps> = ({ header, description, features, image, image_url, category, index }) => {
   const isEven = index % 2 === 0;
 
   // Configuration du lien WhatsApp dynamique
@@ -20,9 +21,12 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
   const orderMessage = encodeURIComponent(`Bonjour Nem's Service, je souhaite commander : ${header}`);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
 
+  // Use image_url if available, otherwise fall back to image
+  const productImage = image_url || image;
+
   return (
     <section 
-      className="w-full py-24 max-lg:py-10 lg:py-40 bg-white relative overflow-hidden" 
+      className="w-full bg-white relative overflow-hidden" 
       id={index === 0 ? "products" : undefined}
     >
       {/* Subtle texture background */}
@@ -32,10 +36,10 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
       }} />
       
       {/* Minimal geometric accents */}
-      <div className={`absolute top-20 ${isEven ? 'right-20' : 'left-20'} w-40 h-px bg-gradient-to-l from-blue-500/10 to-transparent rotate-45`} />
-      <div className={`absolute bottom-20 ${isEven ? 'left-20' : 'right-20'} w-40 h-px bg-gradient-to-r from-blue-500/10 to-transparent -rotate-45`} />
+      <div className={`absolute top-20 ${isEven ? 'right-20' : 'left-20'} w-40 h-px bg-gradient-to-l from-blue-500/10 to-transparent rotate-45 hidden md:block`} />
+      <div className={`absolute bottom-20 ${isEven ? 'left-20' : 'right-20'} w-40 h-px bg-gradient-to-r from-blue-500/10 to-transparent -rotate-45 hidden md:block`} />
 
-      <div className={`max-w-7xl mx-auto px-6 flex flex-col items-center gap-12 md:gap-24 relative z-10 ${
+      <div className={`max-w-7xl mx-auto px-6 py-12 md:py-0 flex flex-col gap-12 md:gap-24 relative z-10 ${
         isEven ? 'md:flex-row' : 'md:flex-row-reverse'
       }`}>
         
@@ -59,6 +63,18 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 tracking-[-0.02em] leading-tight">
             {header}
           </h2>
+
+          {/* Mobile: Show image after header on mobile, hide in desktop text container */}
+          <div className="block md:hidden w-full -mx-6 px-6">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50 group">
+              <img 
+                src={productImage}
+                alt={header} 
+                className="w-full h-full object-contain transition-transform duration-[1.8s] ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/5 rounded-3xl" />
+            </div>
+          </div>
 
           {/* Description with subtle line accent */}
           <div className="relative pl-6">
@@ -88,40 +104,35 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
           </div>
 
           {/* Refined Action Buttons */}
-          <div className="pt-8 flex items-center gap-8">
+          <div className="pt-8 flex flex-wrap items-center gap-6 md:gap-8">
             <a 
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/btn relative text-sm font-light text-gray-900 pb-1 overflow-hidden"
+              className="group/btn relative text-sm font-light bg-black text-white p-3 rounded-3xl px-10  overflow-hidden"
             >
               <span className="relative z-10">Commander</span>
               <span className="absolute bottom-0 left-0 w-full h-px bg-gray-900 transform origin-left transition-transform duration-300 scale-x-100 group-hover/btn:scale-x-0" />
               <span className="absolute bottom-0 left-0 w-full h-px bg-blue-500 transform origin-right transition-transform duration-300 scale-x-0 group-hover/btn:scale-x-100" />
             </a>
-            
-            <button className="group/btn relative text-sm font-light text-gray-400 hover:text-gray-900 transition-colors duration-300 pb-1 overflow-hidden">
-              <span className="relative z-10">Fiche technique</span>
-              <span className="absolute bottom-0 left-0 w-full h-px bg-gray-200 transform origin-left transition-transform duration-300 scale-x-100 group-hover/btn:scale-x-0" />
-              <span className="absolute bottom-0 left-0 w-full h-px bg-gray-900 transform origin-right transition-transform duration-300 scale-x-0 group-hover/btn:scale-x-100" />
-            </button>
+           
           </div>
 
           {/* Minimal separator */}
           <div className="w-12 h-px bg-gray-100" />
         </motion.div>
 
-        {/* IMAGE CONTENT */}
+        {/* IMAGE CONTENT - Desktop only */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full md:w-[55%]"
+          className="hidden md:block w-full md:w-[55%]"
         >
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50 group">
             <img 
-              src={image}
+              src={productImage}
               alt={header} 
               className="w-full h-full object-contain transition-transform duration-[1.8s] ease-out group-hover:scale-105"
             />

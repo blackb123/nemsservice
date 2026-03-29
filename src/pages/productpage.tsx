@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import ProductSection from '../section/productpage/productsection';
-import { product } from '../data/sitedata'; 
+import { useProducts } from '../context/ProductContext'; 
 import { useCategory } from '../provider/categoryprovider'; 
 import { FiChevronRight, FiLayers, FiInfo, FiChevronLeft, FiArrowRight, FiEye } from 'react-icons/fi';
 import type { Variants } from 'framer-motion';
 
 const ProductPage: React.FC = () => {
   const { activeCategory } = useCategory();
+  const { products, isLoading, error } = useProducts();
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   const productListRef = useRef<HTMLDivElement>(null);
@@ -20,12 +21,13 @@ const ProductPage: React.FC = () => {
   const opacityHero = useTransform(scrollY, [0, 300], [1, 0]);
 
   // Memoize filtered products to prevent recalculation on every render
-  const filteredProducts = useMemo(() => 
-    activeCategory === 'All' 
-      ? product 
-      : product.filter((p: { category: string; }) => p.category === activeCategory),
-    [activeCategory]
-  );
+  const filteredProducts = useMemo(() => {
+    const result = activeCategory === 'All' 
+      ? products 
+      : products.filter((p: { category: string; }) => p.category === activeCategory);
+    
+    return result;
+  }, [activeCategory, products]);
 
   // Memoize pagination values
   const { currentProducts, totalPages } = useMemo(() => {
@@ -177,13 +179,42 @@ const ProductPage: React.FC = () => {
     transform: 'translateZ(0)'
   };
   const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "237671810319";
-const whatsappNumber = rawNumber.replace('+', '');
+  const whatsappNumber = rawNumber.replace('+', '');
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <main className="mt-[80px] min-h-screen bg-[#F8FAFC] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600">Chargement des produits...</p>
+        </div>
+      </main>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <main className="mt-[80px] min-h-screen bg-[#F8FAFC] flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">Erreur: {error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Réessayer
+          </button>
+        </div>
+      </main>
+    );
+  }
 
   return (
-    <main className="mt-[80px] min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
+    <main className=" min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
       
       {/* --- HERO SECTION --- */}
-      <section className="relative bg-gradient-to-br from-[#020617] to-[#0b1120] pt-40 pb-52 overflow-hidden w-full">
+      <section className="relative bg-gradient-to-br from-[#020617] to-[#0b1120] pt-10 pb-10 overflow-hidden w-full">
   {/* Subtle texture instead of glowing orbs */}
   <div className="absolute inset-0 opacity-[0.02]" style={{
     backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
@@ -319,8 +350,8 @@ const whatsappNumber = rawNumber.replace('+', '');
 </section>
 
       {/* --- NAVIGATION STICKY --- */}
-      <div ref={productListRef} className="sticky top-[80px] z-30 bg-white/80 backdrop-blur-md w-full">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div ref={productListRef} className="sticky  z-30  backdrop-blur-md w-full my-4">
+        <div className="max-w-7xl mx-auto px-6  flex justify-between items-center">
           <nav className="flex items-center gap-2 md:gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400">
             <a href="/" className="hover:text-blue-600 transition">Nem's</a>
             <FiChevronRight className="flex-shrink-0" />
@@ -341,7 +372,7 @@ const whatsappNumber = rawNumber.replace('+', '');
       </div>
 
       {/* --- LISTE DES PRODUITS --- */}
-      <div className="max-w-7xl mx-auto py-10 max-sm:py-0 relative">
+      <div className="max-w-7xl mx-auto  relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory + currentPage}

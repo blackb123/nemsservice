@@ -5,6 +5,7 @@ import Home from './pages/home'
 import CategoryPage from './pages/productpage' 
 import { CategoryProvider } from './provider/categoryprovider'
 import { CoffretProvider } from './provider/coffreprovider'
+import { ProductProvider } from './context/ProductContext'
 import AboutPage from './pages/apropos'
 import CoffretDisplayPage from './pages/coffretpage'
 import ScrollToTop from './component/ScrollToTop'
@@ -12,6 +13,7 @@ import ScrollToTop from './component/ScrollToTop'
 function App() {
   
   return (
+    <ProductProvider>
     <CoffretProvider>
     <CategoryProvider>
     <MainLayout>
@@ -28,6 +30,7 @@ function App() {
     </MainLayout>
     </CategoryProvider>
     </CoffretProvider>
+    </ProductProvider>
 
   )
 }
