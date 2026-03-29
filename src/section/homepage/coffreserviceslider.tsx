@@ -62,7 +62,7 @@ const ProductSlider = () => {
   }, []);
 
   return (
-    <section className="pb-4 bg-white overflow-hidden">
+    <section className="pb-4 bg-white overflow-hidden" id='products'>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div 
@@ -160,9 +160,7 @@ const ProductSlider = () => {
                     {/* Prix et action */}
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-[9px] md:text-[11px] font-light text-gray-400 line-through mr-1">
-                          {parseInt(item.price.replace('€', '')) * 1.2}€
-                        </span>
+               
                         <span className="text-sm md:text-base font-semibold text-gray-900">
                           {item.price}
                         </span>

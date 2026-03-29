@@ -5,6 +5,21 @@ import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import bg from "../assets/notebook.webp"
 
+type CoffretGroup = {
+  id: number;
+  name: string;
+  category: string;
+  tagline: string;
+  packs: {
+    name: string;
+    ref: string;
+    details: string;
+    colors: string[];
+    includes: string[];
+    image: string;
+  }[];
+};
+
 const CoffretDisplayPage: React.FC = () => {
   const { allCoffrets, selectedPack } = useCoffrets();
 
@@ -40,7 +55,7 @@ const CoffretDisplayPage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen overflow-x-hidden">
       {/* HEADER SECTION */}
-      <header className="relative py-32 md:py-40 border-b border-gray-100 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+      <header className="relative py-15 md:py-15 border-b border-gray-100 overflow-hidden bg-gradient-to-br from-white to-gray-50">
         {/* Subtle texture background */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
           backgroundImage: `radial-gradient(circle at 2px 2px, #020617 1px, transparent 0)`,
@@ -69,7 +84,7 @@ const CoffretDisplayPage: React.FC = () => {
             hidden: { opacity: 0 },
             visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
           }}
-          className="max-w-4xl mx-auto px-6 text-center relative z-10"
+          className="max-w-4xl mx-auto px-6 h-[300px] text-center relative z-10"
         >
           {/* Category with refined line */}
           <motion.div 
@@ -77,7 +92,7 @@ const CoffretDisplayPage: React.FC = () => {
             className="flex items-center justify-center gap-4 mb-6 group"
           >
             <span className="h-[1px] w-8 bg-blue-500/30 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-500" />
-            <span className="text-blue-500/70 text-[10px] font-light uppercase tracking-[0.3em] group-hover:text-blue-500 transition-colors duration-500">
+            <span className="text-blue-500/70 mt-3 text-[10px] font-light uppercase tracking-[0.3em] group-hover:text-blue-500 transition-colors duration-500">
               NEM'S Services - Collection 2024
             </span>
             <span className="h-[1px] w-8 bg-blue-500/30 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-500" />
@@ -89,7 +104,7 @@ const CoffretDisplayPage: React.FC = () => {
             className="text-5xl md:text-7xl font-light text-gray-900 mb-6 tracking-[-0.02em] leading-[1.1]"
           >
             {selectedPack ? (
-              selectedPack.name.split(' ').map((word:any, i:any) => (
+              selectedPack.name.split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
@@ -147,7 +162,7 @@ const CoffretDisplayPage: React.FC = () => {
 
       {/* PRODUCTS SECTION */}
       <div className="max-w-6xl mx-auto px-4 py-20">
-        {displayGroups.map((group) => (
+        {displayGroups.map((group: CoffretGroup) => (
           <div key={group.id} className="mb-32 last:mb-0">
             {!selectedPack && (
               <motion.div 
