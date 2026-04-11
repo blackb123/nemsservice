@@ -55,108 +55,103 @@ const CoffretDisplayPage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen overflow-x-hidden">
       {/* HEADER SECTION */}
-      <header className="relative py-15 md:py-15 border-b border-gray-100 overflow-hidden bg-gradient-to-br from-white to-gray-50">
-        {/* Subtle texture background */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #020617 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
+          <header className="relative py-18 md:py-20 border-b border-gray-100 overflow-hidden bg-[#fffdfa]">
+        {/* Subtle "Paper" texture background */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, #1a1a1a 1px, transparent 0)`,
+          backgroundSize: '32px 32px'
         }} />
         
-        {/* Background image with soft overlay */}
+        {/* Background image with ultra-soft editorial overlay */}
         <div 
-          className="absolute inset-0 z-0 bg-cover bg-center opacity-20"
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-[0.12] grayscale"
           style={{
             backgroundImage: `url(${bg})`,
           }}
         />
         
-        {/* Minimal geometric accents */}
-        <div className="absolute top-20 right-20 w-40 h-px bg-gradient-to-l from-blue-500/10 to-transparent rotate-45" />
-        <div className="absolute bottom-20 left-20 w-40 h-px bg-gradient-to-r from-blue-500/10 to-transparent -rotate-45" />
+        {/* Minimalist "Stationery" Lines - Replacing the blue diagonals */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-24 bg-gradient-to-b from-amber-200/50 to-transparent" />
         
         {/* Soft overlay for text readability */}
-        <div className="absolute inset-0 z-0 bg-white/40" />
+        <div className="absolute inset-0 z-0 bg-white/60" />
         
         <motion.div 
           initial="hidden"
           animate="visible"
           variants={{
             hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
           }}
-          className="max-w-4xl mx-auto px-6 h-[300px] text-center relative z-10"
+          className="max-w-5xl mx-auto px-6 relative z-10 text-center"
         >
-          {/* Category with refined line */}
+          {/* Label: Collection Info */}
           <motion.div 
             variants={fadeInUp}
-            className="flex items-center justify-center gap-4 mb-6 group"
+            className="flex items-center justify-center gap-6 mb-8 group"
           >
-            <span className="h-[1px] w-8 bg-blue-500/30 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-500" />
-            <span className="text-blue-500/70 mt-3 text-[10px] font-light uppercase tracking-[0.3em] group-hover:text-blue-500 transition-colors duration-500">
-              NEM'S Services - Collection 2024
+            <span className="h-[1px] w-12 bg-gray-200 group-hover:w-16 group-hover:bg-amber-400 transition-all duration-700" />
+            <span className="text-gray-500 text-[11px] font-light uppercase tracking-[0.4em] group-hover:text-gray-800 transition-colors duration-500">
+              NEM'S Service • Maison d'Exception
             </span>
-            <span className="h-[1px] w-8 bg-blue-500/30 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-500" />
+            <span className="h-[1px] w-12 bg-gray-200 group-hover:w-16 group-hover:bg-amber-400 transition-all duration-700" />
           </motion.div>
           
-          {/* Main title with refined typography */}
+          {/* Main title: High-end Serif Typography */}
           <motion.h1 
             variants={fadeInUp} 
-            className="text-5xl md:text-7xl font-light text-gray-900 mb-6 tracking-[-0.02em] leading-[1.1]"
+            className="font-serif text-5xl md:text-8xl font-normal text-gray-900 mb-8 tracking-tight leading-[1.05]"
           >
             {selectedPack ? (
               selectedPack.name.split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className="inline-block mr-3 hover:text-blue-500 transition-colors duration-300"
+                  transition={{ delay: 0.4 + i * 0.1, duration: 0.8 }}
+                  className="inline-block mr-4 italic font-light hover:text-amber-700 transition-colors duration-500"
                 >
                   {word}
                 </motion.span>
               ))
             ) : (
-              <>
-                <span className="block">Le Catalogue</span>
-                <span className="text-blue-500 relative inline-block group">
+              <div className="flex flex-col items-center">
+                <span className="block font-light text-gray-800">Le Catalogue</span>
+                <span className="text-amber-700 font-serif italic relative inline-block group mt-2">
                   Prestige
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-px bg-blue-500/30 group-hover:w-20 transition-all duration-500" />
+                  {/* Elegant Underline */}
+                  <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-amber-600/20 group-hover:w-40 group-hover:bg-amber-600/40 transition-all duration-1000" />
                 </span>
-              </>
+              </div>
             )}
           </motion.h1>
           
-          {/* Description with subtle line accent */}
+          {/* Description: Wider spacing, lighter weight */}
           <motion.div 
             variants={fadeInUp}
-            className="relative max-w-2xl mx-auto"
+            className="relative max-w-xl mx-auto mt-12"
           >
-            <span className="absolute left-1/2 -translate-x-1/2 -top-4 w-px h-8 bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" />
-            <p className="text-gray-400 text-lg font-light leading-relaxed">
-              {selectedPack?.tagline || "Découvrez notre sélection exclusive d'objets publicitaires et coffrets cadeaux."}
+            <p className="text-gray-500 text-lg md:text-xl font-light leading-relaxed italic family-serif">
+              {selectedPack?.tagline || "Une immersion dans l'art du cadeau corporatif, alliant distinction et savoir-faire."}
             </p>
           </motion.div>
 
-          {/* Minimal decorative element */}
+          {/* Footer Decorative Mark */}
           <motion.div 
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8 }}
-            className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-20 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"
-          />
+            transition={{ delay: 1, duration: 1 }}
+            className="mt-16 flex flex-col items-center gap-4"
+          >
+            <div className="w-px h-12 bg-gradient-to-b from-amber-200 to-transparent" />
+            <div className="text-[10px] tracking-[0.5em] text-amber-600/40 uppercase">Est. 2024</div>
+          </motion.div>
         </motion.div>
 
-        {/* Subtle floating dots */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-1">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0.2, 0.5, 0.2] }}
-              transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
-              className="w-1 h-1 rounded-full bg-blue-500/30"
-            />
-          ))}
+        {/* Refined side-indicators (Roman Numeral Style or Dots) */}
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-8 items-center">
+          <span className="text-[10px] text-gray-300 uppercase rotate-90 tracking-widest">Scroll</span>
+          <div className="w-[1px] h-20 bg-gray-100" />
         </div>
       </header>
 
