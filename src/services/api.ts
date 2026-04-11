@@ -2,16 +2,33 @@
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
+// Individual image object in the images array
+export interface ProductImage {
+  url: string;
+  public_id: string;
+  order: number;
+}
+
+// Single product object from API
 export interface Product {
   category: string;
   header: string;
   description: string;
   features: string[];
-  image?: string;
-  id?: number;
-  image_url?: string;
-  image_public_id?: string;
-  created_at?: string;
+  images: ProductImage[];
+  primary_image_index: number;
+  id: number;
+  is_active: boolean;
+  created_at: string;  // ISO datetime string
+  updated_at: string | null;
+}
+
+// Paginated response wrapper
+export interface ProductListResponse {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
 }
 
 export interface ApiResponse<T> {
@@ -50,9 +67,9 @@ class ApiService {
     }
   }
 
-  async getProducts(): Promise<Product[]> {
+  async getProducts(skip: number = 0, limit: number = 100): Promise<ProductListResponse> {
     try {
-      const url = `${this.baseUrl}/products`;
+      const url = `${this.baseUrl}/products?skip=${skip}&limit=${limit}`;
       const response = await fetch(url, {
         headers: {
           'Content-Type': 'application/json',
@@ -63,13 +80,28 @@ class ApiService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const products = await response.json();
-      return products || [];
+      const data: ProductListResponse = await response.json();
+      return data;
     } catch (error) {
       console.error('Failed to fetch products:', error);
-      // Return empty array on failure to prevent app crash
-      return [];
+      // Return empty response on failure to prevent app crash
+      return {
+        products: [],
+        total: 0,
+        skip: skip,
+        limit: limit
+      };
     }
+  }
+
+  // Helper to get primary image URL from product
+  getPrimaryImageUrl(product: Product): string {
+    if (product.images && product.images.length > 0) {
+      const primaryIndex = product.primary_image_index ?? 0;
+      const primaryImage = product.images[primaryIndex] || product.images[0];
+      return primaryImage?.url || '';
+    }
+    return '';
   }
 }
 

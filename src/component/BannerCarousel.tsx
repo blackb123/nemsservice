@@ -93,7 +93,7 @@ const BannerCarousel: React.FC = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3  font-semibold transition-colors duration-200 shadow-lg"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleSlideClick(slides[currentSlide].target);

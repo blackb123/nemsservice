@@ -1,18 +1,33 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import type { ProductImage } from '../../services/api';
 
 interface SectionProps {
   header: string;
   description: string;
   features: string[];
-  image?: string;
-  image_url?: string;
+  images: ProductImage[];
+  primary_image_index: number;
   category: string;
   index: number;
 }
 
-const ProductSection: React.FC<SectionProps> = ({ header, description, features, image, image_url, category, index }) => {
+const AUTO_SCROLL_INTERVAL = 4000; // 4 seconds
+
+const ProductSection: React.FC<SectionProps> = ({ 
+  header, 
+  description, 
+  features, 
+  images, 
+  primary_image_index, 
+  category, 
+  index 
+}) => {
   const isEven = index % 2 === 0;
+  const [currentImageIndex, setCurrentImageIndex] = useState(primary_image_index ?? 0);
+  const [direction, setDirection] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   // Configuration du lien WhatsApp dynamique
   const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "237671810319";
@@ -21,8 +36,57 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
   const orderMessage = encodeURIComponent(`Bonjour Nem's Service, je souhaite commander : ${header}`);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
 
-  // Use image_url if available, otherwise fall back to image
-  const productImage = image_url || image;
+  const sortedImages = images && images.length > 0 
+    ? [...images].sort((a, b) => a.order - b.order)
+    : [];
+
+  const totalImages = sortedImages.length;
+
+  const goToNext = useCallback(() => {
+    if (totalImages <= 1) return;
+    setDirection(1);
+    setCurrentImageIndex((prev) => (prev + 1) % totalImages);
+  }, [totalImages]);
+
+  const goToPrev = useCallback(() => {
+    if (totalImages <= 1) return;
+    setDirection(-1);
+    setCurrentImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
+  }, [totalImages]);
+
+  const goToSlide = (slideIndex: number) => {
+    setDirection(slideIndex > currentImageIndex ? 1 : -1);
+    setCurrentImageIndex(slideIndex);
+  };
+
+  // Auto-scroll effect
+  useEffect(() => {
+    if (totalImages <= 1 || isPaused) return;
+    
+    const interval = setInterval(() => {
+      goToNext();
+    }, AUTO_SCROLL_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [totalImages, isPaused, goToNext]);
+
+  const currentImage = sortedImages[currentImageIndex];
+
+  // Animation variants
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
+  };
 
   return (
     <section 
@@ -64,15 +128,79 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
             {header}
           </h2>
 
-          {/* Mobile: Show image after header on mobile, hide in desktop text container */}
+          {/* Mobile: Show carousel after header on mobile */}
           <div className="block md:hidden w-full -mx-6 px-6">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50 group">
-              <img 
-                src={productImage}
-                alt={header} 
-                className="w-full h-full object-contain transition-transform duration-[1.8s] ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/5 rounded-3xl" />
+            <div 
+              className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50 group"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+            >
+              {totalImages > 0 ? (
+                <>
+                  <AnimatePresence initial={false} custom={direction} mode="wait">
+                    <motion.img
+                      key={currentImageIndex}
+                      src={currentImage?.url}
+                      alt={`${header} - Image ${currentImageIndex + 1}`}
+                      className="absolute inset-0 w-full h-full object-contain"
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
+                  </AnimatePresence>
+
+                  {/* Image counter */}
+                  {totalImages > 1 && (
+                    <div className="absolute top-3 right-3 px-2 py-1 bg-black/60 text-white text-[10px] font-medium rounded-full">
+                      {currentImageIndex + 1} / {totalImages}
+                    </div>
+                  )}
+
+                  {/* Navigation arrows - show on hover or when multiple images */}
+                  {totalImages > 1 && (
+                    <>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); goToPrev(); }}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/90 text-gray-800 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+                        aria-label="Image précédente"
+                      >
+                        <FiChevronLeft size={18} />
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); goToNext(); }}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/90 text-gray-800 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+                        aria-label="Image suivante"
+                      >
+                        <FiChevronRight size={18} />
+                      </button>
+
+                      {/* Dot indicators */}
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                        {sortedImages.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={(e) => { e.stopPropagation(); goToSlide(idx); }}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                              idx === currentImageIndex 
+                                ? 'bg-white w-4' 
+                                : 'bg-white/50 hover:bg-white/80'
+                            }`}
+                            aria-label={`Aller à l'image ${idx + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </>
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                  Aucune image
+                </div>
+              )}
+              <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/5 rounded-3xl pointer-events-none" />
             </div>
           </div>
 
@@ -122,7 +250,7 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
           <div className="w-12 h-px bg-gray-100" />
         </motion.div>
 
-        {/* IMAGE CONTENT - Desktop only */}
+        {/* IMAGE CAROUSEL - Desktop only */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -130,22 +258,86 @@ const ProductSection: React.FC<SectionProps> = ({ header, description, features,
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="hidden md:block w-full md:w-[55%]"
         >
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50 group">
-            <img 
-              src={productImage}
-              alt={header} 
-              className="w-full h-full object-contain transition-transform duration-[1.8s] ease-out group-hover:scale-105"
-            />
-            
-            {/* Subtle overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div 
+            className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50 group"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {totalImages > 0 ? (
+              <>
+                <AnimatePresence initial={false} custom={direction} mode="wait">
+                  <motion.img
+                    key={currentImageIndex}
+                    src={currentImage?.url}
+                    alt={`${header} - Image ${currentImageIndex + 1}`}
+                    className="absolute inset-0 w-full h-full object-contain"
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                  />
+                </AnimatePresence>
+
+                {/* Image counter */}
+                {totalImages > 1 && (
+                  <div className="absolute top-4 right-4 px-3 py-1.5 bg-black/60 text-white text-xs font-medium rounded-full backdrop-blur-sm">
+                    {currentImageIndex + 1} / {totalImages}
+                  </div>
+                )}
+
+                {/* Navigation arrows */}
+                {totalImages > 1 && (
+                  <>
+                    <button
+                      onClick={goToPrev}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white/90 text-gray-800 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
+                      aria-label="Image précédente"
+                    >
+                      <FiChevronLeft size={20} />
+                    </button>
+                    <button
+                      onClick={goToNext}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white/90 text-gray-800 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
+                      aria-label="Image suivante"
+                    >
+                      <FiChevronRight size={20} />
+                    </button>
+
+                    {/* Dot indicators */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                      {sortedImages.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => goToSlide(idx)}
+                          className={`h-2 rounded-full transition-all duration-300 ${
+                            idx === currentImageIndex 
+                              ? 'bg-gray-900 w-6' 
+                              : 'bg-gray-400/50 w-2 hover:bg-gray-600'
+                          }`}
+                          aria-label={`Aller à l'image ${idx + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {/* Subtle overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              </>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-gray-400">
+                Aucune image disponible
+              </div>
+            )}
             
             {/* Minimal frame */}
-            <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/5 rounded-3xl" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/5 rounded-3xl pointer-events-none" />
             
             {/* Decorative corner accents */}
-            <div className="absolute top-4 left-4 w-8 h-8 border-t border-l border-gray-900/5 rounded-tl-2xl" />
-            <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-gray-900/5 rounded-br-2xl" />
+            <div className="absolute top-4 left-4 w-8 h-8 border-t border-l border-gray-900/5 rounded-tl-2xl pointer-events-none" />
+            <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-gray-900/5 rounded-br-2xl pointer-events-none" />
           </div>
         </motion.div>
       </div>
