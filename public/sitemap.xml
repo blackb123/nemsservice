@@ -10,7 +10,7 @@
   <!-- Home Page -->
   <url>
     <loc>https://nemsservice.com/</loc>
-    <lastmod>2025-01-19</lastmod>
+    <lastmod>2025-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -23,7 +23,7 @@
   <!-- Products/Category Page -->
   <url>
     <loc>https://nemsservice.com/products</loc>
-    <lastmod>2025-01-19</lastmod>
+    <lastmod>2025-04-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -31,7 +31,7 @@
   <!-- Coffrets/Gift Sets Page -->
   <url>
     <loc>https://nemsservice.com/coffrets</loc>
-    <lastmod>2025-01-19</lastmod>
+    <lastmod>2025-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -39,7 +39,7 @@
   <!-- About Page -->
   <url>
     <loc>https://nemsservice.com/about</loc>
-    <lastmod>2025-01-19</lastmod>
+    <lastmod>2025-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
