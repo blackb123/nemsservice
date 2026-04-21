@@ -216,7 +216,7 @@ const ProductPage: React.FC = () => {
       <SEO
         title={`${activeCategory === 'All' ? 'Nos Produits' : activeCategory} | Nem's Service`}
         description={`Découvrez nos ${activeCategory === 'All' ? "articles de bureau et services d'impression et design de haute qualité" : `fournitures de ${activeCategory.toLowerCase()}`} au Cameroun. N°1 du service d'impression et design à Yaoundé, Douala et Afrique centrale.`}
-        keywords={`impression cameroun, design cameroun, n°1 impression cameroun, ${activeCategory.toLowerCase()}, articles bureau, fournitures scolaires, Yaoundé, Douala, Afrique centrale`}
+        keywords={`impression cameroun, design cameroun, n°1 impression cameroun, ${activeCategory.toLowerCase()}, articles bureau, fournitures scolaires, Yaoundé, Douala, Afrique centrale, nems services, nems service, nem's services, nem's service, nems, nem's, nems impression, nems printing, nems bureau, nems articles, nems cameroun, nems yaoundé, nems douala, nems services cameroun, nems printing cameroun, nems impression cameroun, nems services yaoundé, nems services douala, nems office supplies, nems fournitures, nems photocopie, nems reliure, nems documents`}
         url={`https://nemsservices.com/products`}
         type="website"
       />
