@@ -215,9 +215,9 @@ const ProductPage: React.FC = () => {
     <>
       <SEO
         title={`${activeCategory === 'All' ? 'Nos Produits' : activeCategory} | Nem's Service`}
-        description={`Découvrez nos ${activeCategory === 'All' ? "articles de bureau et services d'impression" : `fournitures de ${activeCategory.toLowerCase()}`} au Cameroun. Qualité professionnelle à Yaoundé et Douala.`}
-        keywords={`${activeCategory.toLowerCase()}, impression cameroun, articles bureau, fournitures scolaires, Yaoundé, Douala`}
-        url={`https://nemsservice.com/products`}
+        description={`Découvrez nos ${activeCategory === 'All' ? "articles de bureau et services d'impression et design de haute qualité" : `fournitures de ${activeCategory.toLowerCase()}`} au Cameroun. N°1 du service d'impression et design à Yaoundé, Douala et Afrique centrale.`}
+        keywords={`impression cameroun, design cameroun, n°1 impression cameroun, ${activeCategory.toLowerCase()}, articles bureau, fournitures scolaires, Yaoundé, Douala, Afrique centrale`}
+        url={`https://nemsservices.com/products`}
         type="website"
       />
       <main className=" min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">

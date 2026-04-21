@@ -1,7 +1,7 @@
 {
-  "name": "Nem's Service - Impression & Articles de Bureau",
+  "name": "Nem's Service - Premier Service d'Impression et Design au Cameroun",
   "short_name": "Nem's Service",
-  "description": "Spécialiste en impression, articles de bureau et fournitures bureaucratiques au Cameroun",
+  "description": "N°1 du service d'impression et design au Cameroun. Leader en impression professionnelle, design graphique et articles de bureau à Yaoundé, Douala et Afrique centrale.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#020617",
@@ -44,14 +44,14 @@
       "name": "Nos Services",
       "short_name": "Services",
       "description": "Découvrez nos services d'impression et articles de bureau",
-      "url": "/products",
+      "url": "https://nemsservices.com/products",
       "icons": [{ "src": "/logo_nems.webp", "sizes": "192x192" }]
     },
     {
       "name": "Nous Contacter",
       "short_name": "Contact",
       "description": "Contactez Nem's Service",
-      "url": "/about",
+      "url": "https://nemsservices.com/about",
       "icons": [{ "src": "/logo_nems.webp", "sizes": "192x192" }]
     }
   ],

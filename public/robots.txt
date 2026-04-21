@@ -6,7 +6,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://nemsservice.com/sitemap.xml
+Sitemap: https://nemsservices.com/sitemap.xml
 
 # Crawl-delay (optional, be respectful)
 Crawl-delay: 1

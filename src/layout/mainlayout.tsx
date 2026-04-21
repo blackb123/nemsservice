@@ -15,7 +15,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "237671810319";
   const whatsappNumber = rawNumber.replace('+', '');
   
-  const message = encodeURIComponent("Je suis intéressé par vos services nems service");
+  const message = encodeURIComponent("Je suis intéressé par vos services nems services");
 
   // Show banner carousel on all pages except home page
   const showBanner = location.pathname !== '/';

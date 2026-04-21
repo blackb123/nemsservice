@@ -10,10 +10,10 @@ function Home() {
   return (
     <>
       <SEO
-        title="Nem's Service | Impression & Articles de Bureau au Cameroun"
-        description="Nem's Service - Spécialiste en impression, articles de bureau et fournitures bureaucratiques au Cameroun. Découvrez nos services d'impression et documents administratifs à Yaoundé et Douala."
-        keywords="impression cameroun, articles bureau, fournitures scolaires, documents administratifs, photocopie, reliure, Yaoundé, Douala"
-        url="https://nemsservice.com/"
+        title="Nem's Service | Premier Service d'Impression et Design au Cameroun"
+        description="Nem's Service - N°1 du service d'impression et design au Cameroun. Leader en impression professionnelle, design graphique et articles de bureau à Yaoundé, Douala et dans toute l'Afrique centrale."
+        keywords="impression cameroun, design cameroun, service d'impression n°1 cameroun, impression professionnelle Yaoundé, impression Douala, design graphique cameroun, articles bureau, fournitures scolaires, photocopie, reliure, leader impression Afrique centrale"
+        url="https://nemsservices.com/"
         type="website"
       />
       <div className='bg-white mx-auto'>
