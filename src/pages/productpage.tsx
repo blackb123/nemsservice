@@ -5,6 +5,7 @@ import { useProducts } from '../context/ProductContext';
 import { useCategory } from '../provider/categoryprovider'; 
 import { FiChevronRight, FiLayers, FiInfo, FiChevronLeft, FiArrowRight, FiEye } from 'react-icons/fi';
 import type { Variants } from 'framer-motion';
+import { SEO } from '../components/SEO';
 
 const ProductPage: React.FC = () => {
   const { activeCategory } = useCategory();
@@ -211,14 +212,22 @@ const ProductPage: React.FC = () => {
   }
 
   return (
-    <main className=" min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
-      
+    <>
+      <SEO
+        title={`${activeCategory === 'All' ? 'Nos Produits' : activeCategory} | Nem's Service`}
+        description={`Découvrez nos ${activeCategory === 'All' ? "articles de bureau et services d'impression" : `fournitures de ${activeCategory.toLowerCase()}`} au Cameroun. Qualité professionnelle à Yaoundé et Douala.`}
+        keywords={`${activeCategory.toLowerCase()}, impression cameroun, articles bureau, fournitures scolaires, Yaoundé, Douala`}
+        url={`https://nemsservice.com/products`}
+        type="website"
+      />
+      <main className=" min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
+        
   {/* --- HERO SECTION --- */}
       
      {/* --- NAVIGATION STICKY: THE EDITORIAL STRIP --- */}
 <div 
   ref={productListRef} 
-  className="sticky top-0 z-30 w-full bg-white/80 backdrop-blur-xl border-y border-stone-100 transition-all duration-500"
+  className="sticky top-0 z-30 w-full bg-white/80 backdrop-blur-xl  border-y border-stone-100 transition-all duration-500"
 >
   <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex justify-between items-center">
     
@@ -536,7 +545,8 @@ const ProductPage: React.FC = () => {
         <div className="absolute bottom-0 right-0 w-1/3 h-[1px] bg-gradient-to-l from-blue-600/50 to-transparent" />
       </section>
     </main>
-  );
+  </>
+);
 };
 
 export default ProductPage;

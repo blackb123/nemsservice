@@ -76,7 +76,7 @@ const BannerCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden bg-[#1a1a1a] shadow-inner">
+    <div className="relative w-full h-[450px] md:h-[500px]  overflow-hidden bg-[#1a1a1a] shadow-inner">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -84,7 +84,7 @@ const BannerCarousel: React.FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }} // Smoother, slower cross-fade
-          className="relative w-full h-full cursor-pointer group"
+          className="relative w-full  h-full cursor-pointer group"
           onClick={() => handleSlideClick(slides[currentSlide].target)}
         >
           {/* Subtle Image Zoom on Slide */}
@@ -99,7 +99,7 @@ const BannerCarousel: React.FC = () => {
           
           {/* Sophisticated Overlay: Deeper but softer gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center">
-            <div className="max-w-7xl mx-auto px-10 md:px-16 lg:px-24 w-full">
+            <div className="max-w-7xl mx-auto px-5 md:px-5 lg:px-10 w-full">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ const BannerCarousel: React.FC = () => {
                 className="max-w-xl md:max-w-2xl text-left"
               >
                 {/* 1. TYPOGRAPHY - TITLE: Classic Serif, Uppercase, Tracking */}
-                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-extralight text-amber-50 uppercase tracking-[0.15em] mb-4 leading-tight drop-shadow-lg">
+                <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-extralight text-amber-50 uppercase tracking-[0.15em] mb-4 leading-tight drop-shadow-lg">
                   {slides[currentSlide].title}
                 </h2>
                 

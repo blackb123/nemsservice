@@ -1,0 +1,52 @@
+# robots.txt for Nem's Service
+# https://www.robotstxt.org/robotstxt.html
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://nemsservice.com/sitemap.xml
+
+# Crawl-delay (optional, be respectful)
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow admin and private areas (if any)
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /*.pdf$  # Optional: block PDFs from indexing
+
+# AI Crawlers - Allow but with restrictions
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Social media crawlers
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
