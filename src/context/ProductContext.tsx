@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import { apiService } from '../services/api';
-import { mergeProducts } from '../utils/productMerger';
-import { product as localProducts, siteData as localSiteData } from '../data/sitedata';
+import { apiService, type Product, type ProductListResponse } from '../services/api';
 
 interface ProductContextType {
-  products: any[];
+  products: Product[];
   isLoading: boolean;
   error: string | null;
+  total: number;
   refreshProducts: () => Promise<void>;
+  loadMore: () => Promise<void>;
 }
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
@@ -17,46 +17,61 @@ interface ProductProviderProps {
   children: ReactNode;
 }
 
+const PRODUCTS_PER_PAGE = 100;
+
 export function ProductProvider({ children }: ProductProviderProps) {
-  const [products, setProducts] = useState<any[]>(localProducts);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [total, setTotal] = useState(0);
+  const [currentSkip, setCurrentSkip] = useState(0);
 
-  const fetchAndMergeProducts = async () => {
+  const fetchProducts = async (skip: number = 0, append: boolean = false) => {
     try {
       setIsLoading(true);
       setError(null);
 
-      // Fetch only products from API
-      const apiProducts = await apiService.getProducts();
-
-      // Merge local and API products
-      const mergedProducts = mergeProducts(localProducts, apiProducts);
+      // Fetch products from API with pagination
+      const response: ProductListResponse = await apiService.getProducts(skip, PRODUCTS_PER_PAGE);
 
       // Update state
-      setProducts(mergedProducts);
+      if (append) {
+        setProducts(prev => [...prev, ...response.products]);
+      } else {
+        setProducts(response.products);
+      }
+      setTotal(response.total);
+      setCurrentSkip(skip + response.products.length);
     } catch (err) {
       console.error('Failed to fetch products:', err);
       setError(err instanceof Error ? err.message : 'Failed to load products');
-      // Keep local data as fallback
     } finally {
       setIsLoading(false);
     }
   };
 
   const refreshProducts = async () => {
-    await fetchAndMergeProducts();
+    setCurrentSkip(0);
+    await fetchProducts(0, false);
+  };
+
+  const loadMore = async () => {
+    if (products.length < total && !isLoading) {
+      await fetchProducts(currentSkip, true);
+    }
   };
 
   useEffect(() => {
-    fetchAndMergeProducts();
+    fetchProducts(0, false);
   }, []);
 
   const value: ProductContextType = {
     products,
     isLoading,
     error,
-    refreshProducts
+    total,
+    refreshProducts,
+    loadMore
   };
 
   return (

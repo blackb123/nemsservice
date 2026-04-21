@@ -5,6 +5,7 @@ import { useProducts } from '../context/ProductContext';
 import { useCategory } from '../provider/categoryprovider'; 
 import { FiChevronRight, FiLayers, FiInfo, FiChevronLeft, FiArrowRight, FiEye } from 'react-icons/fi';
 import type { Variants } from 'framer-motion';
+import { SEO } from '../components/SEO';
 
 const ProductPage: React.FC = () => {
   const { activeCategory } = useCategory();
@@ -211,165 +212,64 @@ const ProductPage: React.FC = () => {
   }
 
   return (
-    <main className=" min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
-      
-      {/* --- HERO SECTION --- */}
-      <section className="relative bg-gradient-to-br from-[#020617] to-[#0b1120] pt-10 pb-10 overflow-hidden w-full">
-  {/* Subtle texture instead of glowing orbs */}
-  <div className="absolute inset-0 opacity-[0.02]" style={{
-    backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-    backgroundSize: '40px 40px'
-  }} />
-  
-  {/* Minimal geometric accents */}
-  <div className="absolute top-20 right-20 w-40 h-px bg-gradient-to-l from-blue-500/20 to-transparent rotate-45" />
-  <div className="absolute bottom-20 left-20 w-40 h-px bg-gradient-to-r from-blue-500/20 to-transparent -rotate-45" />
-  
-  <div className="max-w-7xl mx-auto px-6 relative z-10">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      
-      {/* Left Column - Title Area */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="space-y-8"
-      >
-        {/* Category with refined line */}
-        <motion.div 
-          className="flex items-center gap-4 mb-8 group cursor-default"
-          whileHover={{ x: 8 }}
-          transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        >
-          <span className="h-[1px] w-12 bg-blue-500/50 group-hover:w-16 transition-all duration-500" />
-          <span className="text-blue-400/50 text-[10px] font-light uppercase tracking-[0.3em] group-hover:text-blue-400 transition-colors duration-500">
-            Excellence Artisanale
-          </span>
-        </motion.div>
+    <>
+      <SEO
+        title={`${activeCategory === 'All' ? 'Nos Produits' : activeCategory} | Nem's Service`}
+        description={`Découvrez nos ${activeCategory === 'All' ? "articles de bureau et services d'impression" : `fournitures de ${activeCategory.toLowerCase()}`} au Cameroun. Qualité professionnelle à Yaoundé et Douala.`}
+        keywords={`${activeCategory.toLowerCase()}, impression cameroun, articles bureau, fournitures scolaires, Yaoundé, Douala`}
+        url={`https://nemsservice.com/products`}
+        type="website"
+      />
+      <main className=" min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
         
-        {/* Main title with refined animation */}
-        <h1 className="text-6xl md:text-[7rem] font-light text-white leading-[0.9] tracking-[-0.02em]">
-          {activeCategory.split('').map((char, index) => (
-            <motion.span
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.02 }}
-              className="inline-block hover:opacity-70 transition-opacity duration-300"
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </motion.span>
-          ))}
-        </h1>
+  {/* --- HERO SECTION --- */}
+      
+     {/* --- NAVIGATION STICKY: THE EDITORIAL STRIP --- */}
+<div 
+  ref={productListRef} 
+  className="sticky top-0 z-30 w-full bg-white/80 backdrop-blur-xl  border-y border-stone-100 transition-all duration-500"
+>
+  <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex justify-between items-center">
+    
+    {/* Refined Breadcrumbs */}
+    <nav className="flex items-center gap-3 text-[9px] md:text-[10px] font-light uppercase tracking-[0.3em] text-stone-400">
+      <a href="/" className="hover:text-amber-700 transition-colors duration-300 italic serif">Nem's Maison</a>
+      <span className="w-4 h-px bg-stone-200" /> {/* Minimalist separator instead of icon */}
+      <span className="text-stone-800 font-medium tracking-[0.2em] truncate max-w-[120px] md:max-w-none">
+        {activeCategory}
+      </span>
+    </nav>
 
-        {/* Clean divider */}
-        <div className="w-20 h-px bg-white/10 mt-8" />
-      </motion.div>
-
-      {/* Right Column - Authentic Message */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="space-y-8"
-      >
-        {/* Main message - Elegant and human */}
-        <div className="space-y-6">
-          <p className="text-white text-2xl font-light leading-relaxed">
-            Une collaboration <span className="text-blue-400">sur mesure</span>, 
-            où chaque projet est unique.
-          </p>
-          
-          <div className="space-y-4 text-slate-400 text-base font-light leading-relaxed">
-            <p>
-              Nous travaillons en étroite collaboration avec chaque client pour 
-              garantir une réalisation qui correspond parfaitement à vos attentes. 
-              De la conception à la livraison, notre équipe vous accompagne avec 
-              la même exigence de qualité qui fait notre réputation depuis 15 ans.
-            </p>
-            <p className="text-slate-500 text-sm">
-              — Votre satisfaction est notre seule signature.
-            </p>
-          </div>
-        </div>
-
-        {/* Minimal contact hint */}
-        <motion.div 
-          className="flex items-center gap-4 pt-6 border-t border-white/5"
-          whileHover={{ x: 5 }}
-          transition={{ type: "spring", stiffness: 400 }}
-        >
-          <span className="text-xs text-slate-600 font-light tracking-wider uppercase">
-            Discutons de votre projet
+    {/* Elegant Status & Count */}
+    <div className="flex items-center gap-6 md:gap-10">
+        {/* Availability: Minimalist style */}
+        <div className="hidden sm:flex items-center gap-3">
+          <span className="text-[9px] font-medium text-stone-400 uppercase tracking-widest italic">
+            Disponibilité :
           </span>
-          <span className="text-slate-600 text-lg font-light">→</span>
-        </motion.div>
-
-        {/* Right side - Simple testimonial card without glow */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="relative mt-12 pt-8"
-        >
-          <div className="relative bg-white/[0.02] p-6 rounded-2xl border border-white/5">
-            <div className="absolute top-0 left-8 w-10 h-px bg-blue-500/30" />
-            
-            <p className="text-slate-400 text-sm font-light italic mb-4">
-              "Une équipe qui comprend vraiment nos besoins et qui sait 
-              traduire notre vision en réalité."
-            </p>
-            
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
-                <span className="text-white/30 text-xs">NS</span>
-              </div>
-              <div>
-                <p className="text-white text-xs font-medium">Direction Créative</p>
-                <p className="text-slate-600 text-[9px] uppercase tracking-wider">Nem's Service</p>
-              </div>
-            </div>
-
-            {/* Minimal decorative element */}
-            <div className="absolute bottom-4 right-4 w-12 h-12 border border-white/5 rounded-full" />
-          </div>
-        </motion.div>
-      </motion.div>
-    </div>
-
-    {/* Simple baseline */}
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.8 }}
-      className="absolute bottom-12 left-1/2 -translate-x-1/2 text-[8px] text-slate-800 font-light uppercase tracking-[0.5em]"
-    >
-      • Qualité • Exigence • Durabilité •
-    </motion.div>
-  </div>
-</section>
-
-      {/* --- NAVIGATION STICKY --- */}
-      <div ref={productListRef} className="sticky  z-30  backdrop-blur-md w-full my-4">
-        <div className="max-w-7xl mx-auto px-6  flex justify-between items-center">
-          <nav className="flex items-center gap-2 md:gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400">
-            <a href="/" className="hover:text-blue-600 transition">Nem's</a>
-            <FiChevronRight className="flex-shrink-0" />
-            <span className="text-slate-900 truncate max-w-[100px] md:max-w-none">{activeCategory}</span>
-          </nav>
-
-          <div className="flex items-center gap-4 md:gap-8">
-             <div className="hidden sm:flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-[10px] font-bold text-slate-500 uppercase">Stock Live</span>
-             </div>
-             <div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-[#020617] text-white rounded-full">
-                <FiLayers size={12} />
-                <span className="text-[10px] md:text-[11px] font-black">{filteredProducts.length} RÉFS</span>
-             </div>
-          </div>
+          <span className="text-[9px] font-bold text-stone-800 uppercase tracking-tighter flex items-center gap-1.5">
+            <span className="w-1 h-1 bg-amber-600 rounded-full" /> {/* Static gold dot */}
+            En Stock
+          </span>
         </div>
-      </div>
+
+        {/* Item Counter: Clean, Serif, No background */}
+        <div className="flex items-center gap-2 group">
+          <FiLayers size={10} className="text-stone-400 group-hover:text-amber-700 transition-colors" />
+          <div className="flex items-baseline gap-1">
+            <span className="font-serif italic text-lg text-stone-900 leading-none">
+              {filteredProducts.length}
+            </span>
+            <span className="text-[9px] font-light text-stone-400 uppercase tracking-widest">
+              Pièces
+            </span>
+          </div>
+          {/* Subtle underline for the counter */}
+          <div className="absolute bottom-4 right-0 w-0 h-px bg-amber-200 group-hover:w-full transition-all duration-700 opacity-0 group-hover:opacity-100" />
+        </div>
+    </div>
+  </div>
+</div>
 
       {/* --- LISTE DES PRODUITS --- */}
       <div className="max-w-7xl mx-auto  relative">
@@ -645,7 +545,8 @@ const ProductPage: React.FC = () => {
         <div className="absolute bottom-0 right-0 w-1/3 h-[1px] bg-gradient-to-l from-blue-600/50 to-transparent" />
       </section>
     </main>
-  );
+  </>
+);
 };
 
 export default ProductPage;
