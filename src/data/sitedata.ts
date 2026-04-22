@@ -1,24 +1,29 @@
 // src/data/siteData.ts
-import backdrop from "../assets/product/backdrop1.webp"
-import banner from "../assets/banner.webp"
-import businesscard from "../assets/businesscard.webp"
 import podcast from "../assets/podscast.webp"
 import key from "../assets/keys.webp"
-import roadstand from "../assets/roadstand.webp"
-import card from  "../assets/card.webp"
-import signification from "../assets/signalisation.webp"
-import tshirt from "../assets/tshirts.webp"
-import chapitaux from "../assets/chapitaux.webp"
 import portebrochure from "../assets/portebrochure.webp"
-import roomindicator from "../assets/roomindicator.webp"
 import * as img from '../assets/COFFRET/coffret_img';
 
 /////// PRODUCT IMAGE
-import { 
-  backdrop1, backdrop2, banner1, banner2, carbanner, gonflable, gonflable2, horizontal, 
-  offset, offset2, panneaux, panneaux2, rollup1, rollup2, 
-  serigraphie1, serigraphie2, signalition, stoptrottoir1, stoptrottoir2 
+import {
+  backdrop1, backdrop2, banner1, banner2, carbanner, gonflable, gonflable2, horizontal,
+  offset, offset2, panneaux, panneaux2, rollup1, rollup2,
+  serigraphie1, serigraphie2, signalition, stoptrottoir1, stoptrottoir2,
+  image4, image5, image6, image7, image8, image11, image12, image14, image18, image19, image20, image21,
+  image30, image32, image33, image34, image36, image41, image51, image62, image72, image75, image76,
+  image77, image78, image80, image83, image85, image86, image122, image123, image124, image125,
+  image128, image130, image140, image142, image144, image145, image151, image152, image170,
+  image189, image196, image210, image221, image222,
+  businesscard, card, tshirt, chapitaux, roomindicator
 } from "../assets/product/productimg.ts";
+
+const productImages = {
+  image4, image5, image6, image7, image8, image11, image12, image14, image18, image19, image20, image21,
+  image30, image32, image33, image34, image36, image41, image51, image62, image72, image75, image76,
+  image77, image78, image80, image83, image85, image86, image122, image123, image124, image125,
+  image128, image130, image140, image142, image144, image145, image151, image152, image170,
+  image189, image196, image210, image221, image222
+};
  export const siteData = {
 
   hero: {
