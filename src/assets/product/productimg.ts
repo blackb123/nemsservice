@@ -220,6 +220,32 @@ import image221 from "./221.webp";
 import image222 from "./222.webp";
 import image223 from "./223.webp";
 
+// Named exports for backward compatibility
+export const rollup1 = image4;
+export const rollup2 = image5;
+export const banner1 = image11;
+export const banner2 = image14;
+export const backdrop1 = image30;
+export const backdrop2 = image32;
+export const stoptrottoir1 = image33;
+export const stoptrottoir2 = image34;
+export const signalition = image51;
+export const panneaux = image75;
+export const panneaux2 = image76;
+export const gonflable = image14;
+export const gonflable2 = image18;
+export const offset = image80;
+export const offset2 = image85;
+export const serigraphie1 = image51;
+export const serigraphie2 = image75;
+export const carbanner = image14;
+export const horizontal = image80;
+export const businesscard = image80;
+export const card = image80;
+export const tshirt = image80;
+export const chapitaux = image80;
+export const roomindicator = image51;
+
 export {
   image4,
   image5,
