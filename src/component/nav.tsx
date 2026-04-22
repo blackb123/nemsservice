@@ -46,16 +46,16 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="w-full bg-white border-b border-gray-100 font-sans sticky top-0 z-[100] shadow-sm">
+    <header className="w-full bg-white border-b border-gray-200 font-sans sticky top-0 z-[100] shadow-sm">
       
       {/* --- Top Bar --- */}
-      <div className="max-w-7xl mx-auto px-4 h-14 md:h-20 flex items-center justify-between gap-8">
-        <button onClick={() => setIsOpen(true)} className="md:hidden text-gray-800 p-1">
-          <FiMenu size={24} />
+      <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-24 flex items-center justify-between gap-6 md:gap-8">
+        <button onClick={() => setIsOpen(true)} className="md:hidden text-gray-800 p-1.5 hover:bg-gray-100 rounded-lg transition-colors">
+          <FiMenu size={28} />
         </button>
 
         <Link to="/" className="flex-shrink-0">
-          <img src={logo} alt="Nem's Service" className="h-9 md:h-14 w-auto object-contain" />
+          <img src={logo} alt="Nem's Service" className="h-10 md:h-16 w-auto object-contain" />
         </Link>
 
         {/* Search Bar Desktop */}
@@ -63,20 +63,20 @@ const Navbar: React.FC = () => {
           <input 
             type="text" 
             placeholder="Rechercher un article..." 
-            className="w-full bg-gray-50 border-none rounded-full py-2 px-5 text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+            className="w-full bg-gray-100 border border-gray-200 rounded-lg py-3 px-6 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
           />
-          <FiSearch className="absolute right-4 top-2.5 text-gray-400" size={18} />
+          <FiSearch className="absolute right-5 top-3.5 text-gray-500" size={20} />
         </div>
 
-        <div className="flex items-center gap-4 text-gray-600">
-          <FiUser size={22} className="cursor-pointer hover:text-blue-600 transition-colors" />
+        <div className="flex items-center gap-6 text-gray-700">
+          <FiUser size={24} className="cursor-pointer hover:text-blue-600 transition-colors" />
         </div>
       </div>
 
       {/* --- Desktop Navigation (Fix pour états actifs) --- */}
-      <nav className="hidden md:block border-t border-gray-50 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-center gap-8">
+      <nav className="hidden md:block border-t border-gray-200 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-center gap-10">
             {/* Liens principaux (Accueil, À propos) */}
             {mainLinks.map((link) => {
               const isActive = location.pathname === link.path;
@@ -84,17 +84,17 @@ const Navbar: React.FC = () => {
                 <Link 
                   key={link.name} 
                   to={link.path}
-                  className={`relative py-4 text-[11px] font-bold uppercase tracking-widest transition-all ${
-                    isActive ? "text-blue-600" : "text-gray-900 hover:text-blue-600"
+                  className={`relative py-5 text-sm font-semibold uppercase tracking-wide transition-all ${
+                    isActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
                   }`}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
+                  <span className={`absolute bottom-0 left-0 w-full h-1 bg-blue-600 transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
                 </Link>
               );
             })}
 
-            <div className="h-4 w-[1px] bg-gray-200 mx-2"></div>
+            <div className="h-6 w-px bg-gray-300 mx-2"></div>
 
             {/* Catégories de produits */}
             {navCategories.map((cat) => {
@@ -117,12 +117,12 @@ const Navbar: React.FC = () => {
                 <button 
                   key={cat.name} 
                   onClick={() => handleNavigation(cat)}
-                  className={`relative py-4 text-[11px] uppercase tracking-widest transition-all group ${
-                    isActive ? "text-blue-600 font-bold" : "text-gray-500 hover:text-black font-medium"
+                  className={`relative py-5 text-sm uppercase tracking-wide transition-all group ${
+                    isActive ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-gray-900 font-medium"
                   }`}
                 >
                   {cat.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transition-transform duration-300 ${
+                  <span className={`absolute bottom-0 left-0 w-full h-1 bg-blue-600 transition-transform duration-300 ${
                     isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"
                   }`} />
                 </button>
@@ -140,38 +140,38 @@ const Navbar: React.FC = () => {
       >
         <div className="flex flex-col h-full overflow-y-auto">
           {/* Mobile Header in Menu */}
-          <div className="flex justify-between items-center px-6 h-16 border-b border-gray-50">
-            <img src={logo} alt="logo" className="h-8" />
-            <button onClick={() => setIsOpen(false)} className="text-gray-800 p-1">
-              <FiX size={28} />
+          <div className="flex justify-between items-center px-6 h-20 border-b border-gray-200">
+            <img src={logo} alt="logo" className="h-10" />
+            <button onClick={() => setIsOpen(false)} className="text-gray-800 p-1.5 hover:bg-gray-100 rounded-lg transition-colors">
+              <FiX size={32} />
             </button>
           </div>
 
           {/* Mobile Links Container */}
-          <div className="px-8 py-10 flex flex-col gap-8 text-left">
-            <div className="space-y-6">
-              <p className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em] mb-4">Navigation</p>
+          <div className="px-8 py-12 flex flex-col gap-10 text-left">
+            <div className="space-y-8">
+              <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-6">Navigation</p>
               {mainLinks.map(link => (
                 <Link 
                   key={link.name} 
                   to={link.path} 
                   onClick={() => setIsOpen(false)} 
-                  className="block text-xl font-light text-gray-900 tracking-tight"
+                  className="block text-2xl font-medium text-gray-900 tracking-tight hover:text-blue-600 transition-colors"
                 >
                   {link.name}
                 </Link>
               ))}
             </div>
 
-            <div className="w-12 h-[1px] bg-gray-100 my-2"></div>
+            <div className="w-16 h-px bg-gray-300"></div>
 
-            <div className="space-y-6">
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Catalogue</p>
+            <div className="space-y-8">
+              <p className="text-xs font-bold text-gray-600 uppercase tracking-widest mb-6">Catalogue</p>
               {navCategories.map(cat => (
                 <button 
                   key={cat.name} 
                   onClick={() => handleNavigation(cat)} 
-                  className="block w-full text-left text-xl font-light text-gray-700 tracking-tight hover:text-blue-600 transition-colors"
+                  className="block w-full text-left text-2xl font-medium text-gray-800 tracking-tight hover:text-blue-600 transition-colors"
                 >
                   {cat.name}
                 </button>
@@ -179,14 +179,14 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Mobile Footer Area */}
-            <div className="mt-10 pt-10 border-t border-gray-50">
+            <div className="mt-12 pt-12 border-t border-gray-200">
                <div className="relative">
                   <input 
                     type="text" 
                     placeholder="Besoin d'aide ?" 
-                    className="w-full bg-gray-50 rounded-lg py-3 px-4 text-sm outline-none"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-lg py-3 px-5 text-base outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  <FiSearch className="absolute right-4 top-3.5 text-gray-300" size={16} />
+                  <FiSearch className="absolute right-5 top-3.5 text-gray-500" size={20} />
                </div>
             </div>
           </div>

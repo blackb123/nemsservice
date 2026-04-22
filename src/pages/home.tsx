@@ -9,7 +9,7 @@ import FullWidthMap from '../section/homepage/map'
     <div className='bg-white mx-auto'>
         <Hero ></Hero>
         <TrustBar></TrustBar>
-        <hr />
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
         <CategoryGrid></CategoryGrid>
         <ProductSlider></ProductSlider>
         <SocialShowcase></SocialShowcase>

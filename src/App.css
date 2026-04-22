@@ -1,5 +1,50 @@
-body{
-    background-color: white;
-    width: 100vw;
-    
+:root {
+  /* Color System - Premium Light Palette */
+  --primary: #1e40af; /* Professional blue */
+  --primary-dark: #1e3a8a; /* Darker blue for interaction */
+  --primary-light: #3b82f6; /* Lighter blue for hover states */
+  
+  /* Neutrals */
+  --bg-primary: #ffffff; /* Pure white */
+  --bg-secondary: #f9fafb; /* Very light gray */
+  --bg-tertiary: #f3f4f6; /* Soft gray */
+  
+  --text-primary: #1f2937; /* Dark gray - main text */
+  --text-secondary: #6b7280; /* Medium gray - secondary text */
+  --text-tertiary: #9ca3af; /* Light gray - tertiary text */
+  
+  --border-light: #e5e7eb; /* Light border */
+  --border-medium: #d1d5db; /* Medium border */
+  
+  /* Accent colors */
+  --accent-orange: #f97316; /* Warm accent */
+  --accent-green: #10b981; /* Success/trust accent */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  width: 100vw;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* Typography Scale */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Remove default browser margins */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

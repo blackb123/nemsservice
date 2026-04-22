@@ -34,31 +34,31 @@ const SocialShowcase = () => {
   };
 
   return (
-    <section className="py-5 bg-white border-t  border-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="py-16 md:py-24 bg-white border-t border-gray-200 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
         
         {/* HEADER ANIMÉ */}
         <motion.div 
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-14 md:mb-16"
         >
-          <div className="flex items-center gap-2 mb-3">
-            <FiInstagram className="text-blue-600" />
-            <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.3em]">Showcase</span>
+          <div className="flex items-center gap-3 mb-4">
+            <FiInstagram className="text-blue-600" size={24} />
+            <span className="text-blue-600 font-semibold text-xs md:text-sm uppercase tracking-widest">Showcase</span>
           </div>
-          <h2 className="text-3xl font-black text-gray-900 mb-2 tracking-tighter">{socialShowcase.title}</h2>
-          <p className="text-gray-500 max-w-xl font-medium">{socialShowcase.subtitle}</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 tracking-tight text-balance">{socialShowcase.title}</h2>
+          <p className="text-lg md:text-xl text-gray-700 max-w-2xl leading-relaxed">{socialShowcase.subtitle}</p>
         </motion.div>
         
         <div className="relative group">
           {/* Navigation Buttons */}
           <button 
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 bg-white p-4 rounded-full shadow-2xl border border-gray-100 opacity-0 group-hover:opacity-100 transition-all hover:bg-blue-600 hover:text-white"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-20 bg-white p-3 rounded-lg border-2 border-gray-300 shadow-md opacity-0 group-hover:opacity-100 transition-all hover:border-blue-600 hover:text-blue-600"
           >
-            <FiChevronLeft size={20} />
+            <FiChevronLeft size={22} />
           </button>
           
           {/* Gallery Container */}
@@ -68,19 +68,19 @@ const SocialShowcase = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pt-2"
+            className="flex gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pt-4"
           >
             {socialShowcase.images.map((img) => (
               <motion.div 
                 key={img.id} 
                 variants={itemVariants}
-                className="min-w-[280px] md:min-w-[340px] snap-start relative group/item cursor-pointer"
+                className="min-w-[300px] md:min-w-[380px] snap-start relative group/item cursor-pointer"
               >
-                <div className="relative h-[300px] overflow-hidden rounded-2xl shadow-sm border border-gray-100">
+                <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl shadow-md hover:shadow-xl border-2 border-gray-200 hover:border-blue-600 transition-all duration-300">
                   <motion.img 
                     src={img.url} 
                     alt={`Réalisation par ${img.handle}`}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.08 }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
                     className="w-full h-full object-cover"
                   />
@@ -89,15 +89,15 @@ const SocialShowcase = () => {
                   <motion.div 
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
-                    className="absolute inset-0 bg-black/20 backdrop-blur-[2px] flex items-center justify-center transition-opacity"
+                    className="absolute inset-0 bg-black/30 backdrop-blur-[2px] flex items-center justify-center transition-opacity"
                   >
-                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
-                      <FiInstagram size={24} />
+                    <div className="w-14 h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white hover:bg-white/35 transition-colors">
+                      <FiInstagram size={28} />
                     </div>
                   </motion.div>
 
                   <div className="absolute bottom-5 left-5 right-5 flex justify-between items-center z-10">
-                    <span className="bg-white/90 backdrop-blur-md text-black text-[11px] px-4 py-2 rounded-full font-black shadow-lg uppercase tracking-wider">
+                    <span className="bg-white/95 backdrop-blur-md text-gray-900 text-sm px-5 py-2 rounded-lg font-semibold shadow-lg uppercase tracking-wide">
                       @{img.handle}
                     </span>
                   </div>
@@ -108,9 +108,9 @@ const SocialShowcase = () => {
 
           <button 
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 bg-white p-4 rounded-full shadow-2xl border border-gray-100 opacity-0 group-hover:opacity-100 transition-all hover:bg-blue-600 hover:text-white"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-20 bg-blue-600 text-white p-3 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-all hover:bg-blue-700"
           >
-            <FiChevronRight size={20} />
+            <FiChevronRight size={22} />
           </button>
         </div>
       </div>

@@ -62,39 +62,39 @@ const ProductSlider = () => {
   }, []);
 
   return (
-    <section className="pb-4 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="pb-8 md:pb-12 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex justify-between items-end mb-6 md:mb-8"
+          className="flex justify-between items-end mb-12 md:mb-16"
         >
           <div>
-            <span className="text-blue-600 font-medium text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.25em] mb-1 block">
+            <span className="text-blue-600 font-semibold text-xs md:text-sm uppercase tracking-widest mb-2 block">
               ✦ ÉDITION LIMITÉE
             </span>
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-light text-[#1a1f2b] tracking-tight">
-              Coffrets <span className="font-semibold">Signature</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight text-balance">
+              Coffrets <span className="text-blue-600">Signature</span>
             </h2>
           </div>
           
           {/* Navigation desktop */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={() => scroll('left')}
-              className="p-2 rounded-lg border border-gray-200 hover:border-gray-400 transition-all disabled:opacity-20 bg-white/50 backdrop-blur-sm"
+              className="p-3 rounded-lg border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600 transition-all disabled:opacity-30 bg-white"
               disabled={currentIndex === 0}
             >
-              <FiChevronLeft size={18} />
+              <FiChevronLeft size={20} />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="p-2 rounded-lg bg-black text-white hover:bg-gray-800 transition-all disabled:opacity-20"
+              className="p-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-all disabled:opacity-30"
               disabled={currentIndex === totalSlides - 1}
             >
-              <FiChevronRight size={18} />
+              <FiChevronRight size={20} />
             </button>
           </div>
         </motion.div>
@@ -112,58 +112,58 @@ const ProductSlider = () => {
               <motion.div 
                 key={item.id} 
                 variants={cardVariants}
-                className="min-w-[200px] md:min-w-[250px] snap-start flex-shrink-0"
+                className="min-w-[240px] md:min-w-[300px] snap-start flex-shrink-0"
               >
-                <div className="group relative bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-gray-200 transition-all duration-300 h-full">
+                <div className="group relative bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-blue-600 transition-all duration-300 h-full shadow-sm hover:shadow-lg">
                   
                   {/* Badge */}
-                  <div className="absolute top-2 left-2 z-10">
-                    <span className="bg-white/90 backdrop-blur-md text-black text-[7px] font-medium px-1.5 py-0.5 rounded-full border border-gray-200 shadow-sm">
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="bg-white/95 backdrop-blur-md text-gray-900 text-xs font-semibold px-3 py-1.5 rounded-lg border border-gray-300 shadow-sm">
                       {item.category}
                     </span>
                   </div>
 
-                  {/* Image - Hauteur augmentée */}
+                  {/* Image - Enhanced size */}
                   <div 
-                    className="relative w-full h-36 md:h-40 overflow-hidden cursor-pointer bg-gray-50"
+                    className="relative w-full h-56 md:h-64 overflow-hidden cursor-pointer bg-gray-100"
                     onClick={() => handleDetailClick(item)}
                   >
                     <motion.img 
                       src={item.image} 
                       alt={item.name} 
-                      whileHover={{ scale: 1.03 }}
+                      whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.4 }}
                       className="w-full h-full object-cover" 
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                   </div>
 
                   {/* Contenu */}
-                  <div className="p-3">
+                  <div className="p-5 md:p-6">
                     {/* Référence et note */}
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[7px] font-mono text-gray-400">{item.ref}</span>
-                      <div className="flex items-center gap-0.5">
-                        <FiStar size={7} className="text-yellow-400 fill-yellow-400" />
-                        <span className="text-[7px] text-gray-500">4.9</span>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-mono text-gray-500">{item.ref}</span>
+                      <div className="flex items-center gap-1">
+                        <FiStar size={14} className="text-yellow-400 fill-yellow-400" />
+                        <span className="text-xs font-medium text-gray-700">4.9</span>
                       </div>
                     </div>
 
-                    <h3 className="text-xs md:text-sm font-medium text-gray-900 mb-1 leading-tight line-clamp-1">
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 leading-tight line-clamp-2">
                       {item.name}
                     </h3>
                     
-                    <p className="text-[8px] md:text-[10px] text-gray-500 mb-2 line-clamp-1">
+                    <p className="text-sm md:text-base text-gray-600 mb-4 line-clamp-2 leading-relaxed">
                       {item.tagline}
                     </p>
 
                     {/* Prix et action */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-4">
                       <div>
-                        <span className="text-[9px] md:text-[11px] font-light text-gray-400 line-through mr-1">
+                        <span className="text-sm md:text-base font-light text-gray-500 line-through mr-2">
                           {parseInt(item.price.replace('€', '')) * 1.2}€
                         </span>
-                        <span className="text-sm md:text-base font-semibold text-gray-900">
+                        <span className="text-xl md:text-2xl font-bold text-blue-600">
                           {item.price}
                         </span>
                       </div>
@@ -171,15 +171,15 @@ const ProductSlider = () => {
                       <motion.button
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleDetailClick(item)}
-                        className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
+                        className="w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors shadow-sm"
                       >
-                        <FiArrowRight size={11} />
+                        <FiArrowRight size={18} />
                       </motion.button>
                     </div>
 
                     {/* Caractéristique */}
-                    <div className="mt-2 pt-2 border-t border-gray-100">
-                      <span className="text-[7px] text-gray-400 font-mono">
+                    <div className="pt-4 border-t-2 border-gray-200">
+                      <span className="text-xs text-gray-600 font-medium">
                         ✦ {item.colors}
                       </span>
                     </div>
@@ -190,16 +190,16 @@ const ProductSlider = () => {
           </motion.div>
 
           {/* Pagination mobile */}
-          <div className="flex lg:hidden items-center justify-center gap-3 mt-4">
+          <div className="flex lg:hidden items-center justify-center gap-4 mt-8">
             <button
               onClick={() => scroll('left')}
-              className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-20"
+              className="w-11 h-11 rounded-lg bg-white border-2 border-gray-300 flex items-center justify-center disabled:opacity-30 hover:border-blue-600 hover:text-blue-600 transition-colors"
               disabled={currentIndex === 0}
             >
-              <FiChevronLeft size={14} />
+              <FiChevronLeft size={18} />
             </button>
             
-            <div className="flex gap-1">
+            <div className="flex gap-2">
               {Array.from({ length: totalSlides }).map((_, i) => (
                 <button
                   key={i}
@@ -211,10 +211,10 @@ const ProductSlider = () => {
                       });
                     }
                   }}
-                  className={`h-1 rounded-full transition-all duration-300 ${
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
                     i === currentIndex 
-                      ? 'w-5 bg-black' 
-                      : 'w-1.5 bg-gray-300 hover:bg-gray-400'
+                      ? 'w-8 bg-blue-600' 
+                      : 'w-2 bg-gray-400 hover:bg-gray-500'
                   }`}
                 />
               ))}
@@ -222,10 +222,10 @@ const ProductSlider = () => {
             
             <button
               onClick={() => scroll('right')}
-              className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center disabled:opacity-20"
+              className="w-11 h-11 rounded-lg bg-blue-600 text-white flex items-center justify-center disabled:opacity-30 hover:bg-blue-700 transition-colors"
               disabled={currentIndex === totalSlides - 1}
             >
-              <FiChevronRight size={14} />
+              <FiChevronRight size={18} />
             </button>
           </div>
         </div>

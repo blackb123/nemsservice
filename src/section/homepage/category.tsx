@@ -44,35 +44,35 @@ const CategorySlider = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto py-8  bg-white px-4 relative group overflow-hidden">
+    <section className="max-w-7xl mx-auto py-16 md:py-24 bg-white px-6 relative group overflow-hidden">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-6 md:mb-8"
+        className="mb-12 md:mb-16"
       >
-        <span className="text-blue-600 font-medium text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.25em] mb-1 block">
+        <span className="text-blue-600 font-semibold text-xs md:text-sm uppercase tracking-widest mb-2 block">
           ✦ NAVIGATION
         </span>
-       <h2 className="text-xl md:text-2xl lg:text-3xl font-light text-[#1a1f2b] tracking-tight">
-        Toutes les <span className="font-semibold">Catégories</span>
+       <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight text-balance">
+        Toutes les <span className="text-blue-600">Catégories</span>
       </h2>
       </motion.div>
       
       {/* Navigation Buttons */}
       <button 
         onClick={() => scroll('left')}
-        className="absolute left-2 top-[55%] -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-2 rounded-lg border border-gray-200 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hidden md:block hover:border-gray-400"
+        className="absolute left-0 top-[50%] -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm p-3 rounded-lg border-2 border-gray-300 shadow-md opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center hover:border-blue-600 hover:text-blue-600"
       >
-        <ChevronLeft size={18} />
+        <ChevronLeft size={22} />
       </button>
 
       <button 
         onClick={() => scroll('right')}
-        className="absolute right-2 top-[55%] -translate-y-1/2 z-20 bg-black text-white p-2 rounded-lg shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hidden md:block hover:bg-gray-800"
+        className="absolute right-0 top-[50%] -translate-y-1/2 z-20 bg-blue-600 text-white p-3 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center hover:bg-blue-700"
       >
-        <ChevronRight size={18} />
+        <ChevronRight size={22} />
       </button>
 
       {/* Slider Container */}
@@ -82,7 +82,7 @@ const CategorySlider = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-30px" }}
-        className="flex overflow-x-auto gap-4 md:gap-6 lg:gap-8 scroll-smooth no-scrollbar snap-x snap-mandatory pt-2"
+        className="flex overflow-x-auto gap-6 md:gap-8 lg:gap-10 scroll-smooth no-scrollbar snap-x snap-mandatory pt-4"
       >
         {siteData.categories.map((cat) => {
           const isActive = activeCategory === cat.name;
@@ -91,21 +91,21 @@ const CategorySlider = () => {
             <motion.div 
               key={cat.id} 
               variants={itemVariants}
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -4 }}
               onClick={() => handleCategoryClick(cat.name)} 
-              className="flex-none w-[95px] md:w-[110px] lg:w-[130px] flex flex-col items-center group cursor-pointer snap-center"
+              className="flex-none w-[120px] md:w-[140px] lg:w-[160px] flex flex-col items-center group cursor-pointer snap-center"
             >
-              {/* Image container - tailles ajustées */}
+              {/* Image container - Enhanced sizes */}
               <div className={`
-                relative w-[80px] h-[80px] md:w-[100px] md:h-[100px] lg:w-[120px] lg:h-[120px] rounded-full mb-2 md:mb-3 transition-all duration-300
+                relative w-[100px] h-[100px] md:w-[120px] md:h-[120px] lg:w-[150px] lg:h-[150px] rounded-full mb-4 md:mb-5 transition-all duration-300 shadow-sm
                 ${isActive 
-                  ? 'ring-2 ring-blue-600 ring-offset-2' 
-                  : 'ring-0 group-hover:ring-1 group-hover:ring-gray-300'}
+                  ? 'ring-3 ring-blue-600 ring-offset-2' 
+                  : 'ring-0 group-hover:ring-2 group-hover:ring-gray-300'}
               `}>
                 <motion.img 
                   src={cat.image} 
                   alt={cat.name} 
-                  whileHover={{ scale: 1.08 }}
+                  whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
                   className="w-full h-full rounded-full object-cover"
                 />
@@ -113,8 +113,8 @@ const CategorySlider = () => {
 
               {/* Texte */}
               <motion.p 
-                className={`text-center font-light text-[11px] md:text-[14px] lg:text-xs tracking-wide capitalize transition-colors ${
-                  isActive ? 'text-blue-600 font-medium' : 'text-gray-500 group-hover:text-gray-900'
+                className={`text-center font-semibold text-sm md:text-base lg:text-lg tracking-tight capitalize transition-colors ${
+                  isActive ? 'text-blue-600' : 'text-gray-700 group-hover:text-gray-900'
                 }`}
               >
                 {cat.name}
@@ -124,7 +124,7 @@ const CategorySlider = () => {
               {isActive && (
                 <motion.div 
                   layoutId="activeBar" 
-                  className="h-0.5 w-4 md:w-5 lg:w-6 bg-blue-600 mt-1 md:mt-2 rounded-full" 
+                  className="h-1 w-6 md:w-7 lg:w-8 bg-blue-600 mt-2 md:mt-3 rounded-full" 
                 />
               )}
             </motion.div>
@@ -133,15 +133,15 @@ const CategorySlider = () => {
       </motion.div>
 
       {/* Pagination mobile */}
-      <div className="flex lg:hidden items-center justify-center gap-3 mt-4">
+      <div className="flex lg:hidden items-center justify-center gap-4 mt-8">
         <button
           onClick={() => scroll('left')}
-          className="w-10 h-10 rounded-full bg-black flex items-center justify-center disabled:opacity-20"
+          className="w-12 h-12 rounded-lg bg-white border-2 border-gray-300 flex items-center justify-center disabled:opacity-30 hover:border-blue-600 hover:text-blue-600 transition-colors"
         >
-          <ChevronLeft size={14} />
+          <ChevronLeft size={20} />
         </button>
         
-        <div className="flex gap-1.5">
+        <div className="flex gap-2">
           {siteData.categories.map((_, i) => {
             // Calculer l'index actif approximatif basé sur le scroll
             const isActiveDot = i === 0; // À améliorer avec un state si nécessaire
@@ -158,8 +158,8 @@ const CategorySlider = () => {
                     });
                   }
                 }}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  isActiveDot ? 'w-6 bg-black' : 'w-1.5 bg-gray-300'
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  isActiveDot ? 'w-8 bg-blue-600' : 'w-2 bg-gray-400'
                 }`}
               />
             );
@@ -168,9 +168,9 @@ const CategorySlider = () => {
         
         <button
           onClick={() => scroll('right')}
-          className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center"
+          className="w-12 h-12 rounded-lg bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors"
         >
-          <ChevronRight size={14} />
+          <ChevronRight size={20} />
         </button>
       </div>
 

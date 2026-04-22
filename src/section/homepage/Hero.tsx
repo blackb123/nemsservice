@@ -41,21 +41,21 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full h-fit max-sm:h-fit py-10 md:py-20 overflow-hidden font-sans bg-[#020617]">
+    <section className="relative w-full h-fit max-sm:h-fit py-12 md:py-32 overflow-hidden font-sans bg-gradient-to-br from-white via-gray-50 to-gray-100">
       
-      {/* 1. BACKGROUND AVEC IMAGE RÉDUITE */}
-      <div className="absolute inset-0 flex items-center justify-center  z-0">
+      {/* 1. BACKGROUND AVEC IMAGE SUBTILE */}
+      <div className="absolute inset-0 flex items-center justify-center z-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 0.4, scale: 1 }} // Opacité réduite pour laisser le texte lisible
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="w-full h-full  rounded-3xl"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 0.15, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="w-full h-full"
             style={{
               backgroundImage: `url(${heroImages[index]})`,
-              backgroundSize: 'cover', // L'image ne sera pas coupée et restera "petite"
+              backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat'
             }}
@@ -63,57 +63,57 @@ const Hero = () => {
         </AnimatePresence>
       </div>
 
-      {/* OVERLAY GRADIENT */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/80 via-transparent to-[#020617] z-10" />
+      {/* OVERLAY - Subtle gradient for text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-white/40 z-10" />
 
-      {/* PROMO BANNER */}
+      {/* PROMO BANNER - Premium subtle design */}
       <motion.div
         initial={{ y: -50 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="absolute top-0 left-0 w-full bg-blue-600/10 backdrop-blur-md text-white py-4 px-4 text-center text-xs md:text-sm font-semibold z-30 border-b border-white/5"
+        className="absolute top-0 left-0 w-full bg-gradient-to-r from-blue-50 to-transparent py-5 px-4 text-center text-sm md:text-base font-semibold z-30 border-b border-gray-200"
       >
-        Jusqu'à -25% sur vos articles favoris | Jusqu'au 27 fév.
-        <span className="underline ml-2 cursor-pointer hover:text-blue-400 transition-colors">En profiter</span>
+        <span className="text-gray-800">Jusqu&apos;à -25% sur vos articles favoris | Jusqu&apos;au 27 fév.</span>
+        <span className="underline ml-3 cursor-pointer text-blue-600 hover:text-blue-700 transition-colors">En profiter</span>
       </motion.div>
 
       {/* 2. MAIN CONTENT */}
-      <div className="relative h-full flex items-center justify-center z-20 px-6 py-15">
+      <div className="relative h-full flex items-center justify-center z-20 px-6 py-20">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl max-sm:pt-12 w-full text-center flex flex-col items-center"
+          className="max-w-4xl max-sm:pt-8 w-full text-center flex flex-col items-center"
         >
           <motion.h1 
             variants={textVariants}
-            className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter leading-tight"
+            className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 tracking-tight leading-tight text-balance"
           >
             {hero.title}
           </motion.h1>
 
           <motion.p 
             variants={textVariants}
-            className="text-base md:text-lg text-gray-300 mb-10 max-w-2xl leading-relaxed"
+            className="text-lg md:text-2xl text-gray-700 mb-12 max-w-2xl leading-relaxed text-balance"
           >
             {hero.description}
           </motion.p>
 
-          <motion.div variants={textVariants} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <motion.div variants={textVariants} className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto justify-center">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => scrollToSection('products')}
-              className="px-10 py-5 rounded-full font-black uppercase text-[12px] tracking-widest transition-all bg-blue-600 text-white hover:bg-blue-700 shadow-xl shadow-blue-500/20"
+              className="px-12 py-4 rounded-lg font-semibold uppercase text-sm tracking-wide transition-all bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl"
             >
               Nos Produits
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => scrollToSection('footer')}
-              className="px-10 py-5 rounded-full font-black uppercase text-[12px] tracking-widest transition-all bg-white/10 text-white backdrop-blur-sm border border-white/20 hover:bg-white hover:text-black"
+              className="px-12 py-4 rounded-lg font-semibold uppercase text-sm tracking-wide transition-all bg-white text-gray-900 border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600 shadow-sm hover:shadow-md"
             >
               Contactez-nous
             </motion.button>
@@ -122,15 +122,15 @@ const Hero = () => {
       </div>
 
       {/* 3. INDICATORS */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-30">
         {heroImages.map((_, i) => (
-          <button key={i} onClick={() => setIndex(i)} className="group py-2 px-1">
+          <button key={i} onClick={() => setIndex(i)} className="group py-2 px-1" aria-label={`Go to slide ${i + 1}`}>
             <motion.div
               animate={{ 
                 width: i === index ? 32 : 12,
-                backgroundColor: i === index ? "#2563eb" : "rgba(255, 255, 255, 0.3)"
+                backgroundColor: i === index ? "#1e40af" : "rgba(107, 114, 128, 0.3)"
               }}
-              className="h-1 rounded-full transition-colors"
+              className="h-2 rounded-full transition-colors"
             />
           </button>
         ))}
