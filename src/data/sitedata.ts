@@ -1,11 +1,24 @@
-
-
+// src/data/siteData.ts
+import backdrop from "../assets/product/backdrop1.webp"
+import banner from "../assets/banner.webp"
+import businesscard from "../assets/businesscard.webp"
+import podcast from "../assets/podscast.webp"
+import key from "../assets/keys.webp"
+import roadstand from "../assets/roadstand.webp"
+import card from  "../assets/card.webp"
+import signification from "../assets/signalisation.webp"
+import tshirt from "../assets/tshirts.webp"
+import chapitaux from "../assets/chapitaux.webp"
+import portebrochure from "../assets/portebrochure.webp"
+import roomindicator from "../assets/roomindicator.webp"
 import * as img from '../assets/COFFRET/coffret_img';
 
-import * as productImages from '../assets/product/productimg';
-
-
-
+/////// PRODUCT IMAGE
+import { 
+  backdrop1, backdrop2, banner1, banner2, carbanner, gonflable, gonflable2, horizontal, 
+  offset, offset2, panneaux, panneaux2, rollup1, rollup2, 
+  serigraphie1, serigraphie2, signalition, stoptrottoir1, stoptrottoir2 
+} from "../assets/product/productimg.ts";
  export const siteData = {
 
   hero: {
@@ -23,49 +36,69 @@ import * as productImages from '../assets/product/productimg';
     ]
 
   },
-
-  categories :[
-
-  { id: 1, name: "ROLL-UP", image: productImages.image4 },
-
-  { id: 2, name: "X-BANNER", image: productImages.image11 },
-
-  { id: 3, name: "FLYING BANNER", image: productImages.image14 },
-
-  { id: 4, name: "BACKDROPS", image: productImages.image30 },
-
-  { id: 5, name: "STOP TROTTOIRS", image: productImages.image33 },
-
-  { id: 6, name: "SIGNALETIQUE", image: productImages.image44 },
-
-  { id: 7, name: "CADRES MURAUX", image: productImages.image75 },
-
-  { id: 8, name: "STOP RAYON", image: productImages.image80 },
-
-  { id: 9, name: "PLV", image: productImages.image88 },
-
-  { id: 10, name: "CHEVALETS", image: productImages.image114 },
-
-  { id: 11, name: "PORTES BROCHURES", image: productImages.image117 },
-
-  { id: 12, name: "GONFLABLE", image: productImages.image122 },
-
-  { id: 13, name: "CHAPITAUX", image: productImages.image140 },
-
-  { id: 14, name: "ENSEIGNES", image: productImages.image151 },
-
-  { id: 16, name: "IMPRESSION NUMERIQUE", image: productImages.image206 },
-
-  { id: 18, name: "SERIGRAPHIE", image: productImages.image177 },
-
-  { id: 19, name: "BRODERIE", image: productImages.image190 },
-
-  { id: 20, name: "TEXTILE", image: productImages.image189 },
-
-  { id: 21, name: "GADGETS", image: productImages.image222 },
-
-  { id: 22, name: "OTHERS", image: productImages.image130 }
-
+ categories : [
+  // Section 1: ROLL-UP (from page 6-10)
+  { id: 1, name: "ROLL-UP", image: rollup1 },
+  
+  // Section 2: X-BANNER (from page 10)
+  { id: 2, name: "X-BANNER", image: banner1 },
+  
+  // Section 3: FLYING BANNER (from page 11-17)
+  { id: 3, name: "FLYING BANNER", image: banner2 },
+  
+  // Section 4: BACKDROPS (from page 18-19)
+  { id: 4, name: "BACKDROPS", image: backdrop1 },
+  
+  // Section 5: STOP TROTTOIRS (from page 20-24)
+  { id: 5, name: "STOP TROTTOIRS", image: stoptrottoir1 },
+  
+  // Section 6: PANNEAUX DE SIGNALISATIONS (from page 25-30)
+  { id: 6, name: "SIGNALETIQUE", image: signalition },
+  
+  // Section 7: CADRES MURAUX (from page 31-34)
+  { id: 7, name: "CADRES MURAUX", image: panneaux },
+  
+  // Section 8: STOP RAYON (from page 35-41)
+  { id: 8, name: "STOP RAYON", image: panneaux },
+  
+  // Section 9: PLV (from page 35-41, mixed with Stop Rayon)
+  { id: 9, name: "PLV", image: stoptrottoir1 },
+  
+  // Section 10: CHEVALETS (from page 42-43)
+  { id: 10, name: "CHEVALETS", image: roomindicator },
+  
+  // Section 11: PORTES BROCHURES (from page 44-46)
+  { id: 11, name: "PORTES BROCHURES", image: portebrochure },
+  
+  // Section 12: GONFLABLES (from page 47-54)
+  { id: 12, name: "GONFLABLE", image: gonflable },
+  
+  // Section 13: CHAPITAUX (from page 55-60)
+  { id: 13, name: "CHAPITAUX", image: chapitaux },
+  
+  // Section 14: ENSEIGNES ET PANNEAUX PUBLICITAIRES (from page 61-63)
+  { id: 14, name: "ENSEIGNES", image: panneaux },
+  
+  // Section 15: POTENCES (from page 64)
+  { id: 15, name: "POTENCES", image: panneaux },
+  
+  // Section 16: IMPRESSION NUMÉRIQUE (from page 68-72)
+  { id: 16, name: "IMPRESSION NUMERIQUE", image: card },
+  
+  // Section 17: OFFSET (from page 68)
+  { id: 17, name: "OFFSET", image: offset },
+  
+  // Section 18: SÉRIGRAPHIE (from page 64-65)
+  { id: 18, name: "SERIGRAPHIE", image: serigraphie1 },
+  
+  // Section 19: BRODERIE INDUSTRIELLE (from page 66)
+  { id: 19, name: "BRODERIE", image: serigraphie2 },
+  
+  // Section 20: TEXTILE & BAGAGERIE (from page 73)
+  { id: 20, name: "TEXTILE", image: tshirt },
+  
+  // Section 21: GADGETS PUBLICITAIRES (from page 73)
+  { id: 21, name: "GADGETS", image: offset2 }
 ],
 
   navLinks: [
@@ -563,9 +596,91 @@ export const product = [
     "description": "Chevalet plastique léger et imputrescible.",
 
     "features": ["Matière acrylique", "Epaisseur 4mm", "Impression Quadri UV", "Format maxi 80x120cm", "Double face", "Léger et transportable"],
-
-    "image": productImages.image35
-
+    "image": stoptrottoir1
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Stop trottoirs Chevalet PVC Blanc",
+    "description": "Chevalet en plastique blanc avec surface effaçable.",
+    "features": ["PVC blanc", "Ecriture à la craie ou feutre liquide", "Double face", "Epaisseur 4mm", "Réutilisable"],
+    "image": stoptrottoir1
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Stop trottoirs Géant",
+    "description": "Format A0 ou supérieur pour voir de loin.",
+    "features": ["Format XXL", "Dimension: 60x150cm", "Structure acier galvanisé", "Cadre clippant", "Haute stabilité"],
+    "image": stoptrottoir2
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Stop trottoirs Robuste",
+    "description": "Châssis acier pour usage intensif.",
+    "features": ["Acier laqué", "Anti-corrosion", "Poids élevé", "Grande résistance"],
+    "image": stoptrottoir2
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Stop trottoirs Tropicalisé",
+    "description": "Conçu pour les climats humides et forte chaleur.",
+    "features": ["Traitement anti-UV", "Joints étanches", "Alu renforcé", "Résistant aux intempéries"],
+    "image": stoptrottoir1
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Stop trottoirs Rotatif",
+    "description": "Affiche tournant avec le vent.",
+    "features": ["Socle acier galvanisé", "Elément rotatif acier zingué", "Hauteur: 115cm", "Largeur: 41cm", "Dimension hors tout: 133x50cm", "Poids: 24 kgs", "Ventilateur incorporé"],
+    "image": stoptrottoir2
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Mini Totem Indoor Eclairé",
+    "description": "Mini totem lumineux double face pour intérieur.",
+    "features": ["Métal et aluminium anodisé", "Double face", "Hauteur: 170cm", "Largeur: 60cm", "Poids: 12 kgs", "PVC transparent protecteur", "Impression sur backlight"],
+    "image": stoptrottoir1
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Totem Outdoor",
+    "description": "Signalétique verticale fixe pour extérieur scellée au sol.",
+    "features": ["Structure acier", "Faces PVC", "Scellable au sol sur massif béton", "Faces planes ou galbées", "Lumineux ou non"],
+    "image": stoptrottoir1
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Stop trottoirs Bois",
+    "description": "Aspect naturel pour restaurants et boutiques.",
+    "features": ["Bois traité", "Surface craie", "Élégant", "Aspect naturel"],
+    "image": stoptrottoir2
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Stop trottoirs Magnétique",
+    "description": "Changement de visuel ultra-rapide par plaques aimantées.",
+    "features": ["Façade lexan", "Contours aimantés", "Étanchéité IP54", "Changement rapide"],
+    "image": stoptrottoir1
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Stop trottoirs Ressort",
+    "description": "Modèle avec ressorts pour absorber les chocs et le vent.",
+    "features": ["Ressorts acier", "Flexibilité", "Base stable", "Absorption des chocs"],
+    "image": stoptrottoir2
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "Homme Sandwich",
+    "description": "Support publicitaire porté par une personne.",
+    "features": ["Double face", "Dimension visuel: 60x60cm", "PVC expansé 6mm", "Bretelles réglables", "Street marketing", "Découpe à la forme"],
+    "image": stoptrottoir1
+  },
+  {
+    "category": "STOP TROTTOIRS",
+    "header": "PLV Silhouette Découpée sur Pied",
+    "description": "Personnage ou produit grandeur nature sur pied.",
+    "features": ["Découpe forme", "Pliable", "Impact fort", "Visibilité maximale"],
+    "image": stoptrottoir2
   },
 
   {
@@ -577,9 +692,7 @@ export const product = [
     "description": "Identification des bureaux et salles à information fixe.",
 
     "features": ["Aluminium", "Insert papier possible", "Fixation adhésive", "Sur mesure", "Large choix de matières"],
-
-    "image": productImages.image44
-
+    "image": roomindicator
   },
 
   {
@@ -591,9 +704,7 @@ export const product = [
     "description": "Plaque modulable permettant de changer facilement les informations.",
 
     "features": ["Modulable", "Changement rapide", "Insert papier sous plaque transparente", "Plexiglas ou inox"],
-
-    "image": productImages.image44
-
+    "image": roomindicator
   },
 
   {
@@ -619,9 +730,7 @@ export const product = [
     "description": "Signalétique perpendiculaire au mur pour visibilité dans les couloirs.",
 
     "features": ["Double face", "Alu anodisé", "Visibilité couloir", "Fléchage directionnel"],
-
-    "image": productImages.image57
-
+    "image": roomindicator
   },
 
   {
@@ -633,9 +742,35 @@ export const product = [
     "description": "Panneaux d'information muraux fixes.",
 
     "features": ["PVC ou Alu", "Format sur mesure", "Impression directe", "Fléchage inclus"],
-
-    "image": productImages.image62
-
+    "image": signalition
+  },
+  {
+    "category": "SIGNALETIQUE",
+    "header": "Panneau de Plafond Suspendu",
+    "description": "Signalétique suspendue pour orientation dans grands espaces.",
+    "features": ["Suspension câbles", "Double face", "Léger", "Guidage vertical"],
+    "image": roomindicator
+  },
+  {
+    "category": "SIGNALETIQUE",
+    "header": "Plaque de Table",
+    "description": "Identification nominative pour bureaux ou réunions.",
+    "features": ["Alu plié", "Changement nom aisé", "Design sobre", "Pour bureau"],
+    "image": signalition
+  },
+  {
+    "category": "SIGNALETIQUE",
+    "header": "Oriflamme Classique",
+    "description": "Porte affiche pour stand et point de vente.",
+    "features": ["Impression quadri sublimation", "Deux profiles fixés haut et bas", "Crochets de suspension", "Facile à mettre en place"],
+    "image": banner2
+  },
+  {
+    "category": "SIGNALETIQUE",
+    "header": "Oriflamme Standard",
+    "description": "Kakémono sur-mesure avec qualité d'impression irréprochable.",
+    "features": ["Format sur-mesure", "Bâche, tissu polyester ou PVC souple", "Finition œillets ou baguettes", "Option recto/verso"],
+    "image": banner2
   },
 
 
@@ -769,9 +904,70 @@ export const product = [
     "description": "Petit présentoir de caisse découpé à la forme.",
 
     "features": ["Découpe laser", "Carton ou PVC", "Personnalisé", "Pour comptoir/caisse", "Attire l'attention"],
-
-    "image": productImages.image88
-
+    "image": stoptrottoir1
+  },
+  {
+    "category": "PLV",
+    "header": "Dangler Modèle Classique",
+    "description": "PLV suspendue pour communication sans occuper d'espace au sol.",
+    "features": ["Suspension plafond", "PVC ou Carton", "Recto/verso", "Formes: carré, rectangulaire, circulaire", "Idéal promotions"],
+    "image": banner2
+  },
+  {
+    "category": "PLV",
+    "header": "Dangler Modèle 3D",
+    "description": "Publicité suspendue avec volume.",
+    "features": ["Effet 3D", "Montage facile", "Mobile", "Visibilité 360°", "PVC ou Carton"],
+    "image": banner2
+  },
+  {
+    "category": "PLV",
+    "header": "Dangler Modèle 3D Façonnable",
+    "description": "Dangler 3D personnalisable selon vos besoins.",
+    "features": ["Forme personnalisée", "Effet 3D", "PVC ou Carton", "Recto/verso"],
+    "image": banner2
+  },
+  {
+    "category": "PLV",
+    "header": "Porte Chapelet",
+    "description": "Présentoir pour produits en sachets (snacks, bonbons).",
+    "features": ["Crochets multiples", "En-tête publicitaire", "Gain de place", "Pour rayons"],
+    "image": portebrochure
+  },
+  {
+    "category": "PLV",
+    "header": "PLV Accroche Rétroviseur",
+    "description": "Support de communication pour intérieur de taxi.",
+    "features": ["PVC expansé 6mm", "Format 9x26cm", "Impression quadri UV recto/verso", "Découpe à forme", "Entaille d'accroche"],
+    "image": carbanner
+  },
+  {
+    "category": "PLV",
+    "header": "Oeillet Call-Box",
+    "description": "PLV pour marchands sur trottoirs à accrocher sur parasols.",
+    "features": ["Résistant extérieur", "Fixation rapide", "Visible", "Formats: A5, A4, A3, 40x40cm", "PVC ABS 6-8mm"],
+    "image": stoptrottoir2
+  },
+  {
+    "category": "PLV",
+    "header": "Eventail Personnalisé PVC",
+    "description": "Objet publicitaire utile lors d'événements extérieurs.",
+    "features": ["PVC souple 0,80mm ou 6mm", "Impression quadri UV recto/verso", "Dimensions: 20x14cm", "Découpe à forme", "Vernis UV selectif"],
+    "image": offset2
+  },
+  {
+    "category": "PLV",
+    "header": "Tapis de Sol Publicitaire",
+    "description": "Logo et message à l'entrée de vos locaux.",
+    "features": ["Antidérapant", "Lavable", "Haute définition", "Résistant"],
+    "image": serigraphie1
+  },
+  {
+    "category": "PLV",
+    "header": "Mobil Suspendu",
+    "description": "Animation aérienne pour points de vente.",
+    "features": ["Léger", "Mouvement naturel", "Fixation plafond", "Attire le regard"],
+    "image": banner2
   },
 
   // ==================== SECTION 9: CHEVALETS ====================
@@ -785,9 +981,7 @@ export const product = [
     "description": "Support incliné en acrylique/plexiglas pour affiches.",
 
     "features": ["Acrylique/PMMA", "Bords polis", "Design incliné", "Insertion facile", "Option impression directe sur PVC"],
-
-    "image": productImages.image114
-
+    "image": roomindicator
   },
 
   {
@@ -799,9 +993,28 @@ export const product = [
     "description": "Support droit en acrylique/plexiglas pour présentation verticale.",
 
     "features": ["Acrylique/PMMA", "Bords polis", "Présentation verticale", "Double face possible", "Option impression directe"],
-
-    "image": productImages.image115
-
+    "image": roomindicator
+  },
+  {
+    "category": "CHEVALETS",
+    "header": "Chevalet de Table Contemporain",
+    "description": "Design haut de gamme en aluminium et plexi.",
+    "features": ["Look moderne", "Matériaux nobles", "Premium", "Design épuré"],
+    "image": signalition
+  },
+  {
+    "category": "CHEVALETS",
+    "header": "Chevalet de Table Magnétique",
+    "description": "Maintien du visuel par aimants.",
+    "features": ["Maintien par aimants", "Changement express", "Luxe", "Stable"],
+    "image": signalition
+  },
+  {
+    "category": "CHEVALETS",
+    "header": "Chevalet Economique PVC Expansé",
+    "description": "Solution économique en PVC expansé.",
+    "features": ["PVC expansé", "Economique", "Léger", "Bon rapport qualité/prix"],
+    "image": roomindicator
   },
 
 
@@ -817,9 +1030,7 @@ export const product = [
     "description": "Présentoir de catalogues design pour table.",
 
     "features": ["Design contemporain", "Alu/Verre", "Multi-niveaux", "Pliable", "Finition soignée"],
-
-    "image": productImages.image117
-
+    "image": portebrochure
   },
 
   {
@@ -831,9 +1042,21 @@ export const product = [
     "description": "Look futuriste pour vos halls d'accueil.",
 
     "features": ["Forme courbe", "Grande capacité", "Métal", "Design futuriste"],
-
-    "image": productImages.image118
-
+    "image": portebrochure
+  },
+  {
+    "category": "PORTES BROCHURES",
+    "header": "Porte Brochures Bio-plastique",
+    "description": "Option écologique pour votre PLV.",
+    "features": ["Recyclable", "Léger", "Transparent", "Matériau écologique"],
+    "image": portebrochure
+  },
+  {
+    "category": "PORTES BROCHURES",
+    "header": "Porte Brochures sur Pied avec Table",
+    "description": "Présentoir combiné avec une surface d'écriture.",
+    "features": ["Hybride", "Pratique salons", "Stable", "Avec tablette"],
+    "image": portebrochure
   },
 
   {
@@ -845,9 +1068,28 @@ export const product = [
     "description": "Structure rétractable qui se déplie en accordéon.",
 
     "features": ["Structure polycarbonate", "Hauteur: 126cm", "Format brochures A4", "Pliable", "Valise souple incluse", "Poids: 7 kgs"],
-
-    "image": productImages.image120
-
+    "image": portebrochure
+  },
+  {
+    "category": "PORTES BROCHURES",
+    "header": "Porte Brochures sur Pied Modèle Roulette",
+    "description": "Présentoir sur roulettes pour grande capacité.",
+    "features": ["Hauteur: 156cm", "Format brochures A4", "Très stable", "Polycarbonate résistant", "Valise renforcée", "Poids: 9 kgs"],
+    "image": portebrochure
+  },
+  {
+    "category": "PORTES BROCHURES",
+    "header": "Ramasse Monnaie",
+    "description": "Publicité au point de paiement.",
+    "features": ["Verre ou Plastique", "Visuel interchangeable", "Antidérapant", "Pour caisse"],
+    "image": signalition
+  },
+  {
+    "category": "PORTES BROCHURES",
+    "header": "Porte Affiches sur Pied",
+    "description": "Présentoir pour affiches sur pied.",
+    "features": ["Structure stable", "Pour affiches", "Mobile", "Professionnel"],
+    "image": portebrochure
   },
 
   // ==================== SECTION 11: GONFLABLE ====================
@@ -1053,9 +1295,7 @@ export const product = [
     "description": "Photocopies et impressions haute qualité.",
 
     "features": ["Noir et couleur", "Formats A3/A4/...", "Différents papiers", "Coupe, pliage, plastification"],
-
-    "image": productImages.image206
-
+    "image": card
   },
 
   {
@@ -1067,9 +1307,7 @@ export const product = [
     "description": "Impression professionnelle de plans jusqu'à 2 pouces.",
 
     "features": ["Noir et couleur", "Coupe et pliage", "Assemblage", "Scannérisation"],
-
-    "image": productImages.image207
-
+    "image": offset
   },
 
   {
@@ -1081,9 +1319,7 @@ export const product = [
     "description": "Brochures reliées (spirale, thermocollée, piquée).",
 
     "features": ["Formats A3/A4/A5", "Noir et couleur", "Recto ou recto/verso", "Différentes reliures"],
-
-    "image": productImages.image208
-
+    "image": podcast
   },
 
   {
@@ -1095,9 +1331,7 @@ export const product = [
     "description": "Impression grand format pour vos affiches.",
 
     "features": ["Papier jusqu'à 160g", "Tous formats", "Toutes quantités", "Impression express"],
-
-    "image": productImages.image209
-
+    "image": card
   },
 
   {
@@ -1105,6 +1339,45 @@ export const product = [
     "category": "IMPRESSION NUMERIQUE",
 
     "header": "Plaquettes",
+    "description": "Plaquettes professionnelles pour entreprise.",
+    "features": ["Noir et couleur", "Recto ou recto/verso", "Différents grammages", "Finitions: pliage, rainage"],
+    "image": podcast
+  },
+  {
+    "category": "IMPRESSION NUMERIQUE",
+    "header": "Flyers",
+    "description": "Flyers publicitaires pour tous vos événements.",
+    "features": ["Dès 115g", "Couché mat ou brillant", "Avec ou sans pelliculage", "Recto ou recto/verso"],
+    "image": card
+  },
+  {
+    "category": "IMPRESSION NUMERIQUE",
+    "header": "Cartes de Visite",
+    "description": "Cartes de visite professionnelles.",
+    "features": ["Papier 250 à 350g", "Couché mat ou brillant", "Avec ou sans pelliculage", "Découpe possible", "Vernis sélectif"],
+    "image": businesscard
+  },
+  {
+    "category": "IMPRESSION NUMERIQUE",
+    "header": "Dépliants",
+    "description": "Dépliants pour présenter vos produits.",
+    "features": ["Plusieurs volets", "Différents formats", "Qualité professionnelle"],
+    "image": podcast
+  },
+  {
+    "category": "IMPRESSION NUMERIQUE",
+    "header": "Papiers à Entête",
+    "description": "Papier à entête personnalisé pour votre courrier.",
+    "features": ["Noir et couleur", "Recto ou recto/verso", "Différents papiers", "Finitions variées"],
+    "image": card
+  },
+  {
+    "category": "IMPRESSION NUMERIQUE",
+    "header": "Cartes Postales / Correspondance",
+    "description": "Cartes postales personnalisées.",
+    "features": ["Noir et couleur", "Recto ou recto/verso", "Différents grammages", "Finitions variées"],
+    "image": podcast
+  },
 
     "description": "Plaquettes professionnelles pour entreprise.",
 
@@ -1127,9 +1400,7 @@ export const product = [
     "description": "Impression sérigraphique pour textile et objets.",
 
     "features": ["Impressions au trait", "Impressions à plat", "Grandes séries", "Sur textile et objets"],
-
-    "image": productImages.image177
-
+    "image": serigraphie1
   },
 
 
@@ -1145,9 +1416,7 @@ export const product = [
     "description": "Broderie personnalisée sur textile.",
 
     "features": ["Sur vêtements", "Logo personnalisé", "Haute qualité", "Durable"],
-
-    "image": productImages.image190
-
+    "image": serigraphie2
   },
 
   // ==================== SECTION 19: TEXTILE ====================
@@ -1191,9 +1460,7 @@ export const product = [
     "description": "Mugs et tasses avec votre logo.",
 
     "features": ["Céramique", "Impression personnalisée", "Idéal cadeau", "Utilisation quotidienne"],
-
-    "image": productImages.image222
-
+    "image": offset2
   },
 
   {
@@ -1205,9 +1472,7 @@ export const product = [
     "description": "Parapluies avec votre logo.",
 
     "features": ["Différents modèles", "Résistants", "Impression logo", "Utile au quotidien"],
-
-    "image": productImages.image221
-
+    "image": offset2
   },
 
   {
@@ -1219,9 +1484,7 @@ export const product = [
     "description": "Porte-clés avec votre logo.",
 
     "features": ["Différents modèles", "Métal ou plastique", "Gravure ou impression", "Petit prix"],
-
-    "image": productImages.image218
-
+    "image": key
   },
 
   {
@@ -1233,9 +1496,7 @@ export const product = [
     "description": "Stylos publicitaires avec votre logo.",
 
     "features": ["Différents modèles", "Impression logo", "Goodies classique", "Tous budgets"],
-
-    "image": productImages.image223
-
+    "image": offset2
   }
 
 ];
@@ -1611,5 +1872,4 @@ export const coffretProduct = [
     ]
 
   }
-
 ];

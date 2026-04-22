@@ -14,9 +14,9 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://nemsservices.com/og-image.jpg</image:loc>
-      <image:title>Nem's Service - Impression &amp; Articles de Bureau</image:title>
-      <image:caption>Spécialiste en impression, articles de bureau et fournitures bureaucratiques au Cameroun</image:caption>
+      <image:loc>https://nemsservices.com/logo_nems.webp</image:loc>
+      <image:title>Nem's Service - Premier Service d'Impression et Design au Cameroun</image:title>
+      <image:caption>N°1 du service d'impression et design au Cameroun. Leader en impression professionnelle, design graphique et articles de bureau à Yaoundé, Douala et Afrique centrale.</image:caption>
     </image:image>
   </url>
 
@@ -41,6 +41,63 @@
     <loc>https://nemsservices.com/about</loc>
     <lastmod>2025-04-21</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- SEO Pages -->
+  <url>
+    <loc>https://nemsservices.com/impression-cameroun</loc>
+    <lastmod>2025-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://nemsservices.com/impression-yaounde</loc>
+    <lastmod>2025-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://nemsservices.com/impression-douala</loc>
+    <lastmod>2025-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://nemsservices.com/photocopie-yaounde</loc>
+    <lastmod>2025-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nemsservices.com/photocopie-douala</loc>
+    <lastmod>2025-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nemsservices.com/reliure-cameroun</loc>
+    <lastmod>2025-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nemsservices.com/fournitures-bureau-cameroun</loc>
+    <lastmod>2025-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://nemsservices.com/design-graphique-cameroun</loc>
+    <lastmod>2025-04-21</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
