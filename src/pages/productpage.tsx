@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import ProductSection from '../section/productpage/productsection';
-import { product } from '../data/sitedata'; 
+import { useProducts } from '../context/ProductContext'; 
 import { useCategory } from '../provider/categoryprovider'; 
 import { FiChevronRight, FiLayers, FiInfo, FiChevronLeft, FiArrowRight, FiEye } from 'react-icons/fi';
 import type { Variants } from 'framer-motion';
+import { SEO } from '../components/SEO';
 
 const ProductPage: React.FC = () => {
   const { activeCategory } = useCategory();
+  const { products, isLoading, error } = useProducts();
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   const productListRef = useRef<HTMLDivElement>(null);
@@ -20,12 +22,13 @@ const ProductPage: React.FC = () => {
   const opacityHero = useTransform(scrollY, [0, 300], [1, 0]);
 
   // Memoize filtered products to prevent recalculation on every render
-  const filteredProducts = useMemo(() => 
-    activeCategory === 'All' 
-      ? product 
-      : product.filter(p => p.category === activeCategory),
-    [activeCategory]
-  );
+  const filteredProducts = useMemo(() => {
+    const result = activeCategory === 'All' 
+      ? products 
+      : products.filter((p: { category: string; }) => p.category === activeCategory);
+    
+    return result;
+  }, [activeCategory, products]);
 
   // Memoize pagination values
   const { currentProducts, totalPages } = useMemo(() => {
@@ -132,7 +135,7 @@ const ProductPage: React.FC = () => {
       scale: 0.8
     },
     visible: { 
-      opacity: [0, 0.3, 0],
+      opacity: [0, 0.15, 0],
       scale: [0.8, 1.2, 0.8],
       transition: {
         duration: 2,
@@ -176,116 +179,100 @@ const ProductPage: React.FC = () => {
     willChange: 'transform, opacity',
     transform: 'translateZ(0)'
   };
+  const rawNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "237671810319";
+  const whatsappNumber = rawNumber.replace('+', '');
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <main className="mt-[80px] min-h-screen bg-[#F8FAFC] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600">Chargement des produits...</p>
+        </div>
+      </main>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <main className="mt-[80px] min-h-screen bg-[#F8FAFC] flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">Erreur: {error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Réessayer
+          </button>
+        </div>
+      </main>
+    );
+  }
 
   return (
-    <main className="mt-[80px] min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
-      
-      {/* --- HERO SECTION --- */}
-      <section className="relative bg-[#020617] pt-40 pb-52 overflow-hidden w-full">
-        {/* Optimized floating circle with transform-gpu */}
-        <motion.div 
-          animate={{ 
-            scale: shouldReduceMotion ? 1 : [1, 1.05, 1], 
-            opacity: shouldReduceMotion ? 0.1 : [0.1, 0.12, 0.1] 
-          }}
-          transition={{ 
-            duration: shouldReduceMotion ? 0 : 8, 
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute -top-12 -left-12 w-64 h-64 md:w-96 md:h-96 bg-blue-600 rounded-full blur-[100px] pointer-events-none z-0 transform-gpu"
-          style={floatingCircleStyle}
-        />
+    <>
+      <SEO
+        title={`${activeCategory === 'All' ? 'Nos Produits' : activeCategory} | Nem's Service`}
+        description={`Découvrez nos ${activeCategory === 'All' ? "articles de bureau et services d'impression et design de haute qualité" : `fournitures de ${activeCategory.toLowerCase()}`} au Cameroun. N°1 du service d'impression et design à Yaoundé, Douala et Afrique centrale.`}
+        keywords={`impression cameroun, design cameroun, n°1 impression cameroun, ${activeCategory.toLowerCase()}, articles bureau, fournitures scolaires, Yaoundé, Douala, Afrique centrale, nems services, nems service, nem's services, nem's service, nems, nem's, nems impression, nems printing, nems bureau, nems articles, nems cameroun, nems yaoundé, nems douala, nems services cameroun, nems printing cameroun, nems impression cameroun, nems services yaoundé, nems services douala, nems office supplies, nems fournitures, nems photocopie, nems reliure, nems documents`}
+        url={`https://nemsservices.com/products`}
+        type="website"
+      />
+      <main className=" min-h-screen bg-[#F8FAFC] overflow-x-hidden w-full relative">
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div style={{ y: shouldReduceMotion ? 0 : y1, opacity: opacityHero }}>
-              <motion.div 
-                initial="hidden"
-                animate="visible"
-                variants={heroTextVariants}
-                className="flex items-center gap-3 mb-8"
-              >
-                <span className="h-[2px] w-8 bg-blue-500" />
-                <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.5em]">
-                  Excellence Opérationnelle
-                </span>
-              </motion.div>
-              
-              <motion.h1 
-                initial="hidden"
-                animate="visible"
-                variants={heroTextVariants}
-                className="text-6xl md:text-[10rem] font-black text-white mb-8 tracking-tighter leading-[0.85] break-words"
-              >
-                {activeCategory}
-              </motion.h1>
-              
-              <motion.p 
-                initial="hidden"
-                animate="visible"
-                variants={heroTextVariants}
-                transition={{ delay: 0.3 }}
-                className="max-w-md text-slate-400 text-xl font-light leading-relaxed border-l-2 border-blue-500/30 pl-6"
-              >
-                Une approche <span className="text-white">architecturale</span> de la communication visuelle. 
-              </motion.p>
-            </motion.div>
+  {/* --- HERO SECTION --- */}
+      
+     {/* --- NAVIGATION STICKY: THE EDITORIAL STRIP --- */}
+<div 
+  ref={productListRef} 
+  className="sticky top-0 z-30 w-full bg-white/80 backdrop-blur-xl  border-y border-stone-100 transition-all duration-500"
+>
+  <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex justify-between items-center">
+    
+    {/* Refined Breadcrumbs */}
+    <nav className="flex items-center gap-3 text-[9px] md:text-[10px] font-light uppercase tracking-[0.3em] text-stone-400">
+      <a href="/" className="hover:text-amber-700 transition-colors duration-300 italic serif">Nem's Maison</a>
+      <span className="w-4 h-px bg-stone-200" /> {/* Minimalist separator instead of icon */}
+      <span className="text-stone-800 font-medium tracking-[0.2em] truncate max-w-[120px] md:max-w-none">
+        {activeCategory}
+      </span>
+    </nav>
 
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="hidden lg:block relative"
-            >
-               <div className="absolute inset-0 bg-blue-500/10 blur-[80px] -z-10" />
-               <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl">
-                  <FiInfo className="text-blue-500 mb-4" size={24} />
-                  <p className="text-slate-300 text-lg italic font-light mb-8">
-                    "Nous forgeons des identités qui durent."
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <img 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100" 
-                      className="w-12 h-12 rounded-full object-cover grayscale border-2 border-blue-500" 
-                      alt="Expert"
-                      loading="lazy"
-                    />
-                    <div>
-                      <p className="text-white font-bold text-sm">Cellule Qualité</p>
-                      <p className="text-blue-500 text-[10px] uppercase font-black tracking-widest">Nem's Service</p>
-                    </div>
-                  </div>
-               </div>
-            </motion.div>
-          </div>
+    {/* Elegant Status & Count */}
+    <div className="flex items-center gap-6 md:gap-10">
+        {/* Availability: Minimalist style */}
+        <div className="hidden sm:flex items-center gap-3">
+          <span className="text-[9px] font-medium text-stone-400 uppercase tracking-widest italic">
+            Disponibilité :
+          </span>
+          <span className="text-[9px] font-bold text-stone-800 uppercase tracking-tighter flex items-center gap-1.5">
+            <span className="w-1 h-1 bg-amber-600 rounded-full" /> {/* Static gold dot */}
+            En Stock
+          </span>
         </div>
-      </section>
 
-      {/* --- NAVIGATION STICKY --- */}
-      <div ref={productListRef} className="sticky top-[80px] z-30 bg-white/80 backdrop-blur-md border-b border-slate-200/60 w-full">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-          <nav className="flex items-center gap-2 md:gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400">
-            <a href="/" className="hover:text-blue-600 transition">Nem's</a>
-            <FiChevronRight className="flex-shrink-0" />
-            <span className="text-slate-900 truncate max-w-[100px] md:max-w-none">{activeCategory}</span>
-          </nav>
-
-          <div className="flex items-center gap-4 md:gap-8">
-             <div className="hidden sm:flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-[10px] font-bold text-slate-500 uppercase">Stock Live</span>
-             </div>
-             <div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-[#020617] text-white rounded-full">
-                <FiLayers size={12} />
-                <span className="text-[10px] md:text-[11px] font-black">{filteredProducts.length} RÉFS</span>
-             </div>
+        {/* Item Counter: Clean, Serif, No background */}
+        <div className="flex items-center gap-2 group">
+          <FiLayers size={10} className="text-stone-400 group-hover:text-amber-700 transition-colors" />
+          <div className="flex items-baseline gap-1">
+            <span className="font-serif italic text-lg text-stone-900 leading-none">
+              {filteredProducts.length}
+            </span>
+            <span className="text-[9px] font-light text-stone-400 uppercase tracking-widest">
+              Pièces
+            </span>
           </div>
+          {/* Subtle underline for the counter */}
+          <div className="absolute bottom-4 right-0 w-0 h-px bg-amber-200 group-hover:w-full transition-all duration-700 opacity-0 group-hover:opacity-100" />
         </div>
-      </div>
+    </div>
+  </div>
+</div>
 
       {/* --- LISTE DES PRODUITS --- */}
-      <div className="max-w-7xl mx-auto px-6 max-sm:px-0 py-10 max-sm:py-0 relative">
+      <div className="max-w-7xl mx-auto  relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory + currentPage}
@@ -295,7 +282,7 @@ const ProductPage: React.FC = () => {
             exit="hidden"
             className="flex flex-col space-y-4"
           >
-            {currentProducts.map((item, index) => (
+            {currentProducts.map((item:any, index: number) => (
               <motion.div
                 key={`${index}-${activeCategory}`}
                 variants={productItemVariants}
@@ -305,54 +292,9 @@ const ProductPage: React.FC = () => {
                   margin: "-50px",
                   amount: 0.3
                 }}
-                className="group relative bg-white rounded-[2rem] p-6 md:p-10 transition-all duration-500 overflow-hidden will-change-transform cursor-pointer"
+                className="group relative bg-white  p-6 md:p-10 transition-all duration-500 overflow-hidden will-change-transform cursor-pointer "
               >
-                {/* Modern glow effect on hover */}
-                <motion.div
-                  variants={cardGlowVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                />
-                
-                {/* Animated border gradient */}
-                <div className="absolute inset-0 rounded-[2rem] p-[2px] bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/30 transition-all duration-700">
-                  <div className="absolute inset-0 bg-white rounded-[2rem]" />
-                </div>
-
-                {/* Decorative elements */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 0.5, x: 0 }}
-                  transition={{ delay: 0.2 + index * 0.1 }}
-                  className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 via-purple-600 to-blue-600 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-700 origin-top"
-                />
-
-                {/* Sparkle icons */}
-                <motion.div
-                  initial={{ opacity: 0, rotate: -20 }}
-                  animate={{ opacity: 0.1, rotate: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                  className="absolute top-4 right-4"
-                >
-                </motion.div>
-
-                {/* Ligne de flux décorative - désactivée si réduction de mouvement */}
-                {!shouldReduceMotion && (
-                  <div className="absolute left-3 top-10 h-1/2 w-[3px] bg-gradient-to-b from-blue-600 to-transparent hidden xl:block overflow-hidden">
-                    <motion.div
-                      initial={{ y: "-100%" }}
-                      animate={{ y: "100%" }}
-                      transition={{ 
-                        duration: 3, 
-                        repeat: Infinity, 
-                        ease: "linear",
-                        repeatType: "loop"
-                      }}
-                      className="w-full h-20 bg-blue-400 blur-sm"
-                    />
-                  </div>
-                )}
+               
 
                 {/* Card content with staggered animation */}
                 <motion.div
@@ -363,13 +305,7 @@ const ProductPage: React.FC = () => {
                 </motion.div>
 
                 {/* View details badge */}
-                <motion.div
-                  variants={cardBadgeVariants}
-                  className="absolute bottom-6 right-6 flex items-center gap-2 text-xs font-medium text-slate-400 group-hover:text-blue-600 transition-colors"
-                >
-                  <span>View details</span>
-                  <FiEye className="group-hover:translate-x-1 transition-transform" />
-                </motion.div>
+                
               </motion.div>
             ))}
           </motion.div>
@@ -493,97 +429,124 @@ const ProductPage: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#020617]/80 to-[#020617]" />
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+       <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { 
+              opacity: 1,
+              transition: { staggerChildren: 0.1 }
+            }
+          }}
+        >
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
             variants={{
-              hidden: { opacity: 0 },
-              visible: { 
-                opacity: 1,
-                transition: { staggerChildren: 0.1 }
-              }
+              hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
+              visible: { opacity: 1, y: 0 }
             }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 mb-8"
           >
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
-                visible: { opacity: 1, y: 0 }
-              }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 mb-8"
-            >
-              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-              <span className="text-blue-400 text-[10px] font-black uppercase tracking-widest">
-                Disponible pour nouveaux projets
-              </span>
-            </motion.div>
-
-            <h2 className="text-5xl md:text-8xl font-black text-white mb-12 tracking-tighter leading-[0.9]">
-              <div className="overflow-hidden">
-                <motion.span
-                  className="block"
-                  variants={{
-                    hidden: { y: shouldReduceMotion ? 0 : "100%" },
-                    visible: { 
-                      y: 0, 
-                      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
-                    }
-                  }}
-                >
-                  Prêt à définir le
-                </motion.span>
-              </div>
-              
-              <div className="overflow-hidden">
-                <motion.span
-                  className="block text-blue-600 italic"
-                  variants={{
-                    hidden: { y: shouldReduceMotion ? 0 : "100%" },
-                    visible: { 
-                      y: 0, 
-                      transition: { duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] } 
-                    }
-                  }}
-                >
-                  prochain standard ?
-                </motion.span>
-              </div>
-            </h2>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <motion.button 
-                whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-                whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-                className="relative group/btn overflow-hidden bg-orange-500 text-white px-12 py-7 font-black uppercase text-[12px] tracking-[0.2em] shadow-2xl shadow-blue-500/20 transition-all"
-              >
-                <span className="relative z-10 flex items-center gap-4">
-                  Démarrer la collaboration 
-                  <FiArrowRight size={18} className="group-hover/btn:translate-x-2 transition-transform" />
-                </span>
-                {!shouldReduceMotion && (
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
-                )}
-              </motion.button>
-
-              <motion.button 
-                whileHover={shouldReduceMotion ? {} : { backgroundColor: "rgba(255,255,255,0.05)" }}
-                className="px-12 py-7 font-black uppercase text-[11px] tracking-[0.2em] text-white border border-white/10 backdrop-blur-sm transition-all"
-              >
-                Catalogue PDF v2.0
-              </motion.button>
-            </div>
-
-            <p className="mt-16 text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em]">
-              Expertise Technique • Design Architectural • Nem's Service 2026
-            </p>
+            <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+            <span className="text-blue-400 text-[10px] font-black uppercase tracking-widest">
+              Disponible pour nouveaux projets
+            </span>
           </motion.div>
+
+          <h2 className="text-5xl md:text-8xl font-black text-white mb-12 tracking-tighter leading-[0.9]">
+            <div className="overflow-hidden">
+              <motion.span
+                className="block"
+                variants={{
+                  hidden: { y: shouldReduceMotion ? 0 : "100%" },
+                  visible: { 
+                    y: 0, 
+                    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
+                  }
+                }}
+              >
+                Prêt à définir le
+              </motion.span>
+            </div>
+            
+            <div className="overflow-hidden">
+              <motion.span
+                className="block text-blue-600 italic"
+                variants={{
+                  hidden: { y: shouldReduceMotion ? 0 : "100%" },
+                  visible: { 
+                    y: 0, 
+                    transition: { duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] } 
+                  }
+                }}
+              >
+                prochain standard ?
+              </motion.span>
+            </div>
+          </h2>
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          {/* Collaboration Button - WhatsApp Link */}
+          <motion.a 
+            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+              "Salut! Je voudrais discuter d'une collaboration avec votre équipe. Pouvez-vous m'en dire plus sur vos services ?"
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+            className="relative group/btn overflow-hidden bg-orange-500 text-white px-12 py-7 font-black uppercase text-[12px] tracking-[0.2em] shadow-2xl shadow-blue-500/20 transition-all"
+          >
+            <span className="relative z-10 flex items-center gap-4">
+              Démarrer la collaboration 
+              <FiArrowRight size={18} className="group-hover/btn:translate-x-2 transition-transform" />
+            </span>
+            {!shouldReduceMotion && (
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+            )}
+          </motion.a>
+
+          {/* PDF Download Button with File Size Indicator */}
+          <motion.a 
+            href="/catalogue.pdf"
+            download
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+            className="relative group/btn overflow-hidden px-12 py-7 font-black uppercase text-[11px] tracking-[0.2em] text-white border border-white/10 backdrop-blur-sm transition-all hover:bg-white/5"
+          >
+            <span className="relative z-10 flex flex-col items-center">
+              <span className="flex items-center gap-2">
+                Catalogue PDF v2.0
+                <FiArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+              </span>
+              <span className="text-[8px] font-normal text-slate-400 mt-1">
+                Poids: 33 MB • Téléchargement
+              </span>
+            </span>
+            {!shouldReduceMotion && (
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+            )}
+          </motion.a>
+        </div>
+
+          {/* Optional: Add a note about download size */}
+          <p className="mt-4 text-xs text-slate-500">
+            ⚡ Catalogue complet • 33 MB • Format PDF
+          </p>
+
+          <p className="mt-16 text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em]">
+            Expertise Technique • Design Architectural • Nem's Service 2026
+          </p>
+        </motion.div>
         </div>
 
         <div className="absolute bottom-0 right-0 w-1/3 h-[1px] bg-gradient-to-l from-blue-600/50 to-transparent" />
       </section>
     </main>
-  );
+  </>
+);
 };
 
 export default ProductPage;

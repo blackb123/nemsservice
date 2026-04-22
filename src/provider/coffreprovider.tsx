@@ -1,24 +1,41 @@
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
 import { coffretProduct } from '../data/sitedata'; 
 
+interface Pack {
+  name: string;
+  ref: string;
+  details: string;
+  colors: string[];
+  includes: string[];
+  image: string;
+}
+
+interface CoffretGroup {
+  id: number;
+  name: string;
+  category: string;
+  tagline: string;
+  packs: Pack[];
+}
+
 interface CoffretContextType {
-  allCoffrets: typeof coffretProduct;
-  selectedPack: any | null; 
-  setSelectedPack: (pack: any) => void;
-  getCategoryByName: (name: string) => any;
+  allCoffrets: CoffretGroup[];
+  selectedPack: CoffretGroup | null; 
+  setSelectedPack: (pack: CoffretGroup | null) => void;
+  getCategoryByName: (name: string) => CoffretGroup | undefined;
 }
 
 const CoffretContext = createContext<CoffretContextType | undefined>(undefined);
 
 export const CoffretProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // 1. Initialisation avec récupération depuis le localStorage
-  const [selectedPack, setSelectedPack] = useState<any | null>(() => {
+  //  Initialisation avec récupération depuis le localStorage
+  const [selectedPack, setSelectedPack] = useState<CoffretGroup | null>(() => {
     const savedPack = localStorage.getItem('nem_selected_pack');
     return savedPack ? JSON.parse(savedPack) : null;
   });
 
   // Fonction setter qui sauvegarde aussi dans le localStorage
-  const updateSelectedPack = (pack: any) => {
+  const updateSelectedPack = (pack: CoffretGroup | null) => {
     setSelectedPack(pack);
     if (pack) {
       localStorage.setItem('nem_selected_pack', JSON.stringify(pack));
@@ -28,7 +45,7 @@ export const CoffretProvider: React.FC<{ children: ReactNode }> = ({ children })
   };
 
   const getCategoryByName = (name: string) => {
-    return coffretProduct.find((item) => item.name === name);
+    return coffretProduct.find((item: CoffretGroup) => item.name === name);
   };
 
   const value = {

@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="w-full bg-white border-b border-gray-100 font-sans sticky top-0 z-[100] shadow-sm">
+    <header className="w-[100vw] bg-white border-b border-gray-100 font-sans sticky top-0 z-[100] shadow-sm">
       
       {/* --- Top Bar --- */}
       <div className="max-w-7xl mx-auto px-4 h-14 md:h-20 flex items-center justify-between gap-8">

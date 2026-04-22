@@ -37,19 +37,26 @@ const SocialShowcase = () => {
     <section className="py-5 bg-white border-t  border-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         
-        {/* HEADER ANIMÉ */}
+         {/* HEADER - ENHANCED */}
         <motion.div 
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-12 md:mb-16 text-center md:text-left"
         >
-          <div className="flex items-center gap-2 mb-3">
-            <FiInstagram className="text-blue-600" />
-            <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.3em]">Showcase</span>
+          <div className="flex items-center  gap-4 mb-4">
+            <span className="h-[2px] w-12 bg-gradient-to-r from-blue-500 to-blue-400" />
+            <FiInstagram className="text-blue-500" size={20} />
+            <span className="text-blue-600 text-[11px] font-semibold uppercase tracking-[0.3em]">
+              Notre Communauté
+            </span>
           </div>
-          <h2 className="text-3xl font-black text-gray-900 mb-2 tracking-tighter">{socialShowcase.title}</h2>
-          <p className="text-gray-500 max-w-xl font-medium">{socialShowcase.subtitle}</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 tracking-tight mb-3">
+            {socialShowcase.title}
+          </h2>
+          <p className="text-gray-600 text-base md:text-lg font-light max-w-2xl mx-auto md:mx-0">
+            {socialShowcase.subtitle}
+          </p>
         </motion.div>
         
         <div className="relative group">
@@ -89,9 +96,9 @@ const SocialShowcase = () => {
                   <motion.div 
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
-                    className="absolute inset-0 bg-black/20 backdrop-blur-[2px] flex items-center justify-center transition-opacity"
+                    className="absolute inset-0 bg-black/20 backdrop-blur-[2px] flex items-center j transition-opacity"
                   >
-                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center  text-white">
                       <FiInstagram size={24} />
                     </div>
                   </motion.div>
