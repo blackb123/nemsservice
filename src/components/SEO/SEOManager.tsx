@@ -13,11 +13,11 @@ export interface SEOProps {
 }
 
 const DEFAULT_SEO = {
-  title: "Nem's Service | Impression & Articles de Bureau au Cameroun",
-  description: "Nem's Service - Spécialiste en impression, articles de bureau et fournitures bureaucratiques au Cameroun. Découvrez nos services d'impression et documents administratifs à Yaoundé et Douala.",
-  keywords: "impression cameroun, articles bureau, fournitures scolaires, documents administratifs, photocopie, reliure, Yaoundé, Douala",
-  image: "https://nemsservice.com/og-image.jpg",
-  url: "https://nemsservice.com",
+  title: "Nem's Service | Premier Service d'Impression et Design au Cameroun",
+  description: "Nem's Service - N°1 du service d'impression et design au Cameroun. Leader en impression professionnelle, design graphique et articles de bureau à Yaoundé, Douala et dans toute l'Afrique centrale.",
+  keywords: "impression cameroun, design cameroun, service d'impression n°1 cameroun, impression professionnelle Yaoundé, impression Douala, design graphique cameroun, articles bureau, fournitures scolaires, photocopie, reliure, leader impression Afrique centrale, nems services, nems service, nem's services, nem's service, nems, nem's, nems impression, nems printing, nems bureau, nems articles, nems cameroun, nems yaoundé, nems douala, nems services cameroun, nems printing cameroun, nems impression cameroun, nems services yaoundé, nems services douala, nems office supplies, nems fournitures, nems photocopie, nems reliure, nems documents, nems services impression, nems services design, nems services bureau, nems services articles",
+  image: "https://nemsservices.com/logo_nems.webp",
+  url: "https://nemsservices.com",
   type: "website" as const,
 };
 
@@ -32,7 +32,7 @@ export function useSEO({
   schema,
 }: SEOProps = {}) {
   const location = useLocation();
-  const canonicalUrl = url || `https://nemsservice.com${location.pathname}`;
+  const canonicalUrl = url || `https://nemsservices.com${location.pathname}`;
 
   useEffect(() => {
     // Update document title
@@ -96,10 +96,10 @@ export function useSEO({
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
       name: "Nem's Service",
-      description: "Spécialiste en impression, articles de bureau et fournitures bureaucratiques au Cameroun",
-      url: 'https://nemsservice.com',
+      description: "N°1 du service d'impression et design au Cameroun. Leader en impression professionnelle, design graphique et articles de bureau à Yaoundé, Douala et Afrique centrale.",
+      url: 'https://nemsservices.com',
       telephone: '+237671810319',
-      email: 'contact@nemsservice.com',
+      email: 'contact@nemsservices.com',
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'CM',
@@ -112,7 +112,7 @@ export function useSEO({
       },
       openingHours: 'Mo-Fr 08:00-18:00',
       priceRange: '€€',
-      image: 'https://nemsservice.com/logo_nems.webp',
+      image: 'https://nemsservices.com/logo_nems.webp',
     };
 
     const schemaScript = document.createElement('script');
