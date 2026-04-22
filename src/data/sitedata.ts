@@ -1378,13 +1378,12 @@ export const product = [
     "features": ["Noir et couleur", "Recto ou recto/verso", "Différents grammages", "Finitions variées"],
     "image": podcast
   },
-
+  {
+    "category": "IMPRESSION NUMERIQUE",
+    "header": "Plaquettes",
     "description": "Plaquettes professionnelles pour entreprise.",
-
     "features": ["Noir et couleur", "Recto ou recto/verso", "Différents grammages", "Finitions: pliage, rainage"],
-
     "image": productImages.image210
-
   },
 
 
